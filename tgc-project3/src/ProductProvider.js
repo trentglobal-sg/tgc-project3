@@ -7,7 +7,7 @@ export default function ProductProvider(props) {
 
     const [products, setProducts] = useState([
     ])
-  
+
     const context = {
         getProducts: async () => {
             let response = await axios.get(BASE_API_URL + 'api/products')
@@ -16,8 +16,17 @@ export default function ProductProvider(props) {
         },
     }
 
+    useEffect(()=>{
+        async function fetchData() {
+            // You can await here
+            const products = await context.getProducts()
+            setProducts(products)
+          }
+          fetchData();
+    },[])
+
     //use productProvider as a higher order component
-    return <ProductContext.Provider value={context}>
+    return <ProductContext.Provider value={products}>
         {props.children}
     </ProductContext.Provider>
 }
