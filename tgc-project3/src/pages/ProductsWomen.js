@@ -3,18 +3,19 @@ import {Link} from 'react-router-dom'
 import ProductContext from "../ProductContext"
 
 
-export default function Login() {
+export default function ProductsWomen() {
 
     const context = useContext(ProductContext)
+    const products = context.getWomensProducts()
     
     return (
         <Fragment>
             <div className='container'>
-                <h1>Login</h1>
+                <h1>Women's Products</h1>
                 <ul>
-                    {/* {context.allProducts.map( p => {
-                        return <li>{p.product}</li>
-                    })} */}
+                    {products.map(m => {
+                        return <li>{m.product}</li>
+                    })}
                 </ul>
             </div>
         </Fragment>

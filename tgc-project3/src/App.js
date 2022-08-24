@@ -6,9 +6,19 @@ import About from './pages/About'
 import Cart from './pages/Cart'
 import Home from './pages/Home'
 import Login from './pages/Login'
-import Products from "./pages/Products"
+import ProductsMen from "./pages/ProductsMen"
+import ProductsWomen from "./pages/ProductsWomen"
+import MerinoWool from "./pages/MerinoWool"
+import NotFound from "./pages/NotFound"
 
+//reactboostrap
+import Container from 'react-bootstrap/Container';
+import Nav from 'react-bootstrap/Nav';
+import Navbar from 'react-bootstrap/Navbar';
+import NavDropdown from 'react-bootstrap/NavDropdown';
 
+//logos and images
+import merinologyLogo from './images/merinology.png'
 
 
 function App() {
@@ -17,30 +27,50 @@ function App() {
       {/* The Routes, Route and Link components only worked in <Router> */}
       <ProductProvider>
         <Router>
-          <nav className="navbar navbar-expand-lg navbar-light bg-light">
-            <div className="container-fluid">
-              <a className="navbar-brand" href="/">Merinology</a>
-              <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                <span className="navbar-toggler-icon"></span>
-              </button>
-              <div className="collapse navbar-collapse" id="navbarNav">
-                <ul className="navbar-nav">
-                  <li className="nav-item">
-                    <a className="nav-link active" aria-current="page" href="/products">Products</a>
-                  </li>
-                  <li className="nav-item">
-                    <a className="nav-link" href="/about">About</a>
-                  </li>
-                </ul>
-              </div>
-            </div>
-          </nav>
+          <Navbar bg="light" expand="lg">
+            <Container>
+              <Navbar.Brand href="/"><img style={{ height: '40px' }} src={merinologyLogo}></img></Navbar.Brand>
+              <Navbar.Toggle aria-controls="basic-navbar-nav" />
+              <Navbar.Collapse id="basic-navbar-nav">
+                <Nav className="me-auto">
+                  <NavDropdown title="Men's" id="basic-nav-dropdown">
+                    <NavDropdown.Item as={Link} to="/mens" >All Men's Products</NavDropdown.Item>
+                    <NavDropdown.Divider />
+                    <h6 className='ms-3'>Categories</h6>
+                    <NavDropdown.Item as={Link} to="#">Shirts</NavDropdown.Item>
+                    <NavDropdown.Item as={Link} to="#">Jackets</NavDropdown.Item>
+                    <NavDropdown.Item as={Link} to="#">Bottoms</NavDropdown.Item>
+                    <NavDropdown.Item as={Link} to="#">Innerwear</NavDropdown.Item>
+                  </NavDropdown>
+                  <NavDropdown title="Women's" id="basic-nav-dropdown">
+                    <NavDropdown.Item as={Link} to="/womens">All Women's Products</NavDropdown.Item>
+                    <NavDropdown.Divider />
+                    <h6 className='ms-3'>Categories</h6>
+                    <NavDropdown.Item as={Link} to="#">Shirts</NavDropdown.Item>
+                    <NavDropdown.Item as={Link} to="#">Jackets</NavDropdown.Item>
+                    <NavDropdown.Item as={Link} to="#">Bottoms</NavDropdown.Item>
+                    <NavDropdown.Item as={Link} to="#">Innerwear</NavDropdown.Item>
+                  </NavDropdown>
+                  <NavDropdown title="About" id="basic-nav-dropdown">
+                    <NavDropdown.Item as={Link} to="/merino-wool">Merino Wool</NavDropdown.Item>
+                    <NavDropdown.Item as={Link} to="/about">Who Are We</NavDropdown.Item>
+                  </NavDropdown>
+                  <Nav.Link as={Link} to="/login">Login</Nav.Link>
+                </Nav>
+              </Navbar.Collapse>
+            </Container>
+          </Navbar>
 
           {/* The <Routes> contains the pages */}
           <Routes>
             <Route path="/" element={<Home />} />
-            <Route path="/products" element={<Products />} />
+            <Route path="/mens" element={<ProductsMen />} />
+            <Route path="/womens" element={<ProductsWomen />} />
             <Route path="/about" element={<About />} />
+            <Route path="/merino-wool" element={<MerinoWool />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/cart" element={<Cart />} />
+            <Route path="*" element={<NotFound />} />
           </Routes>
         </Router>
       </ProductProvider>
