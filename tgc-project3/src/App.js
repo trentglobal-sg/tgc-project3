@@ -18,15 +18,7 @@ import BottomsWomen from "./pages/womens/BottomsWomen"
 import InnerwearWomen from "./pages/womens/InnerwearWomen"
 import MerinoWool from "./pages/MerinoWool"
 import NotFound from "./pages/NotFound"
-
-//reactboostrap
-import Container from 'react-bootstrap/Container';
-import Nav from 'react-bootstrap/Nav';
-import Navbar from 'react-bootstrap/Navbar';
-import NavDropdown from 'react-bootstrap/NavDropdown';
-
-//logos and images
-import merinologyLogo from './images/merinology.png'
+import MyNavbar from "./components/MyNavbar"
 
 
 function App() {
@@ -35,40 +27,7 @@ function App() {
       {/* The Routes, Route and Link components only worked in <Router> */}
       <ProductProvider>
         <Router>
-          <Navbar bg="light" expand="lg">
-            {/* <Container> */}
-              <Navbar.Brand  className="ms-3" href="/"><img style={{ height: '40px' }} src={merinologyLogo}></img></Navbar.Brand>
-              <Navbar.Toggle aria-controls="basic-navbar-nav" />
-              <Navbar.Collapse id="basic-navbar-nav">
-                <Nav className="me-auto">
-                  <NavDropdown title="Men's" id="basic-nav-dropdown">
-                    <NavDropdown.Item as={Link} to="/mens" >All Men's Products</NavDropdown.Item>
-                    <NavDropdown.Divider />
-                    <h6 className='ms-3'>Categories</h6>
-                    <NavDropdown.Item as={Link} to="/mens/shirts">Shirts</NavDropdown.Item>
-                    <NavDropdown.Item as={Link} to="/mens/jackets">Jackets</NavDropdown.Item>
-                    <NavDropdown.Item as={Link} to="/mens/bottoms">Bottoms</NavDropdown.Item>
-                    <NavDropdown.Item as={Link} to="/mens/innerwear">Innerwear</NavDropdown.Item>
-                  </NavDropdown>
-                  <NavDropdown title="Women's" id="basic-nav-dropdown">
-                    <NavDropdown.Item as={Link} to="/womens">All Women's Products</NavDropdown.Item>
-                    <NavDropdown.Divider />
-                    <h6 className='ms-3'>Categories</h6>
-                    <NavDropdown.Item as={Link} to="/womens/shirts">Shirts</NavDropdown.Item>
-                    <NavDropdown.Item as={Link} to="/womens/jackets">Jackets</NavDropdown.Item>
-                    <NavDropdown.Item as={Link} to="/womens/bottoms">Bottoms</NavDropdown.Item>
-                    <NavDropdown.Item as={Link} to="/womens/innerwear">Innerwear</NavDropdown.Item>
-                  </NavDropdown>
-                  <NavDropdown title="About" id="basic-nav-dropdown">
-                    <NavDropdown.Item as={Link} to="/merino-wool">Merino Wool</NavDropdown.Item>
-                    <NavDropdown.Item as={Link} to="/about">Who Are We</NavDropdown.Item>
-                  </NavDropdown>
-                  <Nav.Link as={Link} to="/login">Login</Nav.Link>
-                </Nav>
-              </Navbar.Collapse>
-            {/* </Container> */}
-          </Navbar>
-
+          <MyNavbar />
           {/* The <Routes> contains the pages */}
           <Routes>
             <Route path="/" element={<Home />} />
