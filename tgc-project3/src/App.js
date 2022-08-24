@@ -6,8 +6,16 @@ import About from './pages/About'
 import Cart from './pages/Cart'
 import Home from './pages/Home'
 import Login from './pages/Login'
-import ProductsMen from "./pages/ProductsMen"
-import ProductsWomen from "./pages/ProductsWomen"
+import ProductsMen from "./pages/mens/ProductsMen"
+import ShirtsMen from "./pages/mens/ShirtsMen"
+import JacketsMen from "./pages/mens/JacketsMen"
+import BottomsMen from "./pages/mens/BottomsMen"
+import InnerwearMen from "./pages/mens/InnerwearMen"
+import ProductsWomen from "./pages/womens/ProductsWomen"
+import ShirtsWomen from "./pages/womens/ShirtsWomen"
+import JacketsWomen from "./pages/womens/JacketsWomen"
+import BottomsWomen from "./pages/womens/BottomsWomen"
+import InnerwearWomen from "./pages/womens/InnerwearWomen"
 import MerinoWool from "./pages/MerinoWool"
 import NotFound from "./pages/NotFound"
 
@@ -37,19 +45,19 @@ function App() {
                     <NavDropdown.Item as={Link} to="/mens" >All Men's Products</NavDropdown.Item>
                     <NavDropdown.Divider />
                     <h6 className='ms-3'>Categories</h6>
-                    <NavDropdown.Item as={Link} to="#">Shirts</NavDropdown.Item>
-                    <NavDropdown.Item as={Link} to="#">Jackets</NavDropdown.Item>
-                    <NavDropdown.Item as={Link} to="#">Bottoms</NavDropdown.Item>
-                    <NavDropdown.Item as={Link} to="#">Innerwear</NavDropdown.Item>
+                    <NavDropdown.Item as={Link} to="/mens/shirts">Shirts</NavDropdown.Item>
+                    <NavDropdown.Item as={Link} to="/mens/jackets">Jackets</NavDropdown.Item>
+                    <NavDropdown.Item as={Link} to="/mens/bottoms">Bottoms</NavDropdown.Item>
+                    <NavDropdown.Item as={Link} to="/mens/innerwear">Innerwear</NavDropdown.Item>
                   </NavDropdown>
                   <NavDropdown title="Women's" id="basic-nav-dropdown">
                     <NavDropdown.Item as={Link} to="/womens">All Women's Products</NavDropdown.Item>
                     <NavDropdown.Divider />
                     <h6 className='ms-3'>Categories</h6>
-                    <NavDropdown.Item as={Link} to="#">Shirts</NavDropdown.Item>
-                    <NavDropdown.Item as={Link} to="#">Jackets</NavDropdown.Item>
-                    <NavDropdown.Item as={Link} to="#">Bottoms</NavDropdown.Item>
-                    <NavDropdown.Item as={Link} to="#">Innerwear</NavDropdown.Item>
+                    <NavDropdown.Item as={Link} to="/womens/shirts">Shirts</NavDropdown.Item>
+                    <NavDropdown.Item as={Link} to="/womens/jackets">Jackets</NavDropdown.Item>
+                    <NavDropdown.Item as={Link} to="/womens/bottoms">Bottoms</NavDropdown.Item>
+                    <NavDropdown.Item as={Link} to="/womens/innerwear">Innerwear</NavDropdown.Item>
                   </NavDropdown>
                   <NavDropdown title="About" id="basic-nav-dropdown">
                     <NavDropdown.Item as={Link} to="/merino-wool">Merino Wool</NavDropdown.Item>
@@ -65,7 +73,15 @@ function App() {
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/mens" element={<ProductsMen />} />
+            <Route path="/mens/shirts" element={<ShirtsMen />} />
+            <Route path="/mens/jackets" element={<JacketsMen />} />
+            <Route path="/mens/bottoms" element={<BottomsMen />} />
+            <Route path="/mens/innerwear" element={<InnerwearMen />} />
             <Route path="/womens" element={<ProductsWomen />} />
+            <Route path="/womens/shirts" element={<ShirtsWomen />} />
+            <Route path="/womens/jackets" element={<JacketsWomen />} />
+            <Route path="/womens/bottoms" element={<BottomsWomen />} />
+            <Route path="/womens/innerwear" element={<InnerwearWomen />} />
             <Route path="/about" element={<About />} />
             <Route path="/merino-wool" element={<MerinoWool />} />
             <Route path="/login" element={<Login />} />
