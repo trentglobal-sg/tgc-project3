@@ -36,8 +36,8 @@ function App() {
       <ProductProvider>
         <Router>
           <Navbar bg="light" expand="lg">
-            <Container>
-              <Navbar.Brand href="/"><img style={{ height: '40px' }} src={merinologyLogo}></img></Navbar.Brand>
+            {/* <Container> */}
+              <Navbar.Brand  className="ms-3" href="/"><img style={{ height: '40px' }} src={merinologyLogo}></img></Navbar.Brand>
               <Navbar.Toggle aria-controls="basic-navbar-nav" />
               <Navbar.Collapse id="basic-navbar-nav">
                 <Nav className="me-auto">
@@ -66,7 +66,7 @@ function App() {
                   <Nav.Link as={Link} to="/login">Login</Nav.Link>
                 </Nav>
               </Navbar.Collapse>
-            </Container>
+            {/* </Container> */}
           </Navbar>
 
           {/* The <Routes> contains the pages */}
