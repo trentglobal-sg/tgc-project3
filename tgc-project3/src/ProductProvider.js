@@ -12,103 +12,117 @@ export default function ProductProvider(props) {
         getProductsFromApi: async () => {
             let response = await axios.get(BASE_API_URL + 'api/products')
             // console.log(response.data)
-            return response.data  
+            return response.data
         },
 
-        getMensProducts: ()=>{
+        getProductById: (productId) => {
+            let response = '';
+            products.allProducts.map(p => {
+                if (p.id == productId ){
+                    return response = p
+                }
+            })
+            // const product = products.find(p =>{
+            //     return p.id === productId;
+            // });
+            console.log(response)
+            return response;
+        },
+
+        getMensProducts: () => {
             const mensProducts = []
-            products.allProducts.map(product=>{
-                if (product.gender_id == 2){
+            products.allProducts.map(product => {
+                if (product.gender_id == 2) {
                     return mensProducts.push(product)
                 }
             })
             return mensProducts
         },
 
-        getMensShirts: ()=>{
+        getMensShirts: () => {
             const mensShirts = []
-            products.allProducts.map(product=>{
-                if (product.gender_id == 2 && product.category_id == 2){
+            products.allProducts.map(product => {
+                if (product.gender_id == 2 && product.category_id == 2) {
                     return mensShirts.push(product)
                 }
             })
             return mensShirts
         },
 
-        getMensJackets: ()=>{
+        getMensJackets: () => {
             const mensJackets = []
-            products.allProducts.map(product=>{
-                if (product.gender_id == 2 && product.category_id == 3){
+            products.allProducts.map(product => {
+                if (product.gender_id == 2 && product.category_id == 3) {
                     return mensJackets.push(product)
                 }
             })
             return mensJackets
         },
 
-        getMensBottoms: ()=>{
+        getMensBottoms: () => {
             const mensBottoms = []
-            products.allProducts.map(product=>{
-                if (product.gender_id == 2 && product.category_id == 4){
+            products.allProducts.map(product => {
+                if (product.gender_id == 2 && product.category_id == 4) {
                     return mensBottoms.push(product)
                 }
             })
             return mensBottoms
         },
 
-        getMensInnerwear: ()=>{
+        getMensInnerwear: () => {
             const mensInnerwear = []
-            products.allProducts.map(product=>{
-                if (product.gender_id == 2 && product.category_id == 5){
+            products.allProducts.map(product => {
+                if (product.gender_id == 2 && product.category_id == 5) {
                     return mensInnerwear.push(product)
                 }
             })
             return mensInnerwear
         },
 
-        getWomensProducts: ()=>{
+        getWomensProducts: () => {
             const womensProducts = []
-            products.allProducts.map(product=>{
-                if (product.gender_id == 3){
+            products.allProducts.map(product => {
+                if (product.gender_id == 3) {
                     return womensProducts.push(product)
                 }
             })
             return womensProducts
         },
 
-        getWomensShirts: ()=>{
+        getWomensShirts: () => {
             const womensShirts = []
-            products.allProducts.map(product=>{
-                if (product.gender_id == 3 && product.category_id == 2){
+            products.allProducts.map(product => {
+                if (product.gender_id == 3 && product.category_id == 2) {
                     return womensShirts.push(product)
                 }
             })
             return womensShirts
         },
 
-        getWomensJackets: ()=>{
+        getWomensJackets: () => {
             const womensJackets = []
-            products.allProducts.map(product=>{
-                if (product.gender_id == 3 && product.category_id == 3){
+            products.allProducts.map(product => {
+                if (product.gender_id == 3 && product.category_id == 3) {
                     return womensJackets.push(product)
                 }
             })
             return womensJackets
         },
 
-        getWomensBottoms: ()=>{
+        getWomensBottoms: () => {
             const womensBottoms = []
-            products.allProducts.map(product=>{
-                if (product.gender_id == 3 && product.category_id == 4){
+            products.allProducts.map(product => {
+                if (product.gender_id == 3 && product.category_id == 4) {
                     return womensBottoms.push(product)
                 }
             })
             return womensBottoms
         },
 
-        getWomensInnerwear: ()=>{
+        getWomensInnerwear: () => {
             const womensInnerwear = []
-            products.allProducts.map(product=>{
-                if (product.gender_id == 3 && product.category_id == 5){
+            products.allProducts.map(product => {
+                if (product.gender_id == 3 && product.category_id == 5) {
                     return womensInnerwear.push(product)
                 }
             })
@@ -116,15 +130,15 @@ export default function ProductProvider(props) {
         },
     }
 
-    useEffect(()=>{
+    useEffect(() => {
         async function fetchData() {
             // You can await here
             const products = await context.getProductsFromApi()
             setProducts(products)
-          }
-          fetchData();
-          console.log(products)
-    },[])
+        }
+        fetchData();
+        console.log(products)
+    }, [])
 
     //use productProvider as a higher order component
     return <ProductContext.Provider value={context}>

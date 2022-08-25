@@ -19,6 +19,7 @@ import InnerwearWomen from "./pages/womens/InnerwearWomen"
 import MerinoWool from "./pages/MerinoWool"
 import NotFound from "./pages/NotFound"
 import MyNavbar from "./components/MyNavbar"
+import Product from "./pages/Product"
 
 
 function App() {
@@ -46,6 +47,7 @@ function App() {
             <Route path="/login" element={<Login />} />
             <Route path="/cart" element={<Cart />} />
             <Route path="*" element={<NotFound />} />
+            <Route path="/product/:productId" element={<Product />} />
           </Routes>
         </Router>
       </ProductProvider>

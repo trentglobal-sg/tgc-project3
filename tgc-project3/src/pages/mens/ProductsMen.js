@@ -14,7 +14,9 @@ export default function ProductsMen() {
                 <h1>Men's Products</h1>
                 <ul>
                     {products.map(m => {
-                        return <li>{m.product}</li>
+                        return <li>
+                            <Link to={'/product/' + m.id}>{m.product}</Link>
+                            </li>
                     })}
                 </ul>
             </div>
