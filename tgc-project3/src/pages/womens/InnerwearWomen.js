@@ -10,7 +10,7 @@ export default function InnerwearWomen() {
     return (
         <Fragment>
             <div className='container'>
-                <h1>Women's Products</h1>
+                <h3>Women's Innerwear</h3>
                 <SearchResults products={products} />
             </div>
         </Fragment>

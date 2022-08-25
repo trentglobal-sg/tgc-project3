@@ -12,7 +12,7 @@ export default function ProductsMen() {
     return (
         <Fragment>
             <div className='container'>
-                <h1>Men's Products</h1>
+                <h3>Men's Products</h3>
                 <SearchResults products={products}/>
             </div>
         </Fragment>

@@ -11,7 +11,7 @@ export default function JacketsWomen() {
     return (
         <Fragment>
             <div className='container'>
-                <h1>Women's Products</h1>
+                <h3>Women's Jackets</h3>
                 <SearchResults products={products} />
             </div>
         </Fragment>
