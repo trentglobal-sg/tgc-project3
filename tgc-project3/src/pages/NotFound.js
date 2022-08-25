@@ -1,5 +1,5 @@
 import {Fragment} from 'react';
-export default function About() {
+export default function NotFound() {
     return (
         <Fragment>
             <div className='container'>
