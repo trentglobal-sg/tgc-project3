@@ -1,6 +1,6 @@
-import {Fragment, useContext, useEffect} from 'react';
-import {Link} from 'react-router-dom'
+import {Fragment, useContext} from 'react';
 import ProductContext from "../../ProductContext"
+import SearchResults from "../../components/SearchResults"
 
 
 export default function ShirtsMen() {
@@ -12,11 +12,7 @@ export default function ShirtsMen() {
         <Fragment>
             <div className='container'>
                 <h1>Men's Shirts</h1>
-                <ul>
-                    {products.map(m => {
-                        return <li>{m.product}</li>
-                    })}
-                </ul>
+                <SearchResults products={products} />
             </div>
         </Fragment>
     )

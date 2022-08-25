@@ -1,10 +1,11 @@
-import {Fragment, useContext, useEffect} from 'react';
-import {Link} from 'react-router-dom'
+import {Fragment, useContext} from 'react';
 import ProductContext from "../../ProductContext"
+import SearchResults from "../../components/SearchResults"
 
 
 export default function ProductsMen() {
 
+    // const [mensProducts, setMensProducts] = useState([])
     const context = useContext(ProductContext)
     const products = context.getMensProducts()
     
@@ -12,13 +13,7 @@ export default function ProductsMen() {
         <Fragment>
             <div className='container'>
                 <h1>Men's Products</h1>
-                <ul>
-                    {products.map(m => {
-                        return <li>
-                            <Link to={'/product/' + m.id}>{m.product}</Link>
-                            </li>
-                    })}
-                </ul>
+                <SearchResults products={products}/>
             </div>
         </Fragment>
     )
