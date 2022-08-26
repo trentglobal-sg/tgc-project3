@@ -9,6 +9,7 @@ export default function Login() {
     
     return (
         <Fragment>
+            <div className='buffer-top'></div>
             <div className='container'>
                 <h1>Login</h1>
                 <ul>

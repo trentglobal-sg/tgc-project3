@@ -10,6 +10,7 @@ export default function ShirtsMen() {
     
     return (
         <Fragment>
+            <div className='buffer-top'></div>
             <div className='container'>
                 <h3>Men's Shirts</h3>
                 <SearchResults products={products} />

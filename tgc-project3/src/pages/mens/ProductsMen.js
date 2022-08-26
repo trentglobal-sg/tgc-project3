@@ -11,6 +11,7 @@ export default function ProductsMen() {
     
     return (
         <Fragment>
+            <div className='buffer-top'></div>
             <div className='container'>
                 <h3>Men's Products</h3>
                 <SearchResults products={products}/>

@@ -5,10 +5,11 @@ import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import NavDropdown from 'react-bootstrap/NavDropdown';
 import merinologyLogo from '../images/merinology.png'
+import '../index.css'
 
 export default function MyNavbar() {
     return (
-        <Navbar bg="light" expand="lg">
+        <Navbar bg="light" expand="lg" id="navbar">
             {/* <Container> */}
             <Navbar.Brand className="ms-3" href="/"><img style={{ height: '40px' }} src={merinologyLogo} alt="logo"></img></Navbar.Brand>
             <Navbar.Toggle aria-controls="basic-navbar-nav" />

@@ -10,6 +10,7 @@ export default function BottomsWomen() {
     
     return (
         <Fragment>
+            <div className='buffer-top'></div>
             <div className='container'>
                 <h3>Women's Bottoms</h3>
                 <SearchResults products={products} />

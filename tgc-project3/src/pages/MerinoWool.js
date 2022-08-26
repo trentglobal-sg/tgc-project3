@@ -2,6 +2,7 @@ import {Fragment} from 'react';
 export default function MerinoWool() {
     return (
         <Fragment>
+            <div className='buffer-top'></div>
             <div className='container'>
                 <h1>Why Merino Wool</h1>
             </div>

@@ -59,6 +59,7 @@ export default function Product(props) {
     if (product) {
         return (
             <Fragment>
+                <div className='buffer-top'></div>
                 <div className='container row'>
                     <div className='col col-12 col-lg-8'>
                         <h1>{product.product}</h1>

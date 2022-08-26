@@ -9,6 +9,7 @@ export default function InnerwearMen() {
     
     return (
         <Fragment>
+            <div className='buffer-top'></div>
             <div className='container'>
                 <h3>Men's Innerwear</h3>
                 <SearchResults products={products} />
