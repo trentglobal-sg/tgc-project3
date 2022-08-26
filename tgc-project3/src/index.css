@@ -19,5 +19,5 @@ code {
 }
 
 .custom-selected {
-  border: 2px solid red
+  border: 2px solid blue !important
 }

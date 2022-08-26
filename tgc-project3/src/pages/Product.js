@@ -40,8 +40,7 @@ export default function Product(props) {
         fetchVariantsData();
 
         async function fetchActiveProductVariantData() {
-            const firstProductVariants = await getProductVariantData(productId, 1)
-            // setActiveProductVariants(firstProductVariants)
+            await getProductVariantData(productId, 1)
         }
         fetchActiveProductVariantData()
     }, [])
@@ -76,23 +75,18 @@ export default function Product(props) {
                         <h4>Blend: {product.blend.blend}: {product.blend.blend_description}</h4>
                         <h4>Colors</h4>
                         {variants.map(variant =>
-                            // {parseInt(variant.id) === selectedVariant ? 
-                            // <Fragment key={variant.id}>
-                            //     <input type="radio" className='btn-check' value={variant.id} name="variant" id={variant.color_name} />
-                            //     <label className='btn btn-sm me-2 selected' style={{backgroundColor: variant.color_code}} for={variant.color_name}>{variant.color_name}</label>
-                            // </Fragment>
-                            // :
                             <Fragment key={variant.id}>
-                                <input type="radio" className='btn-check' value={variant.id} name="variants" id={variant.color_name} checked={selectedVariant == variant.id} onChange={()=>{selectVariant(variant.id)}} />
-                                <label className='btn variant-circle me-2' style={{backgroundColor: variant.color_code}} for={variant.color_name}></label>
+                                <input type="radio" className='btn-check' value={variant.id} name="variants" id={variant.color_name} checked={selectedVariant === variant.id} onChange={()=>{selectVariant(variant.id)}} />
+                                {selectedVariant===variant.id ? 
+                                <label className='btn variant-circle me-2 custom-selected' style={{backgroundColor: variant.color_code}} for={variant.color_name}></label> :
+                                <label className='btn variant-circle me-2' style={{backgroundColor: variant.color_code}} for={variant.color_name}></label>}
                             </Fragment>
-                            // }
                         )}
                         <h4>Sizes</h4>
                         {activeProductVariants.map(productVariant => 
                             <Fragment key={productVariant.id}>
                                 <div>
-                                    <input type='radio' value={productVariant.id} name="productVariant" id={productVariant.id} checked={selectedProductVariant == productVariant.id} onChange={()=>{selectProductVariant(productVariant.id)}} />
+                                    <input type='radio' value={productVariant.id} name="productVariant" id={productVariant.id} checked={selectedProductVariant === productVariant.id} onChange={()=>{selectProductVariant(productVariant.id)}} />
                                     <label for={productVariant.id}>{productVariant.size.size}</label>
                                     <p>Stock : {productVariant.stock}</p>
                                 </div>
