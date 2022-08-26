@@ -10,9 +10,11 @@ export default function Product(props) {
     // useparams will return an object with all the parameters and their values just like req.params in express
     const { productId } = useParams();
     const [variants, setVariants] = useState([]);
-    const [activeProductVariants, setActiveProductVariants] = useState([])
+    const [selectedVariant, setSelectedVariant] = useState(1);
+    const [activeProductVariants, setActiveProductVariants] = useState([]);
+    const [selectedProductVariant, setSelectedProductVariant] = useState('');
     const context = useContext(ProductContext);
-    const product = context.getProductById(parseInt(productId))
+    const product = context.getProductById(parseInt(productId));
 
 
 
@@ -25,7 +27,8 @@ export default function Product(props) {
     const getProductVariantData = async (productId, variantId) => {
         let activeProductVariantResponse = await axios.get(BASE_API_URL + productId + '/' + variantId)
         let activeProductVariant = activeProductVariantResponse.data
-        return activeProductVariant
+        setActiveProductVariants(activeProductVariant)
+        // return activeProductVariant
     }
 
     useEffect(() => {
@@ -38,11 +41,21 @@ export default function Product(props) {
 
         async function fetchActiveProductVariantData() {
             const firstProductVariants = await getProductVariantData(productId, 1)
-            setActiveProductVariants(firstProductVariants)
+            // setActiveProductVariants(firstProductVariants)
         }
         fetchActiveProductVariantData()
     }, [])
 
+    const selectVariant = (variantId)=>{
+        setSelectedProductVariant('')
+        setSelectedVariant(variantId)
+        getProductVariantData(productId, variantId)
+        return true;
+    }
+
+    const selectProductVariant = (productVariantId) => {
+        setSelectedProductVariant(productVariantId)
+    }
 
     if (product) {
         return (
@@ -63,16 +76,23 @@ export default function Product(props) {
                         <h4>Blend: {product.blend.blend}: {product.blend.blend_description}</h4>
                         <h4>Colors</h4>
                         {variants.map(variant =>
+                            // {parseInt(variant.id) === selectedVariant ? 
+                            // <Fragment key={variant.id}>
+                            //     <input type="radio" className='btn-check' value={variant.id} name="variant" id={variant.color_name} />
+                            //     <label className='btn btn-sm me-2 selected' style={{backgroundColor: variant.color_code}} for={variant.color_name}>{variant.color_name}</label>
+                            // </Fragment>
+                            // :
                             <Fragment key={variant.id}>
-                                <input type="radio" value={variant.id} name="variant" id={variant.color_name} />
-                                <label for={variant.color_name}><p className='variant-circle' style={{backgroundColor: variant.color_code}}></p></label>
+                                <input type="radio" className='btn-check' value={variant.id} name="variants" id={variant.color_name} checked={selectedVariant == variant.id} onChange={()=>{selectVariant(variant.id)}} />
+                                <label className='btn variant-circle me-2' style={{backgroundColor: variant.color_code}} for={variant.color_name}></label>
                             </Fragment>
+                            // }
                         )}
                         <h4>Sizes</h4>
                         {activeProductVariants.map(productVariant => 
                             <Fragment key={productVariant.id}>
                                 <div>
-                                    <input type='radio' value={productVariant.id} name="productVariant" id={productVariant.id} />
+                                    <input type='radio' value={productVariant.id} name="productVariant" id={productVariant.id} checked={selectedProductVariant == productVariant.id} onChange={()=>{selectProductVariant(productVariant.id)}} />
                                     <label for={productVariant.id}>{productVariant.size.size}</label>
                                     <p>Stock : {productVariant.stock}</p>
                                 </div>

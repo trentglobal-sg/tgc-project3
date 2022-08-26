@@ -17,3 +17,7 @@ code {
   width: 30px;
   background-color: black;
 }
+
+.custom-selected {
+  border: 2px solid red
+}
