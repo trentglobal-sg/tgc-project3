@@ -10,7 +10,7 @@ export default function Product(props) {
     // useparams will return an object with all the parameters and their values just like req.params in express
     const { productId } = useParams();
     const [variants, setVariants] = useState([]);
-    const [selectedVariant, setSelectedVariant] = useState(1);
+    const [selectedVariant, setSelectedVariant] = useState('');
     const [activeProductVariants, setActiveProductVariants] = useState([]);
     const [selectedProductVariant, setSelectedProductVariant] = useState('');
     const context = useContext(ProductContext);
@@ -21,28 +21,28 @@ export default function Product(props) {
     const getVariantsData = async (productId) => {
         let variantsResponse = await axios.get(BASE_API_URL + productId)
         let variants = variantsResponse.data
-        return variants
+        setVariants (variants)
+
+        let firstVariant = variants[0].id
+        setSelectedVariant(firstVariant)
+
+        let firstProductVariantsResponse = await axios.get(BASE_API_URL + productId + '/' + firstVariant)
+        let firstProductVariants = firstProductVariantsResponse.data
+        setActiveProductVariants(firstProductVariants)
     }
 
     const getProductVariantData = async (productId, variantId) => {
         let activeProductVariantResponse = await axios.get(BASE_API_URL + productId + '/' + variantId)
         let activeProductVariant = activeProductVariantResponse.data
         setActiveProductVariants(activeProductVariant)
-        // return activeProductVariant
     }
 
     useEffect(() => {
         console.log(productId)
         async function fetchVariantsData() {
-            const variantData = await getVariantsData(productId)
-            setVariants(variantData)
+            await getVariantsData(productId)
         }
         fetchVariantsData();
-
-        async function fetchActiveProductVariantData() {
-            await getProductVariantData(productId, 1)
-        }
-        fetchActiveProductVariantData()
     }, [])
 
     const selectVariant = (variantId)=>{
@@ -63,7 +63,7 @@ export default function Product(props) {
                     <div className='col col-12 col-lg-8'>
                         <h1>{product.product}</h1>
                         <div>
-                            <img src={product.product_image_url} alt="product_image"></img>
+                            <img src={product.product_image_url} style={{width: "30%"}} alt="product_image"></img>
                         </div>
                         <p>{product.description}</p>
 
@@ -92,7 +92,9 @@ export default function Product(props) {
                                 </div>
                             </Fragment>
                         )}
-
+                        <div>
+                            <button className='btn btn-sm btn-primary' >Add to Cart</button>
+                        </div>
                     </div>
                 </div>
             </Fragment>

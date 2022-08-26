@@ -21,3 +21,7 @@ code {
 .custom-selected {
   border: 2px solid blue !important
 }
+
+.test{
+  color: #292929
+}
