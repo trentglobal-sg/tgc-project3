@@ -2,6 +2,7 @@ import { Fragment, useContext, useState, useEffect } from 'react';
 import ProductContext from '../ProductContext';
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
+import "../index.css"
 
 export default function Product(props) {
     const BASE_API_URL = 'https://tgc-ec-merinology.herokuapp.com/api/products/'
@@ -61,10 +62,23 @@ export default function Product(props) {
                         <h4>Micron: {product.micron.micron}: {product.micron.micron_description}</h4>
                         <h4>Blend: {product.blend.blend}: {product.blend.blend_description}</h4>
                         <h4>Colors</h4>
-                        {variants.map(variant => {
-                            // <input type="radio" value={variant.id} name="variant">{variant.color_name}</input>
-                            <p>{variant.color_name}</p>
-                        })}
+                        {variants.map(variant =>
+                            <Fragment key={variant.id}>
+                                <input type="radio" value={variant.id} name="variant" id={variant.color_name} />
+                                <label for={variant.color_name}><p className='variant-circle' style={{backgroundColor: variant.color_code}}></p></label>
+                            </Fragment>
+                        )}
+                        <h4>Sizes</h4>
+                        {activeProductVariants.map(productVariant => 
+                            <Fragment key={productVariant.id}>
+                                <div>
+                                    <input type='radio' value={productVariant.id} name="productVariant" id={productVariant.id} />
+                                    <label for={productVariant.id}>{productVariant.size.size}</label>
+                                    <p>Stock : {productVariant.stock}</p>
+                                </div>
+                            </Fragment>
+                        )}
+
                     </div>
                 </div>
             </Fragment>

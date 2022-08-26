@@ -11,3 +11,9 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+.variant-circle {
+  height: 30px;
+  width: 30px;
+  background-color: black;
+}

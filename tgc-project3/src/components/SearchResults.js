@@ -10,7 +10,7 @@ export default function SearchResults(props) {
             <div className='row justify-content-left'>
                 {props.products.map(m => {
                     return (
-                        <div className="card col-12 col-md-6 col-lg-4 mb-3 p-4" style={{ border: "none" }}>
+                        <div key={m.id} className="card col-12 col-md-6 col-lg-4 mb-3 p-4" style={{ border: "none" }}>
                             <img src={m.product_image_url} alt="productPhoto"></img>
                             <div className="card-body">
                                 <h5 className="card-title">{m.product}</h5>
