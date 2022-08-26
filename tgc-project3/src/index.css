@@ -39,7 +39,7 @@ code {
 #search{
   height: 100vh;
   width: 100%;
-  background-color: black;
+  /* background-color: black; */
 }
 
 .buffer-top{

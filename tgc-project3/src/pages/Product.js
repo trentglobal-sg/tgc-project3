@@ -47,13 +47,13 @@ export default function Product(props) {
 
     const selectVariant = (variantId)=>{
         setSelectedProductVariant('')
-        setSelectedVariant(variantId)
+        setSelectedVariant(parseInt(variantId))
         getProductVariantData(productId, variantId)
         return true;
     }
 
     const selectProductVariant = (productVariantId) => {
-        setSelectedProductVariant(productVariantId)
+        setSelectedProductVariant(parseInt(productVariantId))
     }
 
     if (product) {
@@ -77,7 +77,7 @@ export default function Product(props) {
                         <h4>Colors</h4>
                         {variants.map(variant =>
                             <Fragment key={variant.id}>
-                                <input type="radio" className='btn-check' value={variant.id} name="variants" id={variant.color_name} checked={selectedVariant === variant.id} onChange={()=>{selectVariant(variant.id)}} />
+                                <input type="radio" className='btn-check' value={variant.id} name="variants" id={variant.color_name} checked={selectedVariant === variant.id} onChange={(e)=>{selectVariant(e.target.value)}} />
                                 {selectedVariant===variant.id ? 
                                 <label className='btn variant-circle me-2 custom-selected' style={{backgroundColor: variant.color_code}} for={variant.color_name}></label> :
                                 <label className='btn variant-circle me-2' style={{backgroundColor: variant.color_code}} for={variant.color_name}></label>}
@@ -87,7 +87,7 @@ export default function Product(props) {
                         {activeProductVariants.map(productVariant => 
                             <Fragment key={productVariant.id}>
                                 <div>
-                                    <input type='radio' value={productVariant.id} name="productVariant" id={productVariant.id} checked={selectedProductVariant === productVariant.id} onChange={()=>{selectProductVariant(productVariant.id)}} />
+                                    <input type='radio' value={productVariant.id} name="productVariant" id={productVariant.id} checked={selectedProductVariant === productVariant.id} onChange={(e)=>{selectProductVariant(e.target.value)}} />
                                     <label for={productVariant.id}>{productVariant.size.size}</label>
                                     <p>Stock : {productVariant.stock}</p>
                                 </div>

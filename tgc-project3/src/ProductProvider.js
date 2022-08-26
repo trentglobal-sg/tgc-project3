@@ -158,6 +158,12 @@ export default function ProductProvider(props) {
             }
             return womensInnerwear
         },
+
+        search: async (searchParams)=>{
+            let response = await axios.get(BASE_API_URL + 'api/products/search', {params: searchParams})
+            // console.log(response.data)
+            return response.data
+        }
     }
 
     //use productProvider as a higher order component
