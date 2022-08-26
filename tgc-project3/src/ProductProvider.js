@@ -34,7 +34,7 @@ export default function ProductProvider(props) {
                         return response = p
                     }
                 })
-                // console.log(response)
+                console.log(response)
             }
             return response;
         },
