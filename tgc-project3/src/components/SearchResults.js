@@ -1,12 +1,14 @@
 import { Link } from 'react-router-dom'
 import { Fragment } from 'react'
+import Button from 'react-bootstrap/Button'
+// import Card from 'react-bootstrap/Card'
 // import ProductContext from '../ProductContext'
 
 export default function SearchResults(props) {
     return (
         <Fragment>
             {/* <ul> */}
-            <div className='row justify-content-left'>
+            <div className='row'>
                 {props.products.map(m => {
                     return (
                         // <li>
@@ -19,7 +21,8 @@ export default function SearchResults(props) {
                                 <p className="card-text">{m.description}</p>
                             </div>
                             <div>
-                                <a href={`/product/` + m.id} className="btn btn-primary btn-sm">View</a>
+                                {/* <a href={`/product/` + m.id} className="btn btn-primary btn-sm">View</a> */}
+                                <Button as={Link} to={`/product/${m.id}`} className='btn btn-sm btn-primary'>View</Button>
                             </div>
                         </div>
                     )
