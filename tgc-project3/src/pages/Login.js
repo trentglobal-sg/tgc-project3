@@ -1,6 +1,7 @@
-import { Fragment, useContext, useEffect, useState } from 'react';
+import { Fragment, useContext, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import CustomerContext from '../CustomerContext';
+
 
 export default function Login() {
     const context = useContext(CustomerContext)
@@ -22,9 +23,7 @@ export default function Login() {
 
         if (loginResponse){
             navigate('/')
-        } else {
-            alert('login failed')
-        }
+        } 
     }
 
     return (

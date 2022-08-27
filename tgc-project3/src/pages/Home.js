@@ -3,6 +3,7 @@ import ProductContext from '../ProductContext';
 import homeWallpaper from '../images/home-wallpaper.jpeg'
 import SearchResults from '../components/SearchResults';
 import '../index.css'
+import ReactToastify from '../components/ReactToastify';
 
 export default function Home() {
     const context = useContext(ProductContext);
@@ -35,6 +36,7 @@ export default function Home() {
 
     return (
         <Fragment>
+            <ReactToastify />
             <div id='landing'>
                 <img src={homeWallpaper} alt="wallpaper" style={{ height: "100%" }}></img>
             </div>

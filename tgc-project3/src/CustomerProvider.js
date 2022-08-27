@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import CustomerContext from './CustomerContext';
 import axios from 'axios';
+import {toast} from 'react-toastify'
 
 
 export default function CustomerProvider(props) {
@@ -60,12 +61,14 @@ export default function CustomerProvider(props) {
             // console.log(loginResponse)
             if (loginResponse.data.error) {
                 setCustomer({})
+                toast.error("Account Not Found")
                 return false
             }
 
             let customerData = parseJWT(loginResponse.data.accessToken)
             console.log(customerData)
             setCustomer(customerData)
+            toast.success("Login Success")
             return true
         }
     }
