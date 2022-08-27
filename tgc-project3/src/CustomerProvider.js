@@ -8,8 +8,8 @@ export default function CustomerProvider(props) {
     const [customer, setCustomer] = useState({})
     const [jwt, setJwt] = useState([])
 
-    // const BASE_API_URL = 'https://tgc-ec-merinology.herokuapp.com/api/customers/'
-    const BASE_API_URL = 'https://8000-koihcire-tgcproject3api-jo56h3kktpv.ws-us63.gitpod.io/api/customers/'
+    const BASE_API_URL = 'https://tgc-ec-merinology.herokuapp.com/api/customers/'
+    // const BASE_API_URL = 'https://8000-koihcire-tgcproject3api-jo56h3kktpv.ws-us63.gitpod.io/api/customers/'
 
     const parseJWT = (token) => {
         var base64Url = token.split('.')[1];
@@ -99,6 +99,14 @@ export default function CustomerProvider(props) {
                     setJwt([]);
                     toast.error("There has been an error")
                 }
+            }
+        },
+
+        checkAuth: ()=>{
+            if (jwt.accessToken){
+                return true 
+            } else {
+                return false
             }
         }
     }

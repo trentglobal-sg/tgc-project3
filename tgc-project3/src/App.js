@@ -30,9 +30,10 @@ function App() {
     <Fragment>
       {/* The Routes, Route and Link components only worked in <Router> */}
       <ProductProvider>
-        <CustomerProvider>
+        
           <ReactToastify />
           <Router>
+          <CustomerProvider>
             <MyNavbar />
             {/* The <Routes> contains the pages */}
             <Routes>
@@ -55,8 +56,8 @@ function App() {
               <Route path="*" element={<NotFound />} />
               <Route path="/product/:productId" element={<Product />} />
             </Routes>
+            </CustomerProvider>
           </Router>
-        </CustomerProvider>
       </ProductProvider>
     </Fragment >
   );

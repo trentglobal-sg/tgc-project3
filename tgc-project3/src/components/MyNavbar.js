@@ -1,24 +1,25 @@
 import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom'
 //reactboostrap
 import Container from 'react-bootstrap/Container';
+import Button from 'react-bootstrap/esm/Button';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import NavDropdown from 'react-bootstrap/NavDropdown';
 import merinologyLogo from '../images/merinology.png'
 import '../index.css'
 import CustomerContext from '../CustomerContext';
-import { useContext } from 'react'
+import { useContext, useState, useEffect } from 'react'
 
-export default function MyNavbar() {
-    const context = useContext(CustomerContext)
+export default function MyNavbar(props) {
+    const context = useContext(CustomerContext);
     const logout = async () => {
         await context.logout()
-    }
+    };
 
     return (
         <Navbar bg="light" expand="lg" id="navbar">
             {/* <Container> */}
-            <Navbar.Brand className="ms-3" href="/"><img style={{ height: '40px' }} src={merinologyLogo} alt="logo"></img></Navbar.Brand>
+            <Navbar.Brand className="ms-3" as={Link} to="/" ><img style={{ height: '40px' }} src={merinologyLogo} alt="logo"></img></Navbar.Brand>
             <Navbar.Toggle aria-controls="basic-navbar-nav" />
             <Navbar.Collapse id="basic-navbar-nav">
                 <Nav className="me-auto">
@@ -44,8 +45,10 @@ export default function MyNavbar() {
                         <NavDropdown.Item as={Link} to="/merino-wool">Merino Wool</NavDropdown.Item>
                         <NavDropdown.Item as={Link} to="/about">Who Are We</NavDropdown.Item>
                     </NavDropdown>
-                    <Nav.Link as={Link} to="/login">Login</Nav.Link>
-                    <button className='btn btn-sm btn-primary' onClick={()=>{logout()}} >Logout</button>
+                    {context.checkAuth() ? <Nav.Link onClick={()=>{logout()}}>Logout</Nav.Link>  : <Nav.Link as={Link} to="/login">Login</Nav.Link>
+                    }
+                     
+                    
                 </Nav>
             </Navbar.Collapse>
             {/* </Container> */}
