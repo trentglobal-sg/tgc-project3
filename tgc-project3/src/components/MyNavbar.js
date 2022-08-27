@@ -6,8 +6,15 @@ import Navbar from 'react-bootstrap/Navbar';
 import NavDropdown from 'react-bootstrap/NavDropdown';
 import merinologyLogo from '../images/merinology.png'
 import '../index.css'
+import CustomerContext from '../CustomerContext';
+import { useContext } from 'react'
 
 export default function MyNavbar() {
+    const context = useContext(CustomerContext)
+    const logout = async () => {
+        await context.logout()
+    }
+
     return (
         <Navbar bg="light" expand="lg" id="navbar">
             {/* <Container> */}
@@ -38,6 +45,7 @@ export default function MyNavbar() {
                         <NavDropdown.Item as={Link} to="/about">Who Are We</NavDropdown.Item>
                     </NavDropdown>
                     <Nav.Link as={Link} to="/login">Login</Nav.Link>
+                    <button className='btn btn-sm btn-primary' onClick={()=>{logout()}} >Logout</button>
                 </Nav>
             </Navbar.Collapse>
             {/* </Container> */}

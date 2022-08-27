@@ -1,22 +1,23 @@
 import { useState, useEffect } from 'react';
 import CustomerContext from './CustomerContext';
 import axios from 'axios';
-import {toast} from 'react-toastify'
+import { toast } from 'react-toastify'
 
 
 export default function CustomerProvider(props) {
     const [customer, setCustomer] = useState({})
+    const [jwt, setJwt] = useState([])
 
-    const BASE_API_URL = 'https://tgc-ec-merinology.herokuapp.com/api/customers/'
-    // const BASE_API_URL = 'https://8000-koihcire-tgcproject3api-jo56h3kktpv.ws-us63.gitpod.io/api/customers/'
-    
+    // const BASE_API_URL = 'https://tgc-ec-merinology.herokuapp.com/api/customers/'
+    const BASE_API_URL = 'https://8000-koihcire-tgcproject3api-jo56h3kktpv.ws-us63.gitpod.io/api/customers/'
+
     const parseJWT = (token) => {
-            var base64Url = token.split('.')[1];
-            var base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
-            var jsonPayload = decodeURIComponent(window.atob(base64).split('').map(function(c) {
-                return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
-            }).join(''));
-            return JSON.parse(jsonPayload);
+        var base64Url = token.split('.')[1];
+        var base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
+        var jsonPayload = decodeURIComponent(window.atob(base64).split('').map(function (c) {
+            return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
+        }).join(''));
+        return JSON.parse(jsonPayload);
     }
 
     const context = {
@@ -34,8 +35,6 @@ export default function CustomerProvider(props) {
             // let customer = response.data
             console.log(response.data)
 
-
-
             if (response.data.customer) {
                 let loginResponse = await axios.post(BASE_API_URL + 'login', {
                     email: email,
@@ -43,8 +42,11 @@ export default function CustomerProvider(props) {
                 })
                 console.log(loginResponse)
 
+                setJwt(loginResponse.data)
                 let customerData = parseJWT(loginResponse.data.accessToken)
                 console.log(customerData)
+                setCustomer(customerData)
+                toast.success("Login Success")
                 return true
             }
 
@@ -65,11 +67,39 @@ export default function CustomerProvider(props) {
                 return false
             }
 
+            setJwt(loginResponse.data)
             let customerData = parseJWT(loginResponse.data.accessToken)
             console.log(customerData)
             setCustomer(customerData)
             toast.success("Login Success")
             return true
+        },
+
+        logout: async () => {
+            // console.log(jwt.refreshToken)
+            if (jwt.accessToken) {
+                let logoutResponse = await axios.post(BASE_API_URL + 'logout',
+                    {
+                        refreshToken: jwt.refreshToken
+                    },
+                    {
+                        headers: {
+                            authorization: `Bearer ${jwt.accessToken}`
+                        }
+                    })
+
+                if (logoutResponse.data.message) {
+                    setCustomer({});
+                    setJwt([]);
+                    toast.success("Logged Out")
+                }
+
+                if (logoutResponse.data.error) {
+                    setCustomer({});
+                    setJwt([]);
+                    toast.error("There has been an error")
+                }
+            }
         }
     }
 
