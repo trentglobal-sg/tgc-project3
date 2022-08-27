@@ -5,7 +5,7 @@ import ProductContext from "../ProductContext"
 export default function Login() {
     const context = useContext(ProductContext)
     const [loginData, setLoginData] = useState({
-        username: '',
+        email: '',
         password: ''
     })
 
@@ -22,8 +22,8 @@ export default function Login() {
             <div className='buffer-top'></div>
             <div className='container'>
                 <h1>Login</h1>
-                <label>Username </label>
-                <input type='text' name='username' className='form-control' value={loginData.username} onChange={(e)=>{updateFormField(e)}}/>
+                <label>Email </label>
+                <input type='text' name='username' className='form-control' value={loginData.email} onChange={(e)=>{updateFormField(e)}}/>
                 <label>Password</label>
                 <input type='text' name='password' className='form-control' value={loginData.password} onChange={(e)=>{updateFormField(e)}}/>
                 <button className='btn btn-primary btn-submit mt-3' onClick={() => { submitForm() }} >Submit</button>

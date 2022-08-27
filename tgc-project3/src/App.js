@@ -2,6 +2,7 @@ import { Fragment } from 'react'
 import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom'
 import "bootstrap/dist/css/bootstrap.min.css"
 import ProductProvider from "./ProductProvider"
+import CustomerProvider from './CustomerProvider'
 import About from './pages/About'
 import Cart from './pages/Cart'
 import Home from './pages/Home'
@@ -28,6 +29,7 @@ function App() {
     <Fragment>
       {/* The Routes, Route and Link components only worked in <Router> */}
       <ProductProvider>
+        <CustomerProvider>
         <Router>
           <MyNavbar />
           {/* The <Routes> contains the pages */}
@@ -52,6 +54,7 @@ function App() {
             <Route path="/product/:productId" element={<Product />} />
           </Routes>
         </Router>
+        </CustomerProvider>
       </ProductProvider>
     </Fragment >
   );

@@ -1,8 +1,13 @@
-import { Fragment, useState } from 'react';
+import { Fragment, useContext, useState } from 'react';
+import CustomerContext from '../CustomerContext';
 import "bootstrap/dist/css/bootstrap.min.css"
 import '../index.css'
+import { useNavigate } from 'react-router-dom';
 
 export default function Register() {
+    const context = useContext(CustomerContext)
+    const navigate = useNavigate()
+
     const [registerData, setRegisterData] = useState({
         username: '',
         first_name: '',
@@ -68,6 +73,7 @@ export default function Register() {
         }
 
         setformError(errors)
+
         if (Object.keys(errors).length === 0) {
             return true
         } else {
@@ -75,10 +81,18 @@ export default function Register() {
         }
     }
 
-    const submitForm = () => {
+    const submitForm = async () => {
         let formCheck= checkErrors()
+        console.log("formCheck => ", formCheck)
         if (formCheck){
             // send form
+            let register = await context.register(registerData)
+            console.log("register => ", register)
+            if (register) {
+                navigate('/')
+            } else {
+                alert('customer exists')
+            }
         } 
     }
 
