@@ -34,7 +34,7 @@ export default function Login() {
                 <label>Email </label>
                 <input type='text' name='email' className='form-control' value={loginData.email} onChange={(e)=>{updateFormField(e)}}/>
                 <label>Password</label>
-                <input type='text' name='password' className='form-control' value={loginData.password} onChange={(e)=>{updateFormField(e)}}/>
+                <input type='password' name='password' className='form-control' value={loginData.password} onChange={(e)=>{updateFormField(e)}}/>
                 <button className='btn btn-primary btn-submit mt-3' onClick={()=>submitForm()} >Submit</button>
                 <div className='mt-3'>
                     <p>No account? <a href='/register'>Register Here</a> </p>
