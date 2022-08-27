@@ -49,7 +49,7 @@ code {
 
 .errorMessage{
   color: red;
-  font-size: xx-small;
+  font-size: x-small;
   font-style: italic;
   height: 1px;
 }

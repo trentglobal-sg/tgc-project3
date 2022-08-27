@@ -1,9 +1,10 @@
 import { Fragment, useContext, useEffect, useState } from 'react';
-import { Link } from 'react-router-dom'
-import ProductContext from "../ProductContext"
+import { useNavigate } from 'react-router-dom';
+import CustomerContext from '../CustomerContext';
 
 export default function Login() {
-    const context = useContext(ProductContext)
+    const context = useContext(CustomerContext)
+    const navigate = useNavigate()
     const [loginData, setLoginData] = useState({
         email: '',
         password: ''
@@ -13,8 +14,17 @@ export default function Login() {
         setLoginData({ ...loginData, [e.target.name]: e.target.value })
     }
 
-    const submitForm = ()=>{
-        alert('form submitted')
+    const submitForm = async ()=>{
+        let email = loginData.email;
+        let password = loginData.password
+        let loginResponse = await context.login(email, password)
+        console.log ("login =>", loginResponse)
+
+        if (loginResponse){
+            navigate('/')
+        } else {
+            alert('login failed')
+        }
     }
 
     return (
@@ -23,10 +33,10 @@ export default function Login() {
             <div className='container'>
                 <h1>Login</h1>
                 <label>Email </label>
-                <input type='text' name='username' className='form-control' value={loginData.email} onChange={(e)=>{updateFormField(e)}}/>
+                <input type='text' name='email' className='form-control' value={loginData.email} onChange={(e)=>{updateFormField(e)}}/>
                 <label>Password</label>
                 <input type='text' name='password' className='form-control' value={loginData.password} onChange={(e)=>{updateFormField(e)}}/>
-                <button className='btn btn-primary btn-submit mt-3' onClick={() => { submitForm() }} >Submit</button>
+                <button className='btn btn-primary btn-submit mt-3' onClick={()=>submitForm()} >Submit</button>
                 <div className='mt-3'>
                     <p>No account? <a href='/register'>Register Here</a> </p>
                 </div>

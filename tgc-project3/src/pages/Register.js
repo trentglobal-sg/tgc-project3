@@ -91,7 +91,8 @@ export default function Register() {
             if (register) {
                 navigate('/')
             } else {
-                alert('customer exists')
+                let error = {email: "Email address already in use. Please enter another email address."}
+                setformError(error)
             }
         } 
     }
