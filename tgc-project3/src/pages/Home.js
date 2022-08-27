@@ -40,10 +40,9 @@ export default function Home() {
             </div>
             <div id='search' className='container'>
                 <h3 className='mt-3'>Search for products</h3>
-                <input id='searchProduct' name='searchProduct' type="text" className='form-control' value={searchProduct} onChange={(e)=>{updateSearchProduct(e.target.value)}} onKeyUp={(e)=>{keyUpSearch(e)}}/>
+                <input id='searchProduct' name='searchProduct' type="text" className='form-control mb-2' value={searchProduct} onChange={(e)=>{updateSearchProduct(e.target.value)}} onKeyUp={(e)=>{keyUpSearch(e)}}/>
                 {searchResults ? <SearchResults products={searchResults}/> : ''}            
             </div>
-            {/* {searchResults ? <SearchResults products={searchResults}/> : ''} */}
             
         </Fragment>
     )

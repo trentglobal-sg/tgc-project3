@@ -46,3 +46,10 @@ code {
   height: 8vh;
   width: 10px;
 }
+
+.errorMessage{
+  color: red;
+  font-size: xx-small;
+  font-style: italic;
+  height: 1px;
+}
