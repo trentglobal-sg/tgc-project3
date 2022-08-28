@@ -32,6 +32,16 @@ export default function Home() {
         setSearchResults(results)
     }
 
+    const resetSearch = async() => {
+        //reset all params
+        setSearchProduct('')
+
+        //do an empty search
+        let searchParams = {}
+        let results = await context.search(searchParams)
+        setSearchResults(results)
+    }
+
     const keyUpSearch = (e) => {
         if (e.key === "Enter") {
             search();
@@ -69,10 +79,44 @@ export default function Home() {
                 <h3 className='mt-3'>Search for products</h3>
                 <div>
                     <input id='searchProduct' name='searchProduct' type="text" className='form-control mb-2' value={searchProduct} onChange={(e) => { updateSearchProduct(e.target.value) }} onKeyUp={(e) => { keyUpSearch(e) }} />
+                    <h4>Brands</h4>
+                    <select className='form-select' name="brand">
+                        <option selected>Select Brand</option>
+                        {brands.map(brand => {
+                            return <option value={brand[0]}>{brand[1]}</option>
+                        }
+                        )}
+                    </select>
+                    <h4>Categories</h4>
+                    <select className='form-select' name='category' >
+                        <option selected>Select Category</option>
+                        {categories.map(category => {
+                            return <option value={category[0]}>{category[1]}</option>
+                        })}
+                    </select>
+                    <h4>Activities</h4>
+                    <select className='form-select' name='activity'>
+                        <option selected>Select Activity</option>
+                        {activities.map(activity => {
+                            return <option value={activity[0]}>{activity[1]}</option>
+                        })}
+                    </select>
+                    <h4>Blends</h4>
+                    <select className='form-select' name='blends'>
+                        <option selected>Select Blends</option>
+                        {blends.map(blend => {
+                            return <option value={blend[0]}>{blend[1]}</option>
+                        })}
+                    </select>
+                    <div className='mt-3'>
+                        <button className='btn btn-sm btn-primary me-2' onClick={search}>Search</button>
+                        <button className='btn btn-sm btn-primary me-2' onClick={resetSearch}>Reset</button>
+                    </div>
                 </div>
-                <div>
+                <div className='mt-2'>
                     {searchResults ? <SearchResults products={searchResults} /> : ''}
                 </div>
+
             </div>
 
         </Fragment>
