@@ -14,6 +14,7 @@ export default function Product(props) {
     const [selectedVariantData, setSelectedVariantData] = useState({})
     const [activeProductVariants, setActiveProductVariants] = useState([]);
     const [selectedProductVariant, setSelectedProductVariant] = useState('');
+    const [selectedProductVariantData, setSelectedProductVariantData] = useState({});
     const context = useContext(ProductContext);
     const product = context.getProductById(parseInt(productId));
 
@@ -54,6 +55,7 @@ export default function Product(props) {
 
     const selectVariant = (variantId) => {
         setSelectedProductVariant('')
+        setSelectedProductVariantData({})
         setSelectedVariant(parseInt(variantId))
 
         variants.map(variant => {
@@ -68,6 +70,12 @@ export default function Product(props) {
 
     const selectProductVariant = (productVariantId) => {
         setSelectedProductVariant(parseInt(productVariantId))
+
+        activeProductVariants.map(productVariant => {
+            if (productVariant.id === parseInt(productVariantId)){
+                setSelectedProductVariantData(productVariant)
+            }
+        })
     }
 
     if (product) {
