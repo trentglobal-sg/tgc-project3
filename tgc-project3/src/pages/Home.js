@@ -1,4 +1,4 @@
-import { Fragment, useState, useContext } from 'react';
+import { Fragment, useState, useContext, useEffect } from 'react';
 import ProductContext from '../ProductContext';
 import homeWallpaper from '../images/home-wallpaper.jpeg'
 import SearchResults from '../components/SearchResults';
@@ -13,7 +13,6 @@ export default function Home() {
     const updateSearchProduct = (value)=>{
         setSearchProduct(value)
     }
-
 
     const search = async ()=>{
         let searchParams = {}
@@ -34,6 +33,11 @@ export default function Home() {
         }
     }
 
+    useEffect(()=>{
+        search()
+
+    },[])
+
     return (
         <Fragment>
             <ReactToastify />
@@ -43,6 +47,7 @@ export default function Home() {
             <div id='search' className='container'>
                 <h3 className='mt-3'>Search for products</h3>
                 <input id='searchProduct' name='searchProduct' type="text" className='form-control mb-2' value={searchProduct} onChange={(e)=>{updateSearchProduct(e.target.value)}} onKeyUp={(e)=>{keyUpSearch(e)}}/>
+                
                 {searchResults ? <SearchResults products={searchResults}/> : ''}            
             </div>
             

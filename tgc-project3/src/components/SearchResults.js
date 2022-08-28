@@ -16,7 +16,7 @@ export default function SearchResults(props) {
                             <div className="card-body row justify-content-left">
                                 <div className='col-12'>
                                     <h6 className="card-title">{m.product}</h6>
-                                    <h7 className="card-text">$ {(m.cost / 100).toFixed(2)}</h7>
+                                    <h6 className="card-text">$ {(m.cost / 100).toFixed(2)}</h6>
                                 </div>
                                 {/* <div className='col-3'>
                                     <Button as={Link} to={`/product/${m.id}`} className='btn btn-sm btn-primary'>View</Button>

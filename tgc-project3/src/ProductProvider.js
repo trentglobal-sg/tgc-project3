@@ -21,7 +21,7 @@ export default function ProductProvider(props) {
             setProducts(products)
         }
         fetchData();
-        console.log(products)
+        // console.log(products)
     }, [])
 
     const context = {
@@ -163,7 +163,8 @@ export default function ProductProvider(props) {
             let response = await axios.get(BASE_API_URL + 'api/products/search', {params: searchParams})
             // console.log(response.data)
             return response.data
-        }
+        },
+
     }
 
     //use productProvider as a higher order component
