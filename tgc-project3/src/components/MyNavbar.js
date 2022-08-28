@@ -9,12 +9,18 @@ import merinologyLogo from '../images/merinology.png'
 import '../index.css'
 import CustomerContext from '../CustomerContext';
 import { useContext, useState, useEffect } from 'react'
+import Cart from './Cart'
 
 export default function MyNavbar(props) {
     const context = useContext(CustomerContext);
     const logout = async () => {
         await context.logout()
     };
+
+    // off canvas cart controls
+    const [show, setShow] = useState(false);
+    const handleClose = () => setShow(false);
+    const handleShow = () => setShow(true);
 
     return (
         <Navbar bg="light" expand="lg" id="navbar">
@@ -45,10 +51,9 @@ export default function MyNavbar(props) {
                         <NavDropdown.Item as={Link} to="/merino-wool">Merino Wool</NavDropdown.Item>
                         <NavDropdown.Item as={Link} to="/about">Who Are We</NavDropdown.Item>
                     </NavDropdown>
-                    {context.checkAuth() ? <Nav.Link onClick={()=>{logout()}}>Logout</Nav.Link>  : <Nav.Link as={Link} to="/login">Login</Nav.Link>
-                    }
-                     
-                    
+                    {context.checkAuth() ? <Nav.Link onClick={() => { logout() }}>Logout</Nav.Link> : <Nav.Link as={Link} to="/login">Login</Nav.Link>}
+                    <Nav.Link onClick={handleShow}>Cart</Nav.Link>
+                    <Cart show={show} handleClose={handleClose}/>
                 </Nav>
             </Navbar.Collapse>
             {/* </Container> */}

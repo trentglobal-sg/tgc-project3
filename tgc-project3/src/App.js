@@ -30,8 +30,6 @@ function App() {
     <Fragment>
       {/* The Routes, Route and Link components only worked in <Router> */}
       <ProductProvider>
-        
-          <ReactToastify />
           <Router>
           <CustomerProvider>
             <MyNavbar />
