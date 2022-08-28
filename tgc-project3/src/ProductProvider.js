@@ -165,6 +165,11 @@ export default function ProductProvider(props) {
             return response.data
         },
 
+        getSearchFields: async ()=>{
+            let response = await axios.get(BASE_API_URL + 'api/products/search-fields')
+            // console.log('search', response.data)
+            return response.data
+        }
     }
 
     //use productProvider as a higher order component
