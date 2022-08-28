@@ -67,12 +67,21 @@ export default function CustomerProvider(props) {
                 return false
             }
 
+            //TODO jwt session?
+            sessionStorage.setItem('accessToken', loginResponse.data.accessToken)
+            sessionStorage.setItem('refreshToken', loginResponse.data.refreshToken)
+
             setJwt(loginResponse.data)
             let customerData = parseJWT(loginResponse.data.accessToken)
             console.log(customerData)
             setCustomer(customerData)
             toast.success("Login Success")
             return true
+        },
+
+        getSession: ()=>{
+            let sessionData = sessionStorage.getItem("accessToken")
+            console.log("sessions accesstoken: ", sessionData)
         },
 
         logout: async () => {
@@ -90,6 +99,8 @@ export default function CustomerProvider(props) {
 
                 if (logoutResponse.data.message) {
                     setCustomer({});
+                    //TODO clear jwt sessions
+                    sessionStorage.clear()
                     setJwt([]);
                     toast.success("Logged Out")
                 }

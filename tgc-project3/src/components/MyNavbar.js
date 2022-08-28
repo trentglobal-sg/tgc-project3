@@ -54,6 +54,7 @@ export default function MyNavbar(props) {
                     {context.checkAuth() ? <Nav.Link onClick={() => { logout() }}>Logout</Nav.Link> : <Nav.Link as={Link} to="/login">Login</Nav.Link>}
                     <Nav.Link onClick={handleShow}>Cart</Nav.Link>
                     <Cart show={show} handleClose={handleClose}/>
+                    <Nav.Link onClick={()=>{context.getSession()}}>SESSIONS</Nav.Link>
                 </Nav>
             </Navbar.Collapse>
             {/* </Container> */}
