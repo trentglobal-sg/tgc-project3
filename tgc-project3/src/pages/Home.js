@@ -71,7 +71,7 @@ export default function Home() {
 
     return (
         <Fragment>
-            <ReactToastify />
+            {/* <ReactToastify /> */}
             <div id='landing'>
                 <img src={homeWallpaper} alt="wallpaper" style={{ height: "100%" }}></img>
             </div>

@@ -3,6 +3,7 @@ import ProductContext from '../ProductContext';
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
 import "../index.css"
+import { toast } from 'react-toastify'
 
 export default function Product(props) {
     const BASE_API_URL = 'https://tgc-ec-merinology.herokuapp.com/api/products/'
@@ -14,7 +15,10 @@ export default function Product(props) {
     const [selectedVariantData, setSelectedVariantData] = useState({})
     const [activeProductVariants, setActiveProductVariants] = useState([]);
     const [selectedProductVariant, setSelectedProductVariant] = useState('');
-    const [selectedProductVariantData, setSelectedProductVariantData] = useState({});
+    const [selectedProductVariantData, setSelectedProductVariantData] = useState('');
+    
+
+
     const context = useContext(ProductContext);
     const product = context.getProductById(parseInt(productId));
 
@@ -78,6 +82,14 @@ export default function Product(props) {
         })
     }
 
+    const addToCart = () => {
+        if (selectedProductVariantData){
+            context.addToCart(selectedProductVariantData)
+        } else {
+            toast.error('Please add something to cart')
+        }
+    }
+
     if (product) {
         return (
             <Fragment>
@@ -119,7 +131,7 @@ export default function Product(props) {
                             </Fragment>
                         )}
                         <div>
-                            <button className='btn btn-sm btn-primary' >Add to Cart</button>
+                            <button className='btn btn-sm btn-primary' onClick={()=>{addToCart()}} >Add to Cart</button>
                         </div>
                     </div>
                 </div>

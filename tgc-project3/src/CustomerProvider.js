@@ -6,8 +6,9 @@ import { toast } from 'react-toastify'
 
 
 export default function CustomerProvider(props) {
-    const [customer, setCustomer] = useState({})
-    const [jwt, setJwt] = useState([])
+    const [customer, setCustomer] = useState({});
+    const [jwt, setJwt] = useState([]);
+    const [cart, setCart] = useState({});
 
     const BASE_API_URL = 'https://tgc-ec-merinology.herokuapp.com/api/customers/'
     // const BASE_API_URL = 'https://8000-koihcire-tgcproject3api-jo56h3kktpv.ws-us63.gitpod.io/api/customers/'
@@ -74,7 +75,6 @@ export default function CustomerProvider(props) {
         }
     }
 
-
     useEffect(()=>{
         const handleTabClose = (event) => {
             event.preventDefault();
@@ -90,6 +90,11 @@ export default function CustomerProvider(props) {
             window.removeEventListener('beforeunload', handleTabClose)
         };
     },[])
+
+    const addToCart = (cartItem) => {
+        setCart(cartItem)
+        return true
+    }
 
     const context = {
         register: async (data) => {
@@ -107,18 +112,6 @@ export default function CustomerProvider(props) {
             console.log(response.data)
 
             if (response.data.customer) {
-                // let loginResponse = await axios.post(BASE_API_URL + 'login', {
-                //     email: email,
-                //     password: password
-                // })
-                // console.log(loginResponse)
-
-                // setJwt(loginResponse.data)
-                // let customerData = parseJWT(loginResponse.data.accessToken)
-                // console.log(customerData)
-                // setCustomer(customerData)
-                // toast.success("Login Success")
-                // return true
                 return await login(email, password)
             }
 
