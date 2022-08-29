@@ -8,8 +8,8 @@ import "../index.css"
 import { toast } from 'react-toastify'
 
 export default function Product(props) {
-    const BASE_API_URL = 'https://tgc-ec-merinology.herokuapp.com/api/products/'
-    // const BASE_API_URL = 'https://8000-koihcire-tgcproject3api-jo56h3kktpv.ws-us63.gitpod.io/api/products/'
+    // const BASE_API_URL = 'https://tgc-ec-merinology.herokuapp.com/api/products/'
+    const BASE_API_URL = 'https://8000-koihcire-tgcproject3api-jo56h3kktpv.ws-us63.gitpod.io/api/products/'
     // eg:/products/:productId
     // useparams will return an object with all the parameters and their values just like req.params in express
     const { productId } = useParams();

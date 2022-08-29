@@ -3,15 +3,12 @@ import CustomerContext from './CustomerContext';
 import axios from 'axios';
 import { toast } from 'react-toastify'
 
-
-
 export default function CustomerProvider(props) {
     const [customer, setCustomer] = useState({});
     const [jwt, setJwt] = useState([]);
-    const [cart, setCart] = useState({});
 
-    const BASE_API_URL = 'https://tgc-ec-merinology.herokuapp.com/api/'
-    // const BASE_API_URL = 'https://8000-koihcire-tgcproject3api-jo56h3kktpv.ws-us63.gitpod.io/api/'
+    // const BASE_API_URL = 'https://tgc-ec-merinology.herokuapp.com/api/'
+    const BASE_API_URL = 'https://8000-koihcire-tgcproject3api-jo56h3kktpv.ws-us63.gitpod.io/api/'
 
     const parseJWT = (token) => {
         var base64Url = token.split('.')[1];
@@ -92,8 +89,6 @@ export default function CustomerProvider(props) {
     }, [])
 
     const addToCart = async (productVariantId, quantity) => {
-        console.log('productvariantid: ', productVariantId)
-
         if (jwt.accessToken) {
             try {
                 await axios.post(BASE_API_URL + 'cart/' + productVariantId + '/add',
@@ -112,6 +107,24 @@ export default function CustomerProvider(props) {
             }
         } else {
             return false;
+        }
+    }
+
+    const getCart = async (customerId) => {
+        if (jwt.accessToken) {
+            try{
+                let response = await axios.get(BASE_API_URL + 'cart/', {
+                    headers: {
+                        authorization: `Bearer ${jwt.accessToken}`,
+                    },
+                })
+                let cartItems = response.data
+                console.log(cartItems)
+                return cartItems;
+            } catch (error){
+                console.log(error)
+                return false
+            }
         }
     }
 
@@ -163,6 +176,11 @@ export default function CustomerProvider(props) {
 
         addToCart: async (productVariantId, quantity) => {
             let response = await addToCart(productVariantId, quantity)
+            return response;
+        },
+
+        getCart: async () => {
+            let response = await getCart()
             return response;
         }
     }

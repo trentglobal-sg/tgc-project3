@@ -9,9 +9,11 @@ import merinologyLogo from '../images/merinology.png'
 import '../index.css'
 import CustomerContext from '../CustomerContext';
 import { useContext, useState, useEffect } from 'react'
+import Offcanvas from 'react-bootstrap/Offcanvas';
 import Cart from './Cart'
 
 export default function MyNavbar(props) {
+    const [cart, setCart] = useState('')
     const context = useContext(CustomerContext);
     const logout = async () => {
         await context.logout()
@@ -20,7 +22,14 @@ export default function MyNavbar(props) {
     // off canvas cart controls
     const [show, setShow] = useState(false);
     const handleClose = () => setShow(false);
-    const handleShow = () => setShow(true);
+    const handleShow = () => {
+        const getCart = async () => {
+            let response = await context.getCart();
+            setCart(response);
+        }
+        getCart();
+        setShow(true)
+    };
 
     return (
         <Navbar bg="light" expand="lg" id="navbar">
@@ -53,8 +62,21 @@ export default function MyNavbar(props) {
                     </NavDropdown>
                     {context.checkAuth() ? <Nav.Link onClick={() => { logout() }}>Logout</Nav.Link> : <Nav.Link as={Link} to="/login">Login</Nav.Link>}
                     <Nav.Link onClick={handleShow}>Cart</Nav.Link>
-                    <Cart show={show} handleClose={handleClose}/>
-                    <Nav.Link onClick={()=>{context.getSession()}}>SESSIONS</Nav.Link>
+                    {/* <Cart show={show} handleClose={handleClose} /> */}
+                    <Offcanvas show={show} onHide={handleClose} id="cart" placement='end'>
+                        <Offcanvas.Header closeButton>
+                            <Offcanvas.Title>My Cart</Offcanvas.Title>
+                        </Offcanvas.Header>
+                        <Offcanvas.Body>
+                            {cart ? cart.map(cart=>{
+                                return <div>
+                                    <h1>ID: {cart.id}</h1>
+                                    <h2>Quantity: {cart.quantity}</h2>
+                                </div>
+                            }) : ''}
+                        </Offcanvas.Body>
+                    </Offcanvas>
+                    <Nav.Link onClick={() => { context.getSession() }}>SESSIONS</Nav.Link>
                 </Nav>
             </Navbar.Collapse>
             {/* </Container> */}
