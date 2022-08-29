@@ -3,11 +3,13 @@ import ProductContext from '../ProductContext';
 import CustomerContext from '../CustomerContext';
 import { useParams, Link } from 'react-router-dom';
 import axios from 'axios';
+import "bootstrap/dist/css/bootstrap.min.css"
 import "../index.css"
 import { toast } from 'react-toastify'
 
 export default function Product(props) {
     const BASE_API_URL = 'https://tgc-ec-merinology.herokuapp.com/api/products/'
+    // const BASE_API_URL = 'https://8000-koihcire-tgcproject3api-jo56h3kktpv.ws-us63.gitpod.io/api/products/'
     // eg:/products/:productId
     // useparams will return an object with all the parameters and their values just like req.params in express
     const { productId } = useParams();
@@ -17,13 +19,11 @@ export default function Product(props) {
     const [activeProductVariants, setActiveProductVariants] = useState([]);
     const [selectedProductVariant, setSelectedProductVariant] = useState('');
     const [selectedProductVariantData, setSelectedProductVariantData] = useState('');
-
-
+    const [selectedQuantity, setSelectedQuantity] = useState(1)
 
     const context = useContext(ProductContext);
     const product = context.getProductById(parseInt(productId));
     const customerContext = useContext(CustomerContext)
-
 
     const getVariantsData = async (productId) => {
         let variantsResponse = await axios.get(BASE_API_URL + productId)
@@ -75,6 +75,7 @@ export default function Product(props) {
     }
 
     const selectProductVariant = (productVariantId) => {
+        setSelectedQuantity(1)
         setSelectedProductVariant(parseInt(productVariantId))
 
         activeProductVariants.map(productVariant => {
@@ -84,21 +85,53 @@ export default function Product(props) {
         })
     }
 
+    const increment = ()=>{
+        if(selectedQuantity >= 1 && selectedQuantity < 10 && selectedQuantity < selectedProductVariantData.stock){
+            setSelectedQuantity(selectedQuantity + 1)
+        }
+    }
+
+    const decrement = ()=>{
+        if (selectedQuantity > 1 && selectedQuantity <= 10){
+            setSelectedQuantity(selectedQuantity - 1)
+        }
+    }
+
     const loginErrorToast = () => {
         return <div>
             Please <Link to='/login'>Login First</Link> to add to cart
         </div>
 
-};
+    };
 
-    const addToCart = () => {
+    const addToCart = async () => {
         if (selectedProductVariantData) {
             let checkAuth = customerContext.checkAuth();
             if (checkAuth) {
                 let selected = selectedProductVariantData;
+                let quantity = selectedQuantity;
                 let product = selectedVariantData;
-                customerContext.addToCart({ product, selected })
-                toast.success("Item added to cart")
+                let productVariantId = selectedProductVariant
+
+                if(quantity < selected.stock){
+                    
+                    let response = await customerContext.addToCart(productVariantId, quantity)
+                    console.log('add to cart response: ', response)
+                    if (response){
+                        toast.success("Item added to cart")
+
+                        //reset the counter
+                        setSelectedQuantity(1)
+                        setSelectedProductVariant('')
+                        setSelectedProductVariantData('')
+                    } else {
+                        toast.error("Something went wrong")
+                    }
+                    
+                } else {
+                    toast.error('Sorry, item is out of stock')
+                }
+
             } else {
                 toast.info(loginErrorToast())
             }
@@ -143,12 +176,19 @@ export default function Product(props) {
                                 <div>
                                     <input type='radio' value={productVariant.id} name="productVariant" id={productVariant.id} checked={selectedProductVariant === productVariant.id} onChange={(e) => { selectProductVariant(e.target.value) }} />
                                     <label for={productVariant.id}>{productVariant.size.size}</label>
-                                    <p>Stock : {productVariant.stock}</p>
+                                    {productVariant.stock < 10 ? <p className='errorMessage ms-3' style={{display: "inline"}}>Only {productVariant.stock} pieces left</p> : ''}
+                                    {/* <p>Stock : {productVariant.stock}</p> */}
                                 </div>
                             </Fragment>
                         )}
                         <div>
-                            <button className='btn btn-sm btn-primary' onClick={() => { addToCart() }} >Add to Cart</button>
+                            <h6>Quantity</h6>
+                            <button className='btn btn-sm btn-primary' onClick={increment}><h3>+</h3></button>
+                            <input type="number" className='form-input form-input-sm ms-2 me-2' value={selectedQuantity} onChange={(e) => { setSelectedQuantity(e.target.value) }} disabled/>
+                            <button className='btn btn-sm btn-primary' onClick={decrement} ><h3>-</h3></button>
+                        </div>
+                        <div>
+                            <button className='btn btn-sm btn-primary mt-3' onClick={() => { addToCart() }} >Add to Cart</button>
                         </div>
                     </div>
                 </div>
