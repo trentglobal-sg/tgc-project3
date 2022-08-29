@@ -4,6 +4,7 @@ import axios from 'axios';
 import { toast } from 'react-toastify'
 
 
+
 export default function CustomerProvider(props) {
     const [customer, setCustomer] = useState({})
     const [jwt, setJwt] = useState([])
@@ -19,6 +20,76 @@ export default function CustomerProvider(props) {
         }).join(''));
         return JSON.parse(jsonPayload);
     }
+
+    const login = async (email, password) => {
+        let loginResponse = await axios.post(BASE_API_URL + 'login', {
+            email: email,
+            password: password
+        })
+        // console.log(loginResponse)
+        if (loginResponse.data.error) {
+            setCustomer({})
+            toast.error("Account Not Found")
+            return false
+        }
+
+        //TODO jwt session?
+        sessionStorage.setItem('accessToken', loginResponse.data.accessToken)
+        sessionStorage.setItem('refreshToken', loginResponse.data.refreshToken)
+
+        setJwt(loginResponse.data)
+        let customerData = parseJWT(loginResponse.data.accessToken)
+        console.log(customerData)
+        setCustomer(customerData)
+        toast.success("Login Success")
+        return true
+    }
+
+    const logout = async () => {
+        // console.log(jwt.refreshToken)
+        if (jwt.accessToken) {
+            let logoutResponse = await axios.post(BASE_API_URL + 'logout',
+                {
+                    refreshToken: jwt.refreshToken
+                },
+                {
+                    headers: {
+                        authorization: `Bearer ${jwt.accessToken}`
+                    }
+                })
+
+            if (logoutResponse.data.message) {
+                setCustomer({});
+                //TODO clear jwt sessions
+                sessionStorage.clear()
+                setJwt([]);
+                toast.success("Logged Out")
+            }
+
+            if (logoutResponse.data.error) {
+                setCustomer({});
+                setJwt([]);
+                toast.error("There has been an error")
+            }
+        }
+    }
+
+
+    useEffect(()=>{
+        const handleTabClose = (event) => {
+            event.preventDefault();
+            console.log('before unload event triggered');
+
+            return (event.returnValue = "Are you sure you want to exit?")
+            // return(alert('you want to exit?'))
+        }
+
+        window.addEventListener('beforeunload', handleTabClose);
+
+        return ()=>{
+            window.removeEventListener('beforeunload', handleTabClose)
+        };
+    },[])
 
     const context = {
         register: async (data) => {
@@ -36,18 +107,19 @@ export default function CustomerProvider(props) {
             console.log(response.data)
 
             if (response.data.customer) {
-                let loginResponse = await axios.post(BASE_API_URL + 'login', {
-                    email: email,
-                    password: password
-                })
-                console.log(loginResponse)
+                // let loginResponse = await axios.post(BASE_API_URL + 'login', {
+                //     email: email,
+                //     password: password
+                // })
+                // console.log(loginResponse)
 
-                setJwt(loginResponse.data)
-                let customerData = parseJWT(loginResponse.data.accessToken)
-                console.log(customerData)
-                setCustomer(customerData)
-                toast.success("Login Success")
-                return true
+                // setJwt(loginResponse.data)
+                // let customerData = parseJWT(loginResponse.data.accessToken)
+                // console.log(customerData)
+                // setCustomer(customerData)
+                // toast.success("Login Success")
+                // return true
+                return await login(email, password)
             }
 
             if (response.data.customerExists) {
@@ -56,27 +128,8 @@ export default function CustomerProvider(props) {
         },
 
         login: async (email, password) => {
-            let loginResponse = await axios.post(BASE_API_URL + 'login', {
-                email: email,
-                password: password
-            })
-            // console.log(loginResponse)
-            if (loginResponse.data.error) {
-                setCustomer({})
-                toast.error("Account Not Found")
-                return false
-            }
-
-            //TODO jwt session?
-            sessionStorage.setItem('accessToken', loginResponse.data.accessToken)
-            sessionStorage.setItem('refreshToken', loginResponse.data.refreshToken)
-
-            setJwt(loginResponse.data)
-            let customerData = parseJWT(loginResponse.data.accessToken)
-            console.log(customerData)
-            setCustomer(customerData)
-            toast.success("Login Success")
-            return true
+            let response = await login(email, password)
+            return response
         },
 
         getSession: ()=>{
@@ -85,32 +138,7 @@ export default function CustomerProvider(props) {
         },
 
         logout: async () => {
-            // console.log(jwt.refreshToken)
-            if (jwt.accessToken) {
-                let logoutResponse = await axios.post(BASE_API_URL + 'logout',
-                    {
-                        refreshToken: jwt.refreshToken
-                    },
-                    {
-                        headers: {
-                            authorization: `Bearer ${jwt.accessToken}`
-                        }
-                    })
-
-                if (logoutResponse.data.message) {
-                    setCustomer({});
-                    //TODO clear jwt sessions
-                    sessionStorage.clear()
-                    setJwt([]);
-                    toast.success("Logged Out")
-                }
-
-                if (logoutResponse.data.error) {
-                    setCustomer({});
-                    setJwt([]);
-                    toast.error("There has been an error")
-                }
-            }
+            await logout()
         },
 
         checkAuth: ()=>{

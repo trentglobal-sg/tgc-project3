@@ -1,5 +1,5 @@
 import { Fragment, useContext, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import CustomerContext from '../CustomerContext';
 
 
@@ -37,7 +37,7 @@ export default function Login() {
                 <input type='password' name='password' className='form-control' value={loginData.password} onChange={(e)=>{updateFormField(e)}}/>
                 <button className='btn btn-primary btn-submit mt-3' onClick={()=>submitForm()} >Submit</button>
                 <div className='mt-3'>
-                    <p>No account? <a href='/register'>Register Here</a> </p>
+                    <p>No account? <Link to='/register'>Register Here</Link> </p>
                 </div>
             </div>
         </Fragment>
