@@ -1,6 +1,7 @@
 import { Fragment, useContext, useState, useEffect } from 'react';
 import ProductContext from '../ProductContext';
-import { useParams } from 'react-router-dom';
+import CustomerContext from '../CustomerContext';
+import { useParams, Link } from 'react-router-dom';
 import axios from 'axios';
 import "../index.css"
 import { toast } from 'react-toastify'
@@ -16,11 +17,12 @@ export default function Product(props) {
     const [activeProductVariants, setActiveProductVariants] = useState([]);
     const [selectedProductVariant, setSelectedProductVariant] = useState('');
     const [selectedProductVariantData, setSelectedProductVariantData] = useState('');
-    
+
 
 
     const context = useContext(ProductContext);
     const product = context.getProductById(parseInt(productId));
+    const customerContext = useContext(CustomerContext)
 
 
     const getVariantsData = async (productId) => {
@@ -32,7 +34,7 @@ export default function Product(props) {
         setSelectedVariant(firstVariant)
 
         variants.map(variant => {
-            if (variant.id === firstVariant){
+            if (variant.id === firstVariant) {
                 setSelectedVariantData(variant)
             }
         })
@@ -63,7 +65,7 @@ export default function Product(props) {
         setSelectedVariant(parseInt(variantId))
 
         variants.map(variant => {
-            if (variant.id === parseInt(variantId)){
+            if (variant.id === parseInt(variantId)) {
                 setSelectedVariantData(variant)
             }
         })
@@ -76,15 +78,30 @@ export default function Product(props) {
         setSelectedProductVariant(parseInt(productVariantId))
 
         activeProductVariants.map(productVariant => {
-            if (productVariant.id === parseInt(productVariantId)){
+            if (productVariant.id === parseInt(productVariantId)) {
                 setSelectedProductVariantData(productVariant)
             }
         })
     }
 
+    const loginErrorToast = () => {
+        return <div>
+            Please <Link to='/login'>Login First</Link> to add to cart
+        </div>
+
+};
+
     const addToCart = () => {
-        if (selectedProductVariantData){
-            context.addToCart(selectedProductVariantData)
+        if (selectedProductVariantData) {
+            let checkAuth = customerContext.checkAuth();
+            if (checkAuth) {
+                let selected = selectedProductVariantData;
+                let product = selectedVariantData;
+                customerContext.addToCart({ product, selected })
+                toast.success("Item added to cart")
+            } else {
+                toast.info(loginErrorToast())
+            }
         } else {
             toast.error('Please add something to cart')
         }
@@ -131,7 +148,7 @@ export default function Product(props) {
                             </Fragment>
                         )}
                         <div>
-                            <button className='btn btn-sm btn-primary' onClick={()=>{addToCart()}} >Add to Cart</button>
+                            <button className='btn btn-sm btn-primary' onClick={() => { addToCart() }} >Add to Cart</button>
                         </div>
                     </div>
                 </div>

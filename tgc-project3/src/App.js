@@ -27,10 +27,11 @@ import ReactToastify from './components/ReactToastify'
 function App() {
   return (
     <Fragment>
-      <ReactToastify />
+      
       {/* The Routes, Route and Link components only worked in <Router> */}
       <ProductProvider>
           <Router>
+          <ReactToastify />
           <CustomerProvider>
             <MyNavbar />
             {/* The <Routes> contains the pages */}

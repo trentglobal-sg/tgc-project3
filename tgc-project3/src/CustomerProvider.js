@@ -140,6 +140,10 @@ export default function CustomerProvider(props) {
             } else {
                 return false
             }
+        },
+
+        addToCart: (cartItem)=>{
+            addToCart(cartItem)
         }
     }
 
