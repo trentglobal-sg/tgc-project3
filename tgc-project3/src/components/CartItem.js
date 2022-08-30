@@ -23,6 +23,11 @@ export default function CartItem(props) {
         return response;
     }
 
+    const confirmDeleteItem = async (id)=>{
+        let response = props.confirmDeleteItem(id)
+        return response
+    }
+
     return (
         <li className='list-group-item' >
             <div className='row'>
@@ -44,7 +49,7 @@ export default function CartItem(props) {
                     {/* </div> */}
                 </div>
                 <div className='col col-2'>
-                    <button className='btn btn-sm btn-danger' >Delete</button>
+                    <button className='btn btn-sm btn-danger' onClick={()=>{confirmDeleteItem(props.item.product_variant.id)}}>Delete</button>
                 </div>
             </div>
         </li>

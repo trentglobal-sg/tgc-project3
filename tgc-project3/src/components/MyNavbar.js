@@ -40,6 +40,18 @@ export default function MyNavbar(props) {
         }
     }
 
+    const confirmDeleteItem = async (id)=>{
+        let response = await context.deleteCartItem(id)
+        if (response) {
+            toast.success('Item deleted')
+            await getCart()
+            return true
+        } else {
+            toast.error('Something went wrong')
+            return false
+        }
+    }
+
     // off canvas cart controls
     const [show, setShow] = useState(false);
     const handleClose = () => setShow(false);
@@ -109,7 +121,7 @@ export default function MyNavbar(props) {
                         <Offcanvas.Body>
                             <ul className='list-group'>
                                 {cart ? cart.map(item => { 
-                                    return <CartItem item={item} getCart={getCart} confirmUpdateItem={confirmUpdateItem}/>
+                                    return <CartItem item={item} getCart={getCart} confirmUpdateItem={confirmUpdateItem} confirmDeleteItem={confirmDeleteItem}/>
                                 }) : <p>Cart is Empty</p>}
                             </ul>
                             <button className='btn btn-primary btn-sm mt-3'>Check Out</button>
