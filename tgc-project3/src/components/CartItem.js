@@ -1,16 +1,26 @@
-import {useState} from 'react'
+import {useStatem, useContext, useState} from 'react'
+import CustomerContext from '../CustomerContext';
+import { toast } from 'react-toastify'
 
 export default function CartItem(props) {
+    const context = useContext(CustomerContext);
     const [updateItem, setUpdateItem] = useState('')
     const [updateItemQuantity, setUpdateItemQuantity] = useState('')
 
     const updateQuantity = (e)=>{
-        setUpdateItemQuantity(e.target.value)
+        setUpdateItemQuantity(parseInt(e.target.value))
     }
 
     const mountActive = (id, quantity) => {
         setUpdateItem(id)
         setUpdateItemQuantity(quantity)
+    }
+
+    const confirmUpdateItem = async (id, quantity)=>{
+        let response = props.confirmUpdateItem(id, quantity)
+        setUpdateItem('')
+        setUpdateItemQuantity('');
+        return response;
     }
 
     return (
@@ -26,10 +36,10 @@ export default function CartItem(props) {
                     {/* <div style={{ display: 'flex' }}> */}
                         {updateItemQuantity ?
                             <div className='d-flex'>
-                                <input type='number' style={{ width: '50px' }} className='form-control form-control-sm' value={updateItemQuantity} onChange={(e) => { updateQuantity(e) }} /> <button className='btn btn-sm btn-primary ms-2' >Update</button>
+                                <input type='number' style={{ width: '50px' }} className='form-control form-control-sm' value={updateItemQuantity} onChange={(e) => { updateQuantity(e) }} /> <button className='btn btn-sm btn-primary ms-2' onClick={async ()=>{ await confirmUpdateItem(updateItem, updateItemQuantity)}} >Update</button>
                             </div>
                             :
-                            <input type='number' style={{ width: '50px' }} className='form-control form-control-sm' value={props.item.quantity} onChange={() => { mountActive(props.item.id, props.item.quantity) }} />
+                            <input type='number' style={{ width: '50px' }} className='form-control form-control-sm' value={props.item.quantity} onChange={() => { mountActive(props.item.product_variant.id, props.item.quantity) }} />
                         }
                     {/* </div> */}
                 </div>

@@ -117,6 +117,27 @@ export default function CustomerProvider(props) {
         }
     }
 
+    const updateCartItem = async (productVariantId, quantity) => {
+        if (localStorage.getItem('accessToken')){
+            try {
+                await axios.post(BASE_API_URL + 'cart/' + productVariantId + '/add',{
+                    quantity: quantity
+                },{
+                    headers: {
+                        authorization: `Bearer ${localStorage.getItem('accessToken')}`
+                    },
+                })
+                return true;
+
+            } catch (error){
+                console.log(error)
+                return false
+            }
+        } else {
+            return false
+        }
+    }
+
     const getCart = async (customerId) => {
         if (localStorage.getItem('accessToken')){
         // if (jwt.accessToken) {
@@ -192,6 +213,11 @@ export default function CustomerProvider(props) {
 
         addToCart: async (productVariantId, quantity) => {
             let response = await addToCart(productVariantId, quantity)
+            return response;
+        },
+
+        updateCartItem: async (productVariantId, quantity) => {
+            let response = await updateCartItem(productVariantId, quantity)
             return response;
         },
 

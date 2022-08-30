@@ -12,6 +12,7 @@ import { Fragment, useContext, useState, useEffect } from 'react'
 import Offcanvas from 'react-bootstrap/Offcanvas';
 import Cart from './Cart'
 import CartItem from './CartItem'
+import { toast } from 'react-toastify'
 
 export default function MyNavbar(props) {
     const [cart, setCart] = useState('')
@@ -21,15 +22,29 @@ export default function MyNavbar(props) {
         await context.logout()
     };
 
+    const getCart = async () => {
+        let response = await context.getCart();
+        setCart(response);
+        // handleShow();
+    }
+
+    const confirmUpdateItem = async (id, quantity)=>{
+        let response = await context.updateCartItem(id, quantity)
+        if (response){
+            toast.success('Item updated')
+            await getCart()
+            return true
+        } else {
+            toast.error('Something went wrong')
+            return false
+        }
+    }
+
     // off canvas cart controls
     const [show, setShow] = useState(false);
     const handleClose = () => setShow(false);
     const handleShow = () => {
-        const getCart = async () => {
-            let response = await context.getCart();
-            setCart(response);
-        }
-        getCart();
+        getCart()
         setShow(true)
     };
 
@@ -94,8 +109,8 @@ export default function MyNavbar(props) {
                         <Offcanvas.Body>
                             <ul className='list-group'>
                                 {cart ? cart.map(item => { 
-                                    return <CartItem item={item}/>
-                                }) : ''}
+                                    return <CartItem item={item} getCart={getCart} confirmUpdateItem={confirmUpdateItem}/>
+                                }) : <p>Cart is Empty</p>}
                             </ul>
                             <button className='btn btn-primary btn-sm mt-3'>Check Out</button>
                         </Offcanvas.Body>
