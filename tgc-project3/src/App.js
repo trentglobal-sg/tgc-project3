@@ -23,6 +23,9 @@ import MyNavbar from "./components/MyNavbar"
 import Product from "./pages/Product"
 import ReactToastify from './components/ReactToastify'
 import Stripe from './components/Stripe'
+import Orders from './pages/Orders'
+import OrderFail from './pages/OrderFail'
+import Order from './pages/Order'
 
 
 function App() {
@@ -55,6 +58,9 @@ function App() {
               <Route path="*" element={<NotFound />} />
               <Route path="/product/:productId" element={<Product />} />
               <Route path="/stripe" element={<Stripe />} />
+              <Route path="/orders" element={<Orders />} />
+              <Route path="/orders/:orderId" element={<Order />} />
+              <Route path="/order-fail" element={< OrderFail/>} />
             </Routes>
             </CustomerProvider>
           </Router>

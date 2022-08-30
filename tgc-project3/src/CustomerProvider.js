@@ -71,6 +71,7 @@ export default function CustomerProvider(props) {
                 localStorage.clear()
                 setJwt([]);
                 toast.success("Logged Out")
+                navigate('/')
             }
 
             if (logoutResponse.data.error) {
@@ -78,6 +79,7 @@ export default function CustomerProvider(props) {
                 setCustomer({});
                 setJwt([]);
                 toast.error("There has been an error")
+                navigate('/')
             }
         }
     }

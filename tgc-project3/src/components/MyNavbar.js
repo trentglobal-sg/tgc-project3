@@ -116,6 +116,7 @@ export default function MyNavbar(props) {
                         <Fragment>
                             <Nav.Link onClick={() => { logout() }}>Logout</Nav.Link>
                             <Nav.Link onClick={handleShow}>Cart</Nav.Link>
+                            <Nav.Link as={Link} to="/orders">Orders</Nav.Link>
                         </Fragment>
                         : <Nav.Link as={Link} to="/login">Login</Nav.Link>}
                     {/* <Cart show={show} handleClose={handleClose} /> */}
@@ -127,9 +128,10 @@ export default function MyNavbar(props) {
                             <ul className='list-group'>
                                 {cart ? cart.map(item => { 
                                     return <CartItem item={item} getCart={getCart} confirmUpdateItem={confirmUpdateItem} confirmDeleteItem={confirmDeleteItem}/>
-                                }) : <p>Cart is Empty</p>}
+                                }) : ''}
                             </ul>
-                            <button className='btn btn-primary btn-sm mt-3' onClick={checkout}>Check Out</button>
+                            {cart.length ? <button className='btn btn-primary btn-sm mt-3' onClick={checkout}>Check Out</button> : <p>Cart is Empty</p> }
+                            
                         </Offcanvas.Body>
                     </Offcanvas>
                 </Nav>
