@@ -32,39 +32,44 @@ export default function CustomerProvider(props) {
         }
 
         //TODO jwt session?
-        sessionStorage.setItem('accessToken', loginResponse.data.accessToken)
-        sessionStorage.setItem('refreshToken', loginResponse.data.refreshToken)
+        localStorage.setItem('accessToken', loginResponse.data.accessToken)
+        localStorage.setItem('refreshToken', loginResponse.data.refreshToken)
 
         setJwt(loginResponse.data)
         let customerData = parseJWT(loginResponse.data.accessToken)
         console.log(customerData)
         setCustomer(customerData)
+        localStorage.setItem('customer', customerData)
         toast.success("Login Success")
         return true
     }
 
     const logout = async () => {
         // console.log(jwt.refreshToken)
-        if (jwt.accessToken) {
+        if (localStorage.getItem("accessToken")){
+        // if (jwt.accessToken) {
             let logoutResponse = await axios.post(BASE_API_URL + 'customers/logout',
                 {
-                    refreshToken: jwt.refreshToken
+                    // refreshToken: jwt.refreshToken
+                    refreshToken: localStorage.getItem('refreshToken')
                 },
                 {
                     headers: {
-                        authorization: `Bearer ${jwt.accessToken}`
+                        authorization: `Bearer ${localStorage.getItem('accessToken')}`
+                        // authorization: `Bearer ${jwt.accessToken}`
                     }
                 })
 
             if (logoutResponse.data.message) {
                 setCustomer({});
                 //TODO clear jwt sessions
-                sessionStorage.clear()
+                localStorage.clear()
                 setJwt([]);
                 toast.success("Logged Out")
             }
 
             if (logoutResponse.data.error) {
+                localStorage.clear()
                 setCustomer({});
                 setJwt([]);
                 toast.error("There has been an error")
@@ -89,7 +94,8 @@ export default function CustomerProvider(props) {
     }, [])
 
     const addToCart = async (productVariantId, quantity) => {
-        if (jwt.accessToken) {
+        if (localStorage.getItem('accessToken')){
+        // if (jwt.accessToken) {
             try {
                 await axios.post(BASE_API_URL + 'cart/' + productVariantId + '/add',
                     {
@@ -97,7 +103,8 @@ export default function CustomerProvider(props) {
                     },
                     {
                         headers: {
-                            authorization: `Bearer ${jwt.accessToken}`,
+                            // authorization: `Bearer ${jwt.accessToken}`,
+                            authorization: `Bearer ${localStorage.getItem('accessToken')}`
                         },
                     })
                 return true
@@ -111,11 +118,13 @@ export default function CustomerProvider(props) {
     }
 
     const getCart = async (customerId) => {
-        if (jwt.accessToken) {
+        if (localStorage.getItem('accessToken')){
+        // if (jwt.accessToken) {
             try{
                 let response = await axios.get(BASE_API_URL + 'cart/', {
                     headers: {
-                        authorization: `Bearer ${jwt.accessToken}`,
+                        // authorization: `Bearer ${jwt.accessToken}`,
+                        authorization: `Bearer ${localStorage.getItem('accessToken')}`
                     },
                 })
                 let cartItems = response.data
@@ -158,8 +167,8 @@ export default function CustomerProvider(props) {
         },
 
         getSession: () => {
-            let sessionData = sessionStorage.getItem("accessToken")
-            console.log("sessions accesstoken: ", sessionData)
+            let localStorageData = localStorage.getItem("accessToken")
+            console.log("localstorage accesstoken: ", localStorageData)
         },
 
         logout: async () => {
@@ -167,11 +176,18 @@ export default function CustomerProvider(props) {
         },
 
         checkAuth: () => {
-            if (jwt.accessToken) {
+            let accessToken = localStorage.getItem('accessToken')
+            if (accessToken){
                 return true
             } else {
                 return false
             }
+
+            // if (jwt.accessToken) {
+            //     return true
+            // } else {
+            //     return false
+            // }
         },
 
         addToCart: async (productVariantId, quantity) => {
