@@ -163,7 +163,7 @@ export default function CustomerProvider(props) {
         }
     }
 
-    const getCart = async (customerId) => {
+    const getCart = async () => {
         if (localStorage.getItem('accessToken')){
         // if (jwt.accessToken) {
             try{
@@ -180,6 +180,27 @@ export default function CustomerProvider(props) {
                 console.log(error)
                 return false
             }
+        } else {
+            return false
+        }
+    }
+
+    const getOrders = async ()=>{
+        if (localStorage.getItem('accessToken')){
+            try{
+                let response = await axios.get(BASE_API_URL + 'orders', {
+                    headers: {
+                        authorization: `Bearer ${localStorage.getItem('accessToken')}`
+                    }
+                })
+                let orders = response.data
+                return orders
+            }catch(error){
+                console.log(error)
+                return false
+            }
+        } else {
+            return false
         }
     }
 
@@ -289,6 +310,11 @@ export default function CustomerProvider(props) {
 
         getStripe: ()=>{
             let response = getStripe()
+            return response
+        },
+
+        getOrders: async (customerId) =>{
+            let response = await getOrders(customerId)
             return response
         }
     }

@@ -25,7 +25,7 @@ import ReactToastify from './components/ReactToastify'
 import Stripe from './components/Stripe'
 import Orders from './pages/Orders'
 import OrderFail from './pages/OrderFail'
-import Order from './pages/Order'
+import Order from './components/Order'
 
 
 function App() {
