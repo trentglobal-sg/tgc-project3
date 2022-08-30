@@ -112,6 +112,7 @@ export default function MyNavbar(props) {
                         <NavDropdown.Item as={Link} to="/merino-wool">Merino Wool</NavDropdown.Item>
                         <NavDropdown.Item as={Link} to="/about">Who Are We</NavDropdown.Item>
                     </NavDropdown>
+                    {/* <Nav.Link as={Link} to="/login">Login</Nav.Link> */}
                     {context.checkAuth() ?
                         <Fragment>
                             <Nav.Link onClick={() => { logout() }}>Logout</Nav.Link>

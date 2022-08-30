@@ -2,7 +2,6 @@ import { Fragment, useState, useEffect, useContext } from 'react';
 import CustomerContext from '../CustomerContext';
 import { useNavigate } from 'react-router-dom';
 import moment from 'moment'
-import Order from '../components/Order';
 import Modal from 'react-bootstrap/Modal';
 
 export default function Orders() {
