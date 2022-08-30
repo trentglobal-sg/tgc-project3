@@ -2,10 +2,13 @@ import { useState, useEffect } from 'react';
 import CustomerContext from './CustomerContext';
 import axios from 'axios';
 import { toast } from 'react-toastify'
+import { useNavigate } from 'react-router-dom';
 
 export default function CustomerProvider(props) {
+    const navigate = useNavigate()
     const [customer, setCustomer] = useState({});
     const [jwt, setJwt] = useState([]);
+    const [stripeSessionInfo , setStripeSessionInfo] = useState('')
 
     // const BASE_API_URL = 'https://tgc-ec-merinology.herokuapp.com/api/'
     const BASE_API_URL = 'https://8000-koihcire-tgcproject3api-jo56h3kktpv.ws-us63.gitpod.io/api/'
@@ -32,8 +35,10 @@ export default function CustomerProvider(props) {
         }
 
         //TODO jwt session?
-        localStorage.setItem('accessToken', loginResponse.data.accessToken)
-        localStorage.setItem('refreshToken', loginResponse.data.refreshToken)
+        let accessToken = loginResponse.data.accessToken
+        let refreshToken = loginResponse.data.refreshToken
+        localStorage.setItem('accessToken', accessToken)
+        localStorage.setItem('refreshToken', refreshToken)
 
         setJwt(loginResponse.data)
         let customerData = parseJWT(loginResponse.data.accessToken)
@@ -176,6 +181,32 @@ export default function CustomerProvider(props) {
         }
     }
 
+    const getStripeSessionInfo = async () => {
+        if (localStorage.getItem('accessToken')){
+            try{
+                let response = await axios.get(BASE_API_URL + 'checkout', {
+                    headers: {
+                        authorization: `Bearer ${localStorage.getItem('accessToken')}`
+                    }
+                })
+                console.log('api checkout:', response.data)
+                setStripeSessionInfo(response.data)
+                navigate('/stripe')
+
+            } catch (error){
+                console.log(error)
+                return false
+            }
+        } else {
+            return false
+        }
+    }
+
+    const getStripe = ()=>{
+        return stripeSessionInfo
+    }
+
+
     const context = {
         register: async (data) => {
             let formData = {};
@@ -247,6 +278,16 @@ export default function CustomerProvider(props) {
         getCart: async () => {
             let response = await getCart()
             return response;
+        },
+
+        checkout: async () => {
+            let response = await getStripeSessionInfo()
+            return response
+        },
+
+        getStripe: ()=>{
+            let response = getStripe()
+            return response
         }
     }
 

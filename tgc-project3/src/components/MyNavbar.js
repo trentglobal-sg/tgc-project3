@@ -40,6 +40,11 @@ export default function MyNavbar(props) {
         }
     }
 
+    const checkout = async ()=>{
+        let response = await context.checkout()
+        console.log(response)
+    }
+
     const confirmDeleteItem = async (id)=>{
         let response = await context.deleteCartItem(id)
         if (response) {
@@ -124,7 +129,7 @@ export default function MyNavbar(props) {
                                     return <CartItem item={item} getCart={getCart} confirmUpdateItem={confirmUpdateItem} confirmDeleteItem={confirmDeleteItem}/>
                                 }) : <p>Cart is Empty</p>}
                             </ul>
-                            <button className='btn btn-primary btn-sm mt-3'>Check Out</button>
+                            <button className='btn btn-primary btn-sm mt-3' onClick={checkout}>Check Out</button>
                         </Offcanvas.Body>
                     </Offcanvas>
                 </Nav>

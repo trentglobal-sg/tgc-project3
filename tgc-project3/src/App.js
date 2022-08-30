@@ -22,6 +22,7 @@ import NotFound from "./pages/NotFound"
 import MyNavbar from "./components/MyNavbar"
 import Product from "./pages/Product"
 import ReactToastify from './components/ReactToastify'
+import Stripe from './components/Stripe'
 
 
 function App() {
@@ -53,6 +54,7 @@ function App() {
               <Route path="/register" element={<Register />} />
               <Route path="*" element={<NotFound />} />
               <Route path="/product/:productId" element={<Product />} />
+              <Route path="/stripe" element={<Stripe />} />
             </Routes>
             </CustomerProvider>
           </Router>
