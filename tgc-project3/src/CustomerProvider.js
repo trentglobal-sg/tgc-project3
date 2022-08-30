@@ -120,7 +120,7 @@ export default function CustomerProvider(props) {
     const updateCartItem = async (productVariantId, quantity) => {
         if (localStorage.getItem('accessToken')){
             try {
-                await axios.post(BASE_API_URL + 'cart/' + productVariantId + '/add',{
+                await axios.post(BASE_API_URL + 'cart/' + productVariantId + '/update',{
                     quantity: quantity
                 },{
                     headers: {
