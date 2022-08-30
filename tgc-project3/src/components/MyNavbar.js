@@ -8,12 +8,16 @@ import NavDropdown from 'react-bootstrap/NavDropdown';
 import merinologyLogo from '../images/merinology.png'
 import '../index.css'
 import CustomerContext from '../CustomerContext';
-import { useContext, useState, useEffect } from 'react'
+import { Fragment, useContext, useState, useEffect } from 'react'
 import Offcanvas from 'react-bootstrap/Offcanvas';
 import Cart from './Cart'
+import CartItem from './CartItem'
 
 export default function MyNavbar(props) {
     const [cart, setCart] = useState('')
+    const [activeItem, setActiveItem] = useState('')
+    const [activeItemQuantity, setActiveItemQuantity] = useState('')
+
     const context = useContext(CustomerContext);
     const logout = async () => {
         await context.logout()
@@ -31,9 +35,27 @@ export default function MyNavbar(props) {
         setShow(true)
     };
 
+    // const mountActiveItem = (id)=>{
+    //     setActiveItem (id)
+    //     setActiveItemQuantity(quantity)
+    // }
+
+    // const updateItem = ()=>{
+
+    // }
+
+    // const updateQuantity = (e)=>{
+    //     setActiveItemQuantity(e.target.value)
+    // }
+
+    // const mountActive = (id, quantity) => {
+    //     setActiveItem(id)
+    //     setActiveItemQuantity(quantity)
+    // }
+
+
     return (
         <Navbar bg="light" expand="lg" id="navbar">
-            {/* <Container> */}
             <Navbar.Brand className="ms-3" as={Link} to="/" ><img style={{ height: '40px' }} src={merinologyLogo} alt="logo"></img></Navbar.Brand>
             <Navbar.Toggle aria-controls="basic-navbar-nav" />
             <Navbar.Collapse id="basic-navbar-nav">
@@ -60,26 +82,55 @@ export default function MyNavbar(props) {
                         <NavDropdown.Item as={Link} to="/merino-wool">Merino Wool</NavDropdown.Item>
                         <NavDropdown.Item as={Link} to="/about">Who Are We</NavDropdown.Item>
                     </NavDropdown>
-                    {context.checkAuth() ? <Nav.Link onClick={() => { logout() }}>Logout</Nav.Link> : <Nav.Link as={Link} to="/login">Login</Nav.Link>}
-                    <Nav.Link onClick={handleShow}>Cart</Nav.Link>
+                    {context.checkAuth() ?
+                        <Fragment>
+                            <Nav.Link onClick={() => { logout() }}>Logout</Nav.Link>
+                            <Nav.Link onClick={handleShow}>Cart</Nav.Link>
+                        </Fragment>
+                        : <Nav.Link as={Link} to="/login">Login</Nav.Link>}
                     {/* <Cart show={show} handleClose={handleClose} /> */}
                     <Offcanvas show={show} onHide={handleClose} id="cart" placement='end'>
                         <Offcanvas.Header closeButton>
                             <Offcanvas.Title>My Cart</Offcanvas.Title>
                         </Offcanvas.Header>
                         <Offcanvas.Body>
-                            {cart ? cart.map(cart=>{
-                                return <div>
-                                    <h1>ID: {cart.id}</h1>
-                                    <h2>Quantity: {cart.quantity}</h2>
-                                </div>
-                            }) : ''}
+                            <ul className='list-group'>
+                                {cart ? cart.map(item => { 
+                                    return <CartItem item={item}/>
+                                    // <li className='list-group-item' >
+                                    //     <div className='row'>
+                                    //         <div className='col col-3'>
+                                    //             <img style={{ width: "100%" }} src={item.product_variant.variant.variant_thumbnail_url}></img>
+                                    //         </div>
+                                    //         <div className='col col-6'>
+                                    //             <h6 style={{ fontSize: "small", height: "fit-content" }}>{item.product_variant.variant.product.product}</h6>
+                                    //             <h6 style={{ fontSize: "small", height: "fit-content" }}>{item.product_variant.variant.color_name} | {item.product_variant.size.size}</h6>
+                                    //             <h6 style={{ fontSize: "small", height: "fit-content" }}>$ {item.product_variant.variant.product.cost / 100}</h6>
+                                    //             <div style={{ display: 'flex' }}>
+                                    //                 {activeItemQuantity ?
+                                    //                     <div>
+                                    //                         <input type='number' style={{ width: '60px' }} className='form-control form-control-sm' value={activeItemQuantity} onChange={(e)=>{updateQuantity(e)}} /> <button className='btn btn-sm btn-primary ms-2' >Update</button>
+                                    //                     </div>
+                                    //                     :
+                                    //                     <input type='number' style={{ width: '60px' }} className='form-control form-control-sm' value={item.quantity} onChange={()=>{mountActive(item.id, item.quantity)}} />
+                                    //                 }
+
+                                    //             </div>
+
+                                    //         </div>
+                                    //         <div className='col col-2'>
+                                    //             <button className='btn btn-sm btn-danger' >Delete</button>
+                                    //         </div>
+                                    //     </div>
+                                    // </li>
+                                }) : ''}
+                            </ul>
+                            <button className='btn btn-primary btn-sm mt-3'>Check Out</button>
+
                         </Offcanvas.Body>
                     </Offcanvas>
-                    <Nav.Link onClick={() => { context.getSession() }}>SESSIONS</Nav.Link>
                 </Nav>
             </Navbar.Collapse>
-            {/* </Container> */}
         </Navbar>
     )
 
