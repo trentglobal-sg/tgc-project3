@@ -105,7 +105,7 @@ export default function CustomerProvider(props) {
                     })
                 let newAccessToken = response.data 
                 console.log('new token', newAccessToken)
-                localStorage.setItem(newAccessToken)
+                localStorage.setItem('accessToken', newAccessToken.accessToken)
                 return true
             } catch(error){
                 localStorage.clear()
