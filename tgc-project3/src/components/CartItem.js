@@ -41,10 +41,10 @@ export default function CartItem(props) {
                     {/* <div style={{ display: 'flex' }}> */}
                         {updateItemQuantity ?
                             <div className='d-flex'>
-                                <input type='number' style={{ width: '50px' }} className='form-control form-control-sm' value={updateItemQuantity} onChange={(e) => { updateQuantity(e) }} /> <button className='btn btn-sm btn-primary ms-2' onClick={async ()=>{ await confirmUpdateItem(updateItem, updateItemQuantity)}} >Update</button>
+                                <input type='number' min={1} max={props.item.product_variant.stock || 10} style={{ width: '50px' }} className='form-control form-control-sm' value={updateItemQuantity} onChange={(e) => { updateQuantity(e) }} /> <button className='btn btn-sm btn-primary ms-2' onClick={async ()=>{ await confirmUpdateItem(updateItem, updateItemQuantity)}} >Update</button>
                             </div>
                             :
-                            <input type='number' style={{ width: '50px' }} className='form-control form-control-sm' value={props.item.quantity} onChange={() => { mountActive(props.item.product_variant.id, props.item.quantity) }} />
+                            <input type='number' min={1} max={props.item.product_variant.stock || 10} style={{ width: '50px' }} className='form-control form-control-sm' value={props.item.quantity} onChange={() => { mountActive(props.item.product_variant.id, props.item.quantity) }} />
                         }
                     {/* </div> */}
                 </div>
