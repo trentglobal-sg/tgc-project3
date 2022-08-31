@@ -113,6 +113,7 @@ export default function CustomerProvider(props) {
                 return false
             }   
         } else {
+            localStorage.clear()
             return false
         }
     }
