@@ -157,14 +157,7 @@ export default function Product(props) {
                             <h4>{product.brand.brand}</h4>
                             <h4>$ {(product.cost / 100).toFixed(2)}</h4>
                             <hr></hr>
-                            <div className='mt-3'>
-                                <p className='my-text-font'>{product.description}</p>
-                            </div>
-                            <div>
-                                <p className='mt-2 my-text-font'>{product.fit.fit} Fit</p>
-                                <p className='my-text-font'>Micron: {product.micron.micron} {product.micron.micron_description}</p>
-                                <p className='my-text-font'>Blend: {product.blend.blend}</p>
-                            </div>
+
                             <h6>Colors</h6>
                             {variants.map(variant =>
                                 <Fragment key={variant.id}>
@@ -193,11 +186,14 @@ export default function Product(props) {
                                 <Fragment key={productVariant.id}>
                                     <input type='radio' className='btn-check' value={productVariant.id} name='productVariant' id={productVariant.id} checked={selectedProductVariant === productVariant.id} onChange={(e) => { selectProductVariant(e.target.value) }} />
                                     {selectedProductVariant === productVariant.id ?
-                                        <label className='btn btn-sm me-2 custom-selected' style={{ border: '1px solid black' }} for={productVariant.id}><span>{productVariant.size.size}<br></br>{productVariant.stock < 10 ? <span className='errorMessage' >{productVariant.stock} pcs left</span> : ''} </span></label>
+                                        <label className='btn btn-sm me-2 custom-selected' style={{ border: '1px solid black' }} for={productVariant.id}><span>{productVariant.size.size}</span></label>
                                         : <label className='btn btn-sm me-2' style={{ border: '1px solid black' }} for={productVariant.id}>{productVariant.size.size}</label>
                                     }
                                 </Fragment>
                             )}
+                            <div>
+                                {selectedProductVariantData.stock < 10 ? <span className='errorMessage'>{selectedProductVariantData.stock} pieces left</span> : ''}
+                            </div>
                             <div className='mt-3'>
                                 <h6>Quantity</h6>
                                 <div className='d-flex'>
@@ -210,6 +206,15 @@ export default function Product(props) {
                                         <button className='btn btn-sm btn-primary ms-3' onClick={() => { addToCart() }} >Add to Cart</button>
                                     </div>
                                 </div>
+                            </div>
+
+                            <div className='mt-3'>
+                                <p className='my-text-font'>{product.description}</p>
+                            </div>
+                            <div>
+                                <p className='mt-2 my-text-font'>{product.fit.fit} Fit</p>
+                                <p className='my-text-font'>Micron: {product.micron.micron} {product.micron.micron_description}</p>
+                                <p className='my-text-font'>Blend: {product.blend.blend}</p>
                             </div>
                         </div>
                     </div>
