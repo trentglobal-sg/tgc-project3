@@ -11,8 +11,8 @@ export default function CustomerProvider(props) {
     const [stripeSessionInfo , setStripeSessionInfo] = useState('')
     const [redirectTo, setRedirectTo] = useState('')
 
-    // const BASE_API_URL = 'https://tgc-ec-merinology.herokuapp.com/api/'
-    const BASE_API_URL = 'https://8000-koihcire-tgcproject3api-jo56h3kktpv.ws-us63.gitpod.io/api/'
+    const BASE_API_URL = 'https://tgc-ec-merinology.herokuapp.com/api/'
+    // const BASE_API_URL = 'https://8000-koihcire-tgcproject3api-jo56h3kktpv.ws-us63.gitpod.io/api/'
 
     const parseJWT = (token) => {
         var base64Url = token.split('.')[1];
