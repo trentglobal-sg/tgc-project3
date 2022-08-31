@@ -85,14 +85,14 @@ export default function Product(props) {
         })
     }
 
-    const increment = ()=>{
-        if(selectedQuantity >= 1 && selectedQuantity < 10 && selectedQuantity < selectedProductVariantData.stock){
+    const increment = () => {
+        if (selectedQuantity >= 1 && selectedQuantity < 10 && selectedQuantity < selectedProductVariantData.stock) {
             setSelectedQuantity(selectedQuantity + 1)
         }
     }
 
-    const decrement = ()=>{
-        if (selectedQuantity > 1 && selectedQuantity <= 10){
+    const decrement = () => {
+        if (selectedQuantity > 1 && selectedQuantity <= 10) {
             setSelectedQuantity(selectedQuantity - 1)
         }
     }
@@ -114,11 +114,11 @@ export default function Product(props) {
                 let product = selectedVariantData;
                 let productVariantId = selectedProductVariant
 
-                if(quantity < selected.stock){
-                    
+                if (quantity < selected.stock) {
+
                     let response = await customerContext.addToCart(productVariantId, quantity)
                     console.log('add to cart response: ', response)
-                    if (response){
+                    if (response) {
                         toast.success("Item added to cart")
 
                         //reset the counter
@@ -128,7 +128,7 @@ export default function Product(props) {
                     } else {
                         toast.error("Something went wrong")
                     }
-                    
+
                 } else {
                     toast.error('Sorry, item is out of stock')
                 }
@@ -145,54 +145,76 @@ export default function Product(props) {
         return (
             <Fragment>
                 <div className='buffer-top'></div>
-                <div className='container row'>
-                    <div className='col col-12 col-lg-8'>
-                        <h1>{product.product}</h1>
-                        <div>
-                            <img src={product.product_image_url} style={{ width: "30%" }} alt="product_image"></img>
+                <div className='container mt-4'>
+                    <div className='row'>
+                        <div className='col col-12 col-lg-8 mt-3'>
+                            <div>
+                                <img src={product.product_image_url} className='product-image custom-shadow' alt="product_image"></img>
+                            </div>
                         </div>
-                        <p>{product.description}</p>
-
-                    </div>
-                    <div className='col col-12 col-lg-4'>
-                        <h4>$ {(product.cost / 100).toFixed(2)}</h4>
-                        <h4>Fit: {product.fit.fit}</h4>
-                        <h4>Micron: {product.micron.micron}: {product.micron.micron_description}</h4>
-                        <h4>Blend: {product.blend.blend}: {product.blend.blend_description}</h4>
-                        <h4>Colors</h4>
-                        {variants.map(variant =>
-                            <Fragment key={variant.id}>
-                                <input type="radio" className='btn-check' value={variant.id} name="variants" id={variant.color_name} checked={selectedVariant === variant.id} onChange={(e) => { selectVariant(e.target.value) }} />
-                                {selectedVariant === variant.id ?
-                                    <label className='btn variant-circle me-2 custom-selected' style={{ backgroundColor: variant.color_code }} for={variant.color_name}></label> :
-                                    <label className='btn variant-circle me-2' style={{ backgroundColor: variant.color_code }} for={variant.color_name}></label>}
-                            </Fragment>
-                        )}
-                        <div>
-                            <img className='mt-3' src={selectedVariantData.variant_thumbnail_url} alt="variant thumbnail"></img>
-                        </div>
-                        <h4>Sizes</h4>
-                        {activeProductVariants.map(productVariant =>
-                            <Fragment key={productVariant.id}>
-                                <div>
-                                    <input type='radio' value={productVariant.id} name="productVariant" id={productVariant.id} checked={selectedProductVariant === productVariant.id} onChange={(e) => { selectProductVariant(e.target.value) }} />
-                                    <label for={productVariant.id}>{productVariant.size.size}</label>
-                                    {productVariant.stock < 10 ? <p className='errorMessage ms-3' style={{display: "inline"}}>Only {productVariant.stock} pieces left</p> : ''}
-                                    {/* <p>Stock : {productVariant.stock}</p> */}
+                        <div className='col col-12 col-lg-4 mt-3'>
+                            <h2>{product.product}</h2>
+                            <h4>{product.brand.brand}</h4>
+                            <h4>$ {(product.cost / 100).toFixed(2)}</h4>
+                            <hr></hr>
+                            <div className='mt-3'>
+                                <p className='my-text-font'>{product.description}</p>
+                            </div>
+                            <div>
+                                <p className='mt-2 my-text-font'>{product.fit.fit} Fit</p>
+                                <p className='my-text-font'>Micron: {product.micron.micron} {product.micron.micron_description}</p>
+                                <p className='my-text-font'>Blend: {product.blend.blend}</p>
+                            </div>
+                            <h6>Colors</h6>
+                            {variants.map(variant =>
+                                <Fragment key={variant.id}>
+                                    <input type="radio" className='btn-check' value={variant.id} name="variants" id={variant.color_name} checked={selectedVariant === variant.id} onChange={(e) => { selectVariant(e.target.value) }} />
+                                    {selectedVariant === variant.id ?
+                                        <label className='btn variant-circle me-2 custom-selected' style={{ backgroundColor: variant.color_code }} for={variant.color_name}></label> :
+                                        <label className='btn variant-circle me-2' style={{ backgroundColor: variant.color_code }} for={variant.color_name}></label>}
+                                </Fragment>
+                            )}
+                            <div>
+                                <img className='mt-3' src={selectedVariantData.variant_thumbnail_url} alt="variant thumbnail"></img>
+                            </div>
+                            <div>
+                                <p className='my-text-font'>{selectedVariantData.color_name}</p>
+                            </div>
+                            <h6>Sizes</h6>
+                            {activeProductVariants.map(productVariant =>
+                                // <Fragment key={productVariant.id}>
+                                //     <div>
+                                //         <input type='radio' value={productVariant.id} name="productVariant" id={productVariant.id} checked={selectedProductVariant === productVariant.id} onChange={(e) => { selectProductVariant(e.target.value) }} />
+                                //         <label for={productVariant.id}>{productVariant.size.size}</label>
+                                //         {productVariant.stock < 10 ? <p className='errorMessage ms-3' style={{display: "inline"}}>Only {productVariant.stock} pieces left</p> : ''}
+                                //         {/* <p>Stock : {productVariant.stock}</p> */}
+                                //     </div>
+                                // </Fragment>
+                                <Fragment key={productVariant.id}>
+                                    <input type='radio' className='btn-check' value={productVariant.id} name='productVariant' id={productVariant.id} checked={selectedProductVariant === productVariant.id} onChange={(e) => { selectProductVariant(e.target.value) }} />
+                                    {selectedProductVariant === productVariant.id ?
+                                        <label className='btn btn-sm me-2 custom-selected' style={{ border: '1px solid black' }} for={productVariant.id}><span>{productVariant.size.size}<br></br>{productVariant.stock < 10 ? <span className='errorMessage' >{productVariant.stock} pcs left</span> : ''} </span></label>
+                                        : <label className='btn btn-sm me-2' style={{ border: '1px solid black' }} for={productVariant.id}>{productVariant.size.size}</label>
+                                    }
+                                </Fragment>
+                            )}
+                            <div className='mt-3'>
+                                <h6>Quantity</h6>
+                                <div className='d-flex'>
+                                    <div>
+                                        <button className='btn btn-sm btn-primary' onClick={increment}>+</button>
+                                        <input type="number" style={{ width: '50px' }} className='form-input form-input-sm ms-2 me-2' value={selectedQuantity} onChange={(e) => { setSelectedQuantity(e.target.value) }} disabled />
+                                        <button className='btn btn-sm btn-primary' onClick={decrement} >-</button>
+                                    </div>
+                                    <div>
+                                        <button className='btn btn-sm btn-primary ms-3' onClick={() => { addToCart() }} >Add to Cart</button>
+                                    </div>
                                 </div>
-                            </Fragment>
-                        )}
-                        <div>
-                            <h6>Quantity</h6>
-                            <button className='btn btn-sm btn-primary' onClick={increment}><h3>+</h3></button>
-                            <input type="number" className='form-input form-input-sm ms-2 me-2' value={selectedQuantity} onChange={(e) => { setSelectedQuantity(e.target.value) }} disabled/>
-                            <button className='btn btn-sm btn-primary' onClick={decrement} ><h3>-</h3></button>
-                        </div>
-                        <div>
-                            <button className='btn btn-sm btn-primary mt-3' onClick={() => { addToCart() }} >Add to Cart</button>
+                            </div>
                         </div>
                     </div>
                 </div>
+
             </Fragment>
         )
     } else {

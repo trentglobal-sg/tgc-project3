@@ -8,7 +8,7 @@ export default function CustomerProvider(props) {
     const navigate = useNavigate()
     const [customer, setCustomer] = useState({});
     const [jwt, setJwt] = useState([]);
-    const [stripeSessionInfo , setStripeSessionInfo] = useState('')
+    const [stripeSessionInfo, setStripeSessionInfo] = useState('')
     const [redirectTo, setRedirectTo] = useState('')
 
     const BASE_API_URL = 'https://tgc-ec-merinology.herokuapp.com/api/'
@@ -54,8 +54,8 @@ export default function CustomerProvider(props) {
 
     const logout = async () => {
         // console.log(jwt.refreshToken)
-        if (localStorage.getItem("accessToken")){
-        // if (jwt.accessToken) {
+        if (localStorage.getItem("accessToken")) {
+            // if (jwt.accessToken) {
             let logoutResponse = await axios.post(BASE_API_URL + 'customers/logout',
                 {
                     // refreshToken: jwt.refreshToken
@@ -67,7 +67,7 @@ export default function CustomerProvider(props) {
                 //         // authorization: `Bearer ${jwt.accessToken}`
                 //     }
                 // }
-                )
+            )
 
             if (logoutResponse.data.message) {
                 setCustomer({});
@@ -88,6 +88,43 @@ export default function CustomerProvider(props) {
         }
     }
 
+    //TODO check refresh auth
+    const refreshAuth= async () => {
+        let accessToken = localStorage.getItem('accessToken')
+        let refreshToken = localStorage.getItem('refreshToken')
+        if (accessToken) {
+            try {
+                let response = await axios.post(BASE_API_URL + 'customers/refresh',
+                    {
+                        refreshToken: refreshToken
+                    },
+                    {
+                        headers: {
+                            authorization: `Bearer ${accessToken}`
+                        }
+                    })
+                let newAccessToken = response.data 
+                console.log('new token', newAccessToken)
+                localStorage.setItem(newAccessToken)
+                return true
+            } catch(error){
+                localStorage.clear()
+                console.log(error)
+                return false
+            }   
+        } else {
+            return false
+        }
+    }
+
+    useEffect(()=>{
+        let refresh = async ()=>{
+            let response =  await refreshAuth()
+            console.log(response)
+        }
+        refresh()
+    },[])
+
     useEffect(() => {
         const handleTabClose = (event) => {
             event.preventDefault();
@@ -105,8 +142,8 @@ export default function CustomerProvider(props) {
     }, [])
 
     const addToCart = async (productVariantId, quantity) => {
-        if (localStorage.getItem('accessToken')){
-        // if (jwt.accessToken) {
+        if (localStorage.getItem('accessToken')) {
+            // if (jwt.accessToken) {
             try {
                 await axios.post(BASE_API_URL + 'cart/' + productVariantId + '/add',
                     {
@@ -129,18 +166,18 @@ export default function CustomerProvider(props) {
     }
 
     const updateCartItem = async (productVariantId, quantity) => {
-        if (localStorage.getItem('accessToken')){
+        if (localStorage.getItem('accessToken')) {
             try {
-                await axios.post(BASE_API_URL + 'cart/' + productVariantId + '/update',{
+                await axios.post(BASE_API_URL + 'cart/' + productVariantId + '/update', {
                     quantity: quantity
-                },{
+                }, {
                     headers: {
                         authorization: `Bearer ${localStorage.getItem('accessToken')}`
                     },
                 })
                 return true;
 
-            } catch (error){
+            } catch (error) {
                 console.log(error)
                 return false
             }
@@ -149,10 +186,10 @@ export default function CustomerProvider(props) {
         }
     }
 
-    const deleteCartItem = async (productVariantId)=>{
-        if (localStorage.getItem('accessToken')){
+    const deleteCartItem = async (productVariantId) => {
+        if (localStorage.getItem('accessToken')) {
             try {
-                await axios.delete(BASE_API_URL + 'cart/' + productVariantId + '/delete',{
+                await axios.delete(BASE_API_URL + 'cart/' + productVariantId + '/delete', {
                     headers: {
                         authorization: `Bearer ${localStorage.getItem('accessToken')}`
                     }
@@ -168,9 +205,9 @@ export default function CustomerProvider(props) {
     }
 
     const getCart = async () => {
-        if (localStorage.getItem('accessToken')){
-        // if (jwt.accessToken) {
-            try{
+        if (localStorage.getItem('accessToken')) {
+            // if (jwt.accessToken) {
+            try {
                 let response = await axios.get(BASE_API_URL + 'cart/', {
                     headers: {
                         // authorization: `Bearer ${jwt.accessToken}`,
@@ -180,7 +217,7 @@ export default function CustomerProvider(props) {
                 let cartItems = response.data
                 console.log(cartItems)
                 return cartItems;
-            } catch (error){
+            } catch (error) {
                 console.log(error)
                 return false
             }
@@ -189,9 +226,9 @@ export default function CustomerProvider(props) {
         }
     }
 
-    const getOrders = async ()=>{
-        if (localStorage.getItem('accessToken')){
-            try{
+    const getOrders = async () => {
+        if (localStorage.getItem('accessToken')) {
+            try {
                 let response = await axios.get(BASE_API_URL + 'orders', {
                     headers: {
                         authorization: `Bearer ${localStorage.getItem('accessToken')}`
@@ -199,7 +236,7 @@ export default function CustomerProvider(props) {
                 })
                 let orders = response.data
                 return orders
-            }catch(error){
+            } catch (error) {
                 console.log(error)
                 return false
             }
@@ -209,8 +246,8 @@ export default function CustomerProvider(props) {
     }
 
     const getStripeSessionInfo = async () => {
-        if (localStorage.getItem('accessToken')){
-            try{
+        if (localStorage.getItem('accessToken')) {
+            try {
                 let response = await axios.get(BASE_API_URL + 'checkout', {
                     headers: {
                         authorization: `Bearer ${localStorage.getItem('accessToken')}`
@@ -220,7 +257,7 @@ export default function CustomerProvider(props) {
                 setStripeSessionInfo(response.data)
                 navigate('/stripe')
 
-            } catch (error){
+            } catch (error) {
                 console.log(error)
                 return false
             }
@@ -229,7 +266,7 @@ export default function CustomerProvider(props) {
         }
     }
 
-    const getStripe = ()=>{
+    const getStripe = () => {
         return stripeSessionInfo
     }
 
@@ -259,17 +296,17 @@ export default function CustomerProvider(props) {
         },
 
         login: async (email, password) => {
-            if (!redirectTo){
+            if (!redirectTo) {
                 let response = await login(email, password)
                 navigate('/')
                 return response
-            } else if (redirectTo){
+            } else if (redirectTo) {
                 navigate(redirectTo)
                 setRedirectTo('')
                 let response = await login(email, password)
                 return response
             }
-            
+
         },
 
         getSession: () => {
@@ -281,20 +318,7 @@ export default function CustomerProvider(props) {
             await logout()
         },
 
-        checkAuth: () => {
-            let accessToken = localStorage.getItem('accessToken')
-            if (accessToken){
-                return true
-            } else {
-                return false
-            }
-
-            // if (jwt.accessToken) {
-            //     return true
-            // } else {
-            //     return false
-            // }
-        },
+       
 
         addToCart: async (productVariantId, quantity) => {
             let response = await addToCart(productVariantId, quantity)
@@ -321,18 +345,27 @@ export default function CustomerProvider(props) {
             return response
         },
 
-        getStripe: ()=>{
+        getStripe: () => {
             let response = getStripe()
             return response
         },
 
-        getOrders: async (customerId) =>{
+        getOrders: async (customerId) => {
             let response = await getOrders(customerId)
             return response
         },
 
-        updateRedirectTo: (lastVisited)=>{
+        updateRedirectTo: (lastVisited) => {
             setRedirectTo(lastVisited)
+        },
+
+        checkAuth: ()=>{
+            let accessToken = localStorage.getItem('accessToken')
+            if (accessToken){
+                return true
+            } else {
+                return false
+            }
         }
     }
 

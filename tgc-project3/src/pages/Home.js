@@ -5,6 +5,8 @@ import SearchResults from '../components/SearchResults';
 import '../index.css'
 import ReactToastify from '../components/ReactToastify';
 import Accordian from 'react-bootstrap/Accordion'
+import Button from 'react-bootstrap/esm/Button';
+import { Link } from 'react-router-dom';
 
 export default function Home() {
     const context = useContext(ProductContext);
@@ -24,7 +26,7 @@ export default function Home() {
         setSearchProduct(value)
     }
 
-    const updateSearchBrands = (value) =>{
+    const updateSearchBrands = (value) => {
         setSearchBrands(value)
     }
 
@@ -32,11 +34,11 @@ export default function Home() {
         setSearchCategories(value)
     }
 
-    const updateSearchActivities = (value)=>{
+    const updateSearchActivities = (value) => {
         setSearchActivities(value)
     }
 
-    const updateSearchBlends = (value)=>{
+    const updateSearchBlends = (value) => {
         setSearchBlends(value)
     }
 
@@ -47,24 +49,24 @@ export default function Home() {
             searchParams = { ...searchParams, product }
         }
 
-        if (searchBrands){
+        if (searchBrands) {
             let brand_id = searchBrands;
-            searchParams = {...searchParams, brand_id}
+            searchParams = { ...searchParams, brand_id }
         }
 
-        if (searchCategories){
+        if (searchCategories) {
             let category_id = searchCategories;
-            searchParams = {...searchParams, category_id}
+            searchParams = { ...searchParams, category_id }
         }
 
-        if (searchActivities){
+        if (searchActivities) {
             let activity_id = searchActivities;
-            searchParams = {...searchParams, activity_id}
+            searchParams = { ...searchParams, activity_id }
         }
 
-        if (searchBlends){
+        if (searchBlends) {
             let blend_id = searchBlends;
-            searchParams = {...searchParams, blend_id}
+            searchParams = { ...searchParams, blend_id }
         }
         // console.log(searchParams)
         let results = await context.search(searchParams)
@@ -73,7 +75,7 @@ export default function Home() {
         setSearchResults(results)
     }
 
-    const resetSearch = async() => {
+    const resetSearch = async () => {
         //reset all params
         setSearchProduct('')
 
@@ -126,51 +128,45 @@ export default function Home() {
 
     return (
         <Fragment>
-            {/* <ReactToastify /> */}
-            <div id='landing'>
-                <img src={homeWallpaper} alt="wallpaper" style={{ height: "100%" }}></img>
+            <div id='landing' className='d-flex align-items-center justify-center'>
+                {/* <img src={homeWallpaper} alt="wallpaper" style={{ height: "100%" }}></img> */}
+                <div className='container align-items-center justify-center d-flex flex-column'>
+                    <div className='d-flex align-items-center justify-center'>
+                        <Button as={Link} to='/mens' className='landing-links me-2'>Shop Mens</Button>
+                        <Button as={Link} to='/womens' className='landing-links ms-2'>Shop Womens</Button>
+                    </div>
+                    <Button className='landing-links mt-4' href="#searchPage" >Search for Products</Button>
+                </div>
             </div>
-            <div id='search' className='container'>
-                <h3 className='mt-3'>Search for products</h3>
+            <div id='searchPage' className='container'>
+                <div className='buffer-top'></div>
+                <h3>Search for products</h3>
                 <div>
-                    <input id='searchProduct' name='searchProduct' type="text" className='form-control mb-2' value={searchProduct} onChange={(e) => { updateSearchProduct(e.target.value) }} onKeyUp={(e) => { keyUpSearch(e) }} />
-                    {/* <Accordian>
-                        <Accordian.Item eventKey='0'>
-                            <Accordian.Header>Brands</Accordian.Header>
-                            <Accordian.Body>
-                                {brands.map(brand => {
-                                    return <div>
-                                        <input className='form-check-input' type='checkbox' name='searchBrands' value={brand[0]} id={brand[1]} checked={searchBrands.includes(brand[0])} onChange={(e)=>{updateBrands(e)}}/>
-                                        <label className='form-check-label ms-2' for={brand[1]}>{brand[1]}</label>
-                                        </div>
-                                })}
-                            </Accordian.Body>
-                        </Accordian.Item>
-                    </Accordian> */}
-                    <h4>Brands</h4>
-                    <select className='form-select' name="searchBrands" onChange={(e)=>{updateSearchBrands(e.target.value)}} >
+                    <input id='searchProduct' placeholder='Search by product name...' name='searchProduct' type="text" className='form-control' value={searchProduct} onChange={(e) => { updateSearchProduct(e.target.value) }} onKeyUp={(e) => { keyUpSearch(e) }} />
+                    <h5 className='mt-2'>Brands</h5>
+                    <select className='form-select' name="searchBrands" onChange={(e) => { updateSearchBrands(e.target.value) }} >
                         <option selected value="">Select Brand</option>
                         {brands.map(brand => {
                             return <option value={brand[0]}>{brand[1]}</option>
                         }
                         )}
                     </select>
-                    <h4>Categories</h4>
-                    <select className='form-select' name='searchCategories' onChange={(e)=>{updateSearchCategories(e.target.value)}} >
+                    <h5 className='mt-2'>Categories</h5>
+                    <select className='form-select' name='searchCategories' onChange={(e) => { updateSearchCategories(e.target.value) }} >
                         <option selected value="">Select Category</option>
                         {categories.map(category => {
                             return <option value={category[0]}>{category[1]}</option>
                         })}
                     </select>
-                    <h4>Activities</h4>
-                    <select className='form-select' name='searchActivities' onChange={(e)=>{updateSearchActivities(e.target.value)}}>
+                    <h5 className='mt-2'>Activities</h5>
+                    <select className='form-select' name='searchActivities' onChange={(e) => { updateSearchActivities(e.target.value) }}>
                         <option selected value="">Select Activity</option>
                         {activities.map(activity => {
                             return <option value={activity[0]}>{activity[1]}</option>
                         })}
                     </select>
-                    <h4>Blends</h4>
-                    <select className='form-select' name='searchBlends' onChange={(e=>{updateSearchBlends(e.target.value)})}>
+                    <h5 className='mt-2'>Blends</h5>
+                    <select className='form-select' name='searchBlends' onChange={(e => { updateSearchBlends(e.target.value) })}>
                         <option selected value=''>Select Blends</option>
                         {blends.map(blend => {
                             return <option value={blend[0]}>{blend[1]}</option>
@@ -181,7 +177,9 @@ export default function Home() {
                         <button className='btn btn-sm btn-primary me-2' onClick={resetSearch}>Reset</button>
                     </div>
                 </div>
-                <div className='mt-2'>
+
+                <div id="search" className='mt-2'>
+
                     {searchResults.length ? <SearchResults products={searchResults} /> : <h4>No Search Results</h4>}
                 </div>
 
