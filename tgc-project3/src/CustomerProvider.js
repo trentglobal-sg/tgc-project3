@@ -43,9 +43,10 @@ export default function CustomerProvider(props) {
 
         setJwt(loginResponse.data)
         let customerData = parseJWT(loginResponse.data.accessToken)
-        console.log(customerData)
+        // console.log(customerData)
+        let customer = customerData.username
         setCustomer(customerData)
-        localStorage.setItem('customer', customerData)
+        localStorage.setItem('customer', customer)
         toast.success("Login Success")
         return true
     }
@@ -60,12 +61,13 @@ export default function CustomerProvider(props) {
                     // refreshToken: jwt.refreshToken
                     refreshToken: localStorage.getItem('refreshToken')
                 },
-                {
-                    headers: {
-                        authorization: `Bearer ${localStorage.getItem('accessToken')}`
-                        // authorization: `Bearer ${jwt.accessToken}`
-                    }
-                })
+                // {
+                //     headers: {
+                //         authorization: `Bearer ${localStorage.getItem('accessToken')}`
+                //         // authorization: `Bearer ${jwt.accessToken}`
+                //     }
+                // }
+                )
 
             if (logoutResponse.data.message) {
                 setCustomer({});

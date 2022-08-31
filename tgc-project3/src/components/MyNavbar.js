@@ -115,9 +115,13 @@ export default function MyNavbar(props) {
                     {/* <Nav.Link as={Link} to="/login">Login</Nav.Link> */}
                     {context.checkAuth() ?
                         <Fragment>
-                            <Nav.Link onClick={() => { logout() }}>Logout</Nav.Link>
+                            <NavDropdown title={localStorage.getItem('customer')} id="basic-nav-dropdown">
+                                <NavDropdown.Item as={Link} to="/orders">Orders</NavDropdown.Item>
+                                <NavDropdown.Item onClick={()=>{logout()}}>Log Out</NavDropdown.Item>
+                            </NavDropdown>
+                            {/* <Nav.Link onClick={() => { logout() }}>Logout</Nav.Link> */}
                             <Nav.Link onClick={handleShow}>Cart</Nav.Link>
-                            <Nav.Link as={Link} to="/orders">Orders</Nav.Link>
+                            {/* <Nav.Link as={Link} to="/orders">Orders</Nav.Link> */}
                         </Fragment>
                         : <Nav.Link as={Link} to="/login">Login</Nav.Link>}
                     <Offcanvas show={show} onHide={handleClose} id="cart" placement='end'>
