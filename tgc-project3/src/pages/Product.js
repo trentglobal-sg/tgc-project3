@@ -98,8 +98,9 @@ export default function Product(props) {
     }
 
     const loginErrorToast = () => {
+        let address = `/product/${productId}`
         return <div>
-            Please <Link to='/login'>Login First</Link> to add to cart
+            Please <Link to='/login' onClick={customerContext.updateRedirectTo(address)}>Login First</Link> to add to cart
         </div>
 
     };

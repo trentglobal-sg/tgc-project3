@@ -9,6 +9,7 @@ export default function CustomerProvider(props) {
     const [customer, setCustomer] = useState({});
     const [jwt, setJwt] = useState([]);
     const [stripeSessionInfo , setStripeSessionInfo] = useState('')
+    const [redirectTo, setRedirectTo] = useState('')
 
     const BASE_API_URL = 'https://tgc-ec-merinology.herokuapp.com/api/'
     // const BASE_API_URL = 'https://8000-koihcire-tgcproject3api-jo56h3kktpv.ws-us63.gitpod.io/api/'
@@ -48,6 +49,7 @@ export default function CustomerProvider(props) {
         toast.success("Login Success")
         return true
     }
+
 
     const logout = async () => {
         // console.log(jwt.refreshToken)
@@ -255,8 +257,17 @@ export default function CustomerProvider(props) {
         },
 
         login: async (email, password) => {
-            let response = await login(email, password)
-            return response
+            if (!redirectTo){
+                let response = await login(email, password)
+                navigate('/')
+                return response
+            } else if (redirectTo){
+                navigate(redirectTo)
+                setRedirectTo('')
+                let response = await login(email, password)
+                return response
+            }
+            
         },
 
         getSession: () => {
@@ -316,6 +327,10 @@ export default function CustomerProvider(props) {
         getOrders: async (customerId) =>{
             let response = await getOrders(customerId)
             return response
+        },
+
+        updateRedirectTo: (lastVisited)=>{
+            setRedirectTo(lastVisited)
         }
     }
 

@@ -21,9 +21,9 @@ export default function Login() {
         let loginResponse = await context.login(email, password)
         console.log ("login =>", loginResponse)
 
-        if (loginResponse){
-            navigate('/')
-        } 
+        // if (loginResponse){
+        //     navigate('/')
+        // } 
     }
 
     return (

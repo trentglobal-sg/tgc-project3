@@ -120,7 +120,6 @@ export default function MyNavbar(props) {
                             <Nav.Link as={Link} to="/orders">Orders</Nav.Link>
                         </Fragment>
                         : <Nav.Link as={Link} to="/login">Login</Nav.Link>}
-                    {/* <Cart show={show} handleClose={handleClose} /> */}
                     <Offcanvas show={show} onHide={handleClose} id="cart" placement='end'>
                         <Offcanvas.Header closeButton>
                             <Offcanvas.Title>My Cart</Offcanvas.Title>
