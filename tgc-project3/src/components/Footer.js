@@ -39,7 +39,7 @@ export default function Footer() {
                     <input type="text" className='form-control form-control-sm' placeholder='Enter your email...' />
                     <input type="checkbox" /><label className='my-text-font-small mt-2 ms-2'>I have read and accepted Merinology's <a href="#">Privacy Policy</a></label>
                     <div>
-                        <button className="btn btn-sm btn-primary mt-1">Submit</button>
+                        <button className="btn btn-sm my-btn mt-1">Submit</button>
                     </div>
                 </div>
 
