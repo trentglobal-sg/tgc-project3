@@ -100,13 +100,7 @@ code {
   position: -webkit-sticky;
 }
 
-#search {
-  /* height: 100vh; */
-  margin-top: -25px;
-  /* width: 100%; */
-  /* background-color: black; */
-  /* overflow: scroll; */
-}
+
 
 .buffer-top {
   height: 75px;
@@ -149,6 +143,14 @@ code {
 @media screen and (width > 990px) {
   #nav-container {
     width: 100%
+  }
+
+  #search {
+    /* height: 100vh; */
+    margin-top: -25px;
+    /* width: 100%; */
+    /* background-color: black; */
+    /* overflow: scroll; */
   }
 
   #nav-left {

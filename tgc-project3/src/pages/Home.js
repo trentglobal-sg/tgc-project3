@@ -78,6 +78,10 @@ export default function Home() {
     const resetSearch = async () => {
         //reset all params
         setSearchProduct('')
+        setSearchBrands('')
+        setSearchCategories('')
+        setSearchActivities('')
+        setSearchBlends('')
 
         //do an empty search
         let searchParams = {}
@@ -146,7 +150,7 @@ export default function Home() {
                     <div id="search-fields" className="col col-12 col-lg-3">
                         <input id='searchProduct' placeholder='Search by product name...' name='searchProduct' type="text" className='form-control' value={searchProduct} onChange={(e) => { updateSearchProduct(e.target.value) }} onKeyUp={(e) => { keyUpSearch(e) }} />
                         <h5 className='mt-2'>Brands</h5>
-                        <select className='form-select' name="searchBrands" onChange={(e) => { updateSearchBrands(e.target.value) }} >
+                        <select className='form-select' value={searchBrands} name="searchBrands" onChange={(e) => { updateSearchBrands(e.target.value) }} >
                             <option selected value="">Select Brand</option>
                             {brands.map(brand => {
                                 return <option value={brand[0]}>{brand[1]}</option>
@@ -154,21 +158,21 @@ export default function Home() {
                             )}
                         </select>
                         <h5 className='mt-2'>Categories</h5>
-                        <select className='form-select' name='searchCategories' onChange={(e) => { updateSearchCategories(e.target.value) }} >
+                        <select className='form-select' value={searchCategories} name='searchCategories' onChange={(e) => { updateSearchCategories(e.target.value) }} >
                             <option selected value="">Select Category</option>
                             {categories.map(category => {
                                 return <option value={category[0]}>{category[1]}</option>
                             })}
                         </select>
                         <h5 className='mt-2'>Activities</h5>
-                        <select className='form-select' name='searchActivities' onChange={(e) => { updateSearchActivities(e.target.value) }}>
+                        <select className='form-select' value={searchActivities} name='searchActivities' onChange={(e) => { updateSearchActivities(e.target.value) }}>
                             <option selected value="">Select Activity</option>
                             {activities.map(activity => {
                                 return <option value={activity[0]}>{activity[1]}</option>
                             })}
                         </select>
                         <h5 className='mt-2'>Blends</h5>
-                        <select className='form-select' name='searchBlends' onChange={(e => { updateSearchBlends(e.target.value) })}>
+                        <select className='form-select' value={searchBlends} name='searchBlends' onChange={(e => { updateSearchBlends(e.target.value) })}>
                             <option selected value=''>Select Blends</option>
                             {blends.map(blend => {
                                 return <option value={blend[0]}>{blend[1]}</option>
