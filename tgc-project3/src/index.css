@@ -23,7 +23,7 @@ code {
 }
 
 #navbar{
-  position: fixed;
+  /* position: fixed; */
   width: 100%;
   z-index: 1234;
 }
@@ -80,8 +80,8 @@ code {
 
 #cart{
   z-index: 2344;
-  max-height: 70vh;
-  max-width: 80vh;
+  max-height: 90vh;
+  max-width: 100vh;
 }
 
 
@@ -90,10 +90,30 @@ code {
   width: 100%
 }
 
+/* Navbar Items */
+
 
 @media screen and (width > 768px) {
   .product-image{
     width: 80%;
+  }
+
+}
+
+@media screen and (width > 990px) {
+  #nav-container{
+    width: 100%
+  }
+  #nav-left{
+    display: flex
+  }
+  #nav-right{
+    display: flex;
+    margin-inline-start: auto;
+    /* margin-inline-end: 1rem; */
+  }
+  .product-image{
+    width: 85%;
   }
 
 }

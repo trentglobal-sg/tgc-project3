@@ -198,9 +198,9 @@ export default function Product(props) {
                                 <h6>Quantity</h6>
                                 <div className='d-flex'>
                                     <div>
-                                        <button className='btn btn-sm btn-primary' onClick={increment}>+</button>
-                                        <input type="number" style={{ width: '50px' }} className='form-input form-input-sm ms-2 me-2' value={selectedQuantity} onChange={(e) => { setSelectedQuantity(e.target.value) }} disabled />
                                         <button className='btn btn-sm btn-primary' onClick={decrement} >-</button>
+                                        <input type="number" style={{ width: '50px' }} className='form-input form-input-sm ms-2 me-2' value={selectedQuantity} onChange={(e) => { setSelectedQuantity(e.target.value) }} disabled />
+                                        <button className='btn btn-sm btn-primary' onClick={increment}>+</button>
                                     </div>
                                     <div>
                                         <button className='btn btn-sm btn-primary ms-3' onClick={() => { addToCart() }} >Add to Cart</button>

@@ -1,14 +1,12 @@
 import { Fragment, useState, useContext, useEffect } from 'react';
 import ProductContext from '../ProductContext';
-import homeWallpaper from '../images/home-wallpaper.jpeg'
 import SearchResults from '../components/SearchResults';
 import '../index.css'
-import ReactToastify from '../components/ReactToastify';
-import Accordian from 'react-bootstrap/Accordion'
 import Button from 'react-bootstrap/esm/Button';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 export default function Home() {
+    const navigate = useNavigate()
     const context = useContext(ProductContext);
     const [searchProduct, setSearchProduct] = useState('')
     const [searchBrands, setSearchBrands] = useState('')
@@ -131,6 +129,7 @@ export default function Home() {
             <div id='landing' className='d-flex align-items-center justify-center'>
                 {/* <img src={homeWallpaper} alt="wallpaper" style={{ height: "100%" }}></img> */}
                 <div className='container align-items-center justify-center d-flex flex-column'>
+                    <div className='btn' onClick={()=>{navigate('/merino-wool')}} style={{border: 'none'}}><h2>Experience the magic of Merino Wool</h2></div>
                     <div className='d-flex align-items-center justify-center'>
                         <Button as={Link} to='/mens' className='landing-links me-2'>Shop Mens</Button>
                         <Button as={Link} to='/womens' className='landing-links ms-2'>Shop Womens</Button>
