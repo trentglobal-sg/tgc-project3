@@ -3,7 +3,6 @@ import "bootstrap/dist/css/bootstrap.min.css"
 import '../index.css'
 
 export default function Footer() {
-
     return (
         <div id='footer' className='d-flex justify-content-center'>
             <div className='row justify-center container m-3'>
