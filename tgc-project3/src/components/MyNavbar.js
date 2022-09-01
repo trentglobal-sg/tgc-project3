@@ -120,7 +120,9 @@ export default function MyNavbar(props) {
                         {context.checkAuth() ?
                             <Fragment>
                                 <Nav.Link onClick={handleShow} eventKey={13}>Cart</Nav.Link>
-                                <NavDropdown title={localStorage.getItem('customer')} id="basic-nav-dropdown">
+                                <NavDropdown title="My Account" id="basic-nav-dropdown">
+                                    <NavDropdown.Item>{localStorage.getItem('customer')}</NavDropdown.Item>
+                                    <hr></hr>
                                     <NavDropdown.Item as={Link} to="/orders" eventKey={14}>My Orders</NavDropdown.Item>
                                     <NavDropdown.Item onClick={() => { logout() }} eventKey={15}>Log Out</NavDropdown.Item>
                                 </NavDropdown>
