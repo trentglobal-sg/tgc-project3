@@ -84,26 +84,26 @@ export default function MyNavbar(props) {
 
 
     return (
-        <Navbar bg="light" expand="lg" id="navbar" fixed='top' collapseOnSelect > 
+        <Navbar bg="light" expand="lg" id="navbar" fixed='top' collapseOnSelect> 
         <Container className='align-items-center'>
             <Navbar.Brand className="ms-3" as={Link} to="/" ><img style={{ height: '40px' }} src={merinologyLogo} alt="logo"></img></Navbar.Brand>
             <Navbar.Toggle aria-controls="basic-navbar-nav" id="navbar-toggle"/>
             <Navbar.Collapse id="basic-navbar-nav">
-                <Nav id="nav-container" className='ps-3 pe-3'>
+                <Nav id="nav-container" className='ps-3 pe-3 '>
                     <div id="nav-left">
                         <NavDropdown title="Men's" id="basic-nav-dropdown">
-                            <NavDropdown.Item as={Link} to="/mens" eventKey={1}>All Men's Products</NavDropdown.Item>
+                            <NavDropdown.Item as={Link} to="/mens" eventKey={1} className="my-bold">All Men's Products</NavDropdown.Item>
                             <NavDropdown.Divider />
-                            <h6 className='ms-3'>Categories</h6>
+                            <h6 className='ms-3 my-bold'>Categories</h6>
                             <NavDropdown.Item as={Link} to="/mens/shirts" eventKey={2}>Shirts</NavDropdown.Item>
                             <NavDropdown.Item as={Link} to="/mens/jackets" eventKey={3}>Jackets</NavDropdown.Item>
                             <NavDropdown.Item as={Link} to="/mens/bottoms" eventKey={4}>Bottoms</NavDropdown.Item>
                             <NavDropdown.Item as={Link} to="/mens/innerwear" eventKey={5}>Innerwear</NavDropdown.Item>
                         </NavDropdown>
                         <NavDropdown title="Women's" id="basic-nav-dropdown">
-                            <NavDropdown.Item as={Link} to="/womens" eventKey={6}>All Women's Products</NavDropdown.Item>
+                            <NavDropdown.Item as={Link} to="/womens" eventKey={6} className="my-bold">All Women's Products</NavDropdown.Item>
                             <NavDropdown.Divider />
-                            <h6 className='ms-3'>Categories</h6>
+                            <h6 className='ms-3 my-bold'>Categories</h6>
                             <NavDropdown.Item as={Link} to="/womens/shirts" eventKey={7}>Shirts</NavDropdown.Item>
                             <NavDropdown.Item as={Link} to="/womens/jackets" eventKey={8}>Jackets</NavDropdown.Item>
                             <NavDropdown.Item as={Link} to="/womens/bottoms" eventKey={9}>Bottoms</NavDropdown.Item>
@@ -111,7 +111,7 @@ export default function MyNavbar(props) {
                         </NavDropdown>
                         <NavDropdown title="About" id="basic-nav-dropdown">
                             <NavDropdown.Item as={Link} to="/merino-wool" eventKey={11}>Merino Wool</NavDropdown.Item>
-                            <NavDropdown.Item as={Link} to="/about" eventKey={12}>Who Are We</NavDropdown.Item>
+                            {/* <NavDropdown.Item as={Link} to="/about" eventKey={12}>Who Are We</NavDropdown.Item> */}
                         </NavDropdown>
                     </div>
                     <hr></hr>
@@ -121,7 +121,7 @@ export default function MyNavbar(props) {
                             <Fragment>
                                 <Nav.Link onClick={handleShow} eventKey={13}>Cart</Nav.Link>
                                 <NavDropdown title="My Account" id="basic-nav-dropdown">
-                                    <NavDropdown.Item>{localStorage.getItem('customer')}</NavDropdown.Item>
+                                    <h6 className='ms-3 pt-2 my-bold'>Hi, {localStorage.getItem('customer')}</h6>
                                     <hr></hr>
                                     <NavDropdown.Item as={Link} to="/orders" eventKey={14}>My Orders</NavDropdown.Item>
                                     <NavDropdown.Item onClick={() => { logout() }} eventKey={15}>Log Out</NavDropdown.Item>
@@ -131,7 +131,7 @@ export default function MyNavbar(props) {
                     </div>
                     <Offcanvas show={show} onHide={handleClose} id="cart" placement='end'>
                         <Offcanvas.Header closeButton>
-                            <Offcanvas.Title>My Cart</Offcanvas.Title>
+                            <Offcanvas.Title className='my-bold'>My Cart</Offcanvas.Title>
                         </Offcanvas.Header>
                         <Offcanvas.Body>
                             <ul className='list-group'>
@@ -139,7 +139,7 @@ export default function MyNavbar(props) {
                                     return <CartItem item={item} getCart={getCart} confirmUpdateItem={confirmUpdateItem} confirmDeleteItem={confirmDeleteItem} />
                                 }) : ''}
                             </ul>
-                            {cart.length ? <button className='btn btn-primary btn-sm mt-3' onClick={checkout}>Check Out</button> : <p>Cart is Empty</p>}
+                            {cart.length ? <button className='btn btn-primary btn-sm mt-3' onClick={checkout}>Check Out</button> : <p className='my-bold'>Cart is Empty</p>}
 
                         </Offcanvas.Body>
                     </Offcanvas>

@@ -3,6 +3,10 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+import './fonts/HurmeGeometric/HurmeGeometricSans3-Light.ttf';
+import './fonts/HurmeGeometric/HurmeGeometricSans3-SemiBoldObl.ttf';
+import './fonts/HurmeGeometric/HurmeGeometricSans3-Regular.ttf';
+import './fonts/HurmeGeometric/HurmeGeometricSans3-SemiBold.ttf';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(

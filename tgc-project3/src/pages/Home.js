@@ -1,9 +1,11 @@
 import { Fragment, useState, useContext, useEffect } from 'react';
 import ProductContext from '../ProductContext';
 import SearchResults from '../components/SearchResults';
+import "bootstrap/dist/css/bootstrap.min.css"
 import '../index.css'
 import Button from 'react-bootstrap/esm/Button';
 import { Link, useNavigate } from 'react-router-dom';
+import Footer from '../components/Footer';
 
 export default function Home() {
     const navigate = useNavigate()
@@ -129,7 +131,7 @@ export default function Home() {
             <div id='landing' className='d-flex align-items-center justify-center'>
                 {/* <img src={homeWallpaper} alt="wallpaper" style={{ height: "100%" }}></img> */}
                 <div className='container align-items-center justify-center d-flex flex-column'>
-                    <div className='btn' onClick={()=>{navigate('/merino-wool')}} style={{border: 'none'}}><h2>Experience the magic of Merino Wool</h2></div>
+                    <div className='btn' onClick={() => { navigate('/merino-wool') }} style={{ border: 'none' }}><h1 className='my-bold'>Experience the magic of Merino Wool</h1></div>
                     <div className='d-flex align-items-center justify-center'>
                         <Button as={Link} to='/mens' className='landing-links me-2'>Shop Mens</Button>
                         <Button as={Link} to='/womens' className='landing-links ms-2'>Shop Womens</Button>
@@ -138,51 +140,53 @@ export default function Home() {
                 </div>
             </div>
             <div id='searchPage' className='container'>
-                <div className='buffer-top'></div>
-                <h3>Search for products</h3>
-                <div>
-                    <input id='searchProduct' placeholder='Search by product name...' name='searchProduct' type="text" className='form-control' value={searchProduct} onChange={(e) => { updateSearchProduct(e.target.value) }} onKeyUp={(e) => { keyUpSearch(e) }} />
-                    <h5 className='mt-2'>Brands</h5>
-                    <select className='form-select' name="searchBrands" onChange={(e) => { updateSearchBrands(e.target.value) }} >
-                        <option selected value="">Select Brand</option>
-                        {brands.map(brand => {
-                            return <option value={brand[0]}>{brand[1]}</option>
-                        }
-                        )}
-                    </select>
-                    <h5 className='mt-2'>Categories</h5>
-                    <select className='form-select' name='searchCategories' onChange={(e) => { updateSearchCategories(e.target.value) }} >
-                        <option selected value="">Select Category</option>
-                        {categories.map(category => {
-                            return <option value={category[0]}>{category[1]}</option>
-                        })}
-                    </select>
-                    <h5 className='mt-2'>Activities</h5>
-                    <select className='form-select' name='searchActivities' onChange={(e) => { updateSearchActivities(e.target.value) }}>
-                        <option selected value="">Select Activity</option>
-                        {activities.map(activity => {
-                            return <option value={activity[0]}>{activity[1]}</option>
-                        })}
-                    </select>
-                    <h5 className='mt-2'>Blends</h5>
-                    <select className='form-select' name='searchBlends' onChange={(e => { updateSearchBlends(e.target.value) })}>
-                        <option selected value=''>Select Blends</option>
-                        {blends.map(blend => {
-                            return <option value={blend[0]}>{blend[1]}</option>
-                        })}
-                    </select>
-                    <div className='mt-3'>
-                        <button className='btn btn-sm btn-primary me-2' onClick={search}>Search</button>
-                        <button className='btn btn-sm btn-primary me-2' onClick={resetSearch}>Reset</button>
+                <div className='buffer-top' id='buffer'></div>
+                <h3 className='my-bold'>Search for products</h3>
+                <div id='search-container' className="row">
+                    <div id="search-fields" className="col col-12 col-lg-3">
+                        <input id='searchProduct' placeholder='Search by product name...' name='searchProduct' type="text" className='form-control' value={searchProduct} onChange={(e) => { updateSearchProduct(e.target.value) }} onKeyUp={(e) => { keyUpSearch(e) }} />
+                        <h5 className='mt-2'>Brands</h5>
+                        <select className='form-select' name="searchBrands" onChange={(e) => { updateSearchBrands(e.target.value) }} >
+                            <option selected value="">Select Brand</option>
+                            {brands.map(brand => {
+                                return <option value={brand[0]}>{brand[1]}</option>
+                            }
+                            )}
+                        </select>
+                        <h5 className='mt-2'>Categories</h5>
+                        <select className='form-select' name='searchCategories' onChange={(e) => { updateSearchCategories(e.target.value) }} >
+                            <option selected value="">Select Category</option>
+                            {categories.map(category => {
+                                return <option value={category[0]}>{category[1]}</option>
+                            })}
+                        </select>
+                        <h5 className='mt-2'>Activities</h5>
+                        <select className='form-select' name='searchActivities' onChange={(e) => { updateSearchActivities(e.target.value) }}>
+                            <option selected value="">Select Activity</option>
+                            {activities.map(activity => {
+                                return <option value={activity[0]}>{activity[1]}</option>
+                            })}
+                        </select>
+                        <h5 className='mt-2'>Blends</h5>
+                        <select className='form-select' name='searchBlends' onChange={(e => { updateSearchBlends(e.target.value) })}>
+                            <option selected value=''>Select Blends</option>
+                            {blends.map(blend => {
+                                return <option value={blend[0]}>{blend[1]}</option>
+                            })}
+                        </select>
+                        <div className='mt-3'>
+                            <button className='btn btn-sm btn-primary me-2' onClick={search}>Search</button>
+                            <button className='btn btn-sm btn-primary me-2' onClick={resetSearch}>Reset</button>
+                        </div>
+                    </div>
+                    <div id="search" className="col col-12 col-lg-9">
+                        {searchResults.length ? <SearchResults products={searchResults} /> : <h4>No Search Results</h4>}
                     </div>
                 </div>
-
-                <div id="search" className='mt-2'>
-
-                    {searchResults.length ? <SearchResults products={searchResults} /> : <h4>No Search Results</h4>}
-                </div>
-
             </div>
+            {/* <div>
+                <Footer />
+            </div> */}
 
         </Fragment>
     )

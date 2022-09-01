@@ -25,6 +25,7 @@ import ReactToastify from './components/ReactToastify'
 import Stripe from './components/Stripe'
 import Orders from './pages/Orders'
 import OrderFail from './pages/OrderFail'
+import Footer from './components/Footer'
 
 
 
@@ -63,6 +64,7 @@ function App() {
             </Routes>
             </CustomerProvider>
           </Router>
+          <Footer />
       </ProductProvider>
     </Fragment >
   );

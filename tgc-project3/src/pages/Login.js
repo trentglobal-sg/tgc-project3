@@ -15,11 +15,11 @@ export default function Login() {
         setLoginData({ ...loginData, [e.target.name]: e.target.value })
     }
 
-    const submitForm = async ()=>{
+    const submitForm = async () => {
         let email = loginData.email;
         let password = loginData.password
         let loginResponse = await context.login(email, password)
-        console.log ("login =>", loginResponse)
+        console.log("login =>", loginResponse)
 
         // if (loginResponse){
         //     navigate('/')
@@ -28,16 +28,18 @@ export default function Login() {
 
     return (
         <Fragment>
-            <div className='buffer-top'></div>
-            <div className='container'>
-                <h1>Login</h1>
-                <label>Email </label>
-                <input type='text' name='email' className='form-control' value={loginData.email} onChange={(e)=>{updateFormField(e)}}/>
-                <label>Password</label>
-                <input type='password' name='password' className='form-control' value={loginData.password} onChange={(e)=>{updateFormField(e)}}/>
-                <button className='btn btn-primary btn-submit mt-3' onClick={()=>submitForm()} >Submit</button>
-                <div className='mt-3'>
-                    <p>No account? <Link to='/register'>Register Here</Link> </p>
+            <div style={{ minHeight: ' 100vh' }}>
+                <div className='buffer-top'></div>
+                <div className='container'>
+                    <h1>Login</h1>
+                    <label>Email </label>
+                    <input type='text' name='email' className='form-control' value={loginData.email} onChange={(e) => { updateFormField(e) }} />
+                    <label>Password</label>
+                    <input type='password' name='password' className='form-control' value={loginData.password} onChange={(e) => { updateFormField(e) }} />
+                    <button className='btn btn-primary btn-submit mt-3' onClick={() => submitForm()} >Submit</button>
+                    <div className='mt-3'>
+                        <p>No account? <Link to='/register'>Register Here</Link> </p>
+                    </div>
                 </div>
             </div>
         </Fragment>
