@@ -30,13 +30,13 @@ export default function Login() {
         <Fragment>
             <div style={{ minHeight: ' 100vh' }}>
                 <div className='buffer-top'></div>
-                <div className='container'>
+                <div className='container' style={{maxWidth: '600px'}}>
                     <h1>Login</h1>
                     <label>Email </label>
                     <input type='text' name='email' className='form-control' value={loginData.email} onChange={(e) => { updateFormField(e) }} />
                     <label>Password</label>
                     <input type='password' name='password' className='form-control' value={loginData.password} onChange={(e) => { updateFormField(e) }} />
-                    <button className='btn btn-primary btn-submit mt-3' onClick={() => submitForm()} >Submit</button>
+                    <button className='btn my-btn btn-submit mt-3' onClick={() => submitForm()} >Submit</button>
                     <div className='mt-3'>
                         <p>No account? <Link to='/register'>Register Here</Link> </p>
                     </div>

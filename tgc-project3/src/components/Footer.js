@@ -6,17 +6,14 @@ export default function Footer() {
     return (
         <div id='footer' className='d-flex justify-content-center'>
             <div className='row justify-center container m-3'>
-                <div className='col col-12 col-lg-4'>
-                    <h6 className='my-bold'>LOCATE US</h6>
-                    <p className='my-text-font-small'>Visit our shop at this address</p>
-                    <span className='my-text-font-small' style={{ display: 'block' }}>60 Mountbatten Road</span>
-                    <span className='my-text-font-small' style={{ display: 'block' }}>#01-01</span>
-                    <p className='my-text-font-small' style={{ display: 'block' }}>S(123123)</p>
-                    <span className='my-text-font-small' >Opening Hours:</span>
-                    <p className='my-text-font-small'>Mon - Fri (9am - 8pm)</p>
-                    <p className='my-text-font-small'>Tel: 6 1234 1234</p>
+                <div className='col col-12 col-lg-4 locate-us'>
+                    <h6 className='my-bold'>ABOUT</h6>
+                    <span className='my-bold my-text-font-small'>Who are we</span>
+                    <span className='my-bold d-block my-text-font-small'>Return Policy</span>
+                    <span className='my-bold d-block my-text-font-small'>FAQ</span>
+                    <span className='my-bold d-block my-text-font-small'>Locate Us</span>
                 </div>
-                <div className='col col-12 col-lg-4'>
+                <div className='col col-12 col-lg-4 follow-us mb-3'>
                     <h6 className='my-bold'>FOLLOW US</h6>
                     <div>
                         <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-facebook me-2" viewBox="0 0 16 16">
@@ -33,13 +30,16 @@ export default function Footer() {
                         </svg>
                     </div>
                 </div>
-                <div className='col col-12 col-lg-4'>
+                <div className='col col-12 col-lg-4 subscribe'>
                     <h6 className='my-bold'>SUBSCRIBE TO OFFERS</h6>
                     <span className='my-text-font-small'>Receive product news and updates from us</span>
                     <input type="text" className='form-control form-control-sm' placeholder='Enter your email...' />
-                    <input type="checkbox" /><label className='my-text-font-small mt-2 ms-2'>I have read and accepted Merinology's <a href="#">Privacy Policy</a></label>
+                    <div className='d-flex'>
+                        <input type="checkbox" />
+                        <label className='my-text-font-small mt-2 ms-2'>I have read and accepted Merinology's <a style={{color:"whitesmoke", display:"inline"}}  href="#">Privacy Policy</a></label>
+                    </div>
                     <div>
-                        <button className="btn btn-sm my-btn mt-1">Submit</button>
+                        <button className="btn btn-sm my-btn mt-2">Submit</button>
                     </div>
                 </div>
 

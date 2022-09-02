@@ -134,13 +134,13 @@ export default function Home() {
         <Fragment>
             <div id='landing' className='d-flex align-items-center justify-center'>
                 {/* <img src={homeWallpaper} alt="wallpaper" style={{ height: "100%" }}></img> */}
-                <div className='container align-items-center justify-center d-flex flex-column'>
+                <div className='container align-items-center justify-center d-flex flex-column call-to-action'>
                     <div className='btn' onClick={() => { navigate('/merino-wool') }} style={{ border: 'none' }}><h1 className='my-bold'>Experience the magic of Merino Wool</h1></div>
-                    <div className='d-flex align-items-center justify-center'>
-                        <Button as={Link} to='/mens' className='landing-links me-2'>Shop Mens</Button>
-                        <Button as={Link} to='/womens' className='landing-links ms-2'>Shop Womens</Button>
+                    <div className='d-flex align-items-center justify-center' style={{maxWidth: '70vw'}}>
+                        <Button as={Link} to='/mens' className='landing-links me-3 my-btn'>Shop Mens</Button>
+                        <Button as={Link} to='/womens' className='landing-links ms-3 my-btn'>Shop Womens</Button>
                     </div>
-                    <Button className='landing-links mt-4' href="#searchPage" >Search for Products</Button>
+                    <Button className='landing-links mt-4 my-btn' href="#searchPage" >Search for Products</Button>
                 </div>
             </div>
             <div id='searchPage' className='container'>
@@ -179,8 +179,8 @@ export default function Home() {
                             })}
                         </select>
                         <div className='mt-3'>
-                            <button className='btn btn-sm btn-primary me-2' onClick={search}>Search</button>
-                            <button className='btn btn-sm btn-primary me-2' onClick={resetSearch}>Reset</button>
+                            <button className='btn btn-sm my-btn me-2' onClick={search}>Search</button>
+                            <button className='btn btn-sm my-btn me-2' onClick={resetSearch}>Reset</button>
                         </div>
                     </div>
                     <div id="search" className="col col-12 col-lg-9">

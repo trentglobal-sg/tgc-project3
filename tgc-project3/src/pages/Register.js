@@ -101,7 +101,7 @@ export default function Register() {
         <Fragment>
             <div style={{ minHeight: ' 100vh' }}>
                 <div className='buffer-top'></div>
-                <div className='container'>
+                <div className='container' style={{maxWidth: '600px'}}>
                     <h1>Register</h1>
                     <label>Username</label>
                     <input type='text' name='username' className='form-control' value={registerData.username} onChange={(e) => { updateFormField(e) }} />
@@ -124,7 +124,7 @@ export default function Register() {
                     <label>Confirm Password</label>
                     <input type='password' name='confirm_password' className='form-control' value={registerData.confirm_password} onChange={(e) => { updateFormField(e) }} />
                     {formError.confirm_password ? <p className='errorMessage' >{formError.confirm_password}</p> : ''}
-                    <button className='btn btn-primary btn-submit mt-3' onClick={() => { submitForm() }} >Submit</button>
+                    <button className='btn my-btn btn-submit mt-3' onClick={() => { submitForm() }} >Submit</button>
                 </div>
             </div>
         </Fragment>
