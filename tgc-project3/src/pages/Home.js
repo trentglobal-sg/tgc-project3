@@ -116,31 +116,17 @@ export default function Home() {
         search()
     }, [])
 
-    // const updateBrands = (e)=>{
-    //     let value = parseInt(e.target.value)
-    //     let currentValues = searchBrands;
-    //     let modifiedValues;
-    //     if(!currentValues.includes(value)){
-    //         modifiedValues = [...currentValues, value]
-    //     } else {
-    //         modifiedValues = currentValues.filter((element)=>{
-    //             return element !== value
-    //         })
-    //     }
-    //     setSearchBrands(modifiedValues)
-    // }
-
     return (
         <Fragment>
             <div id='landing' className='d-flex align-items-center justify-center'>
                 {/* <img src={homeWallpaper} alt="wallpaper" style={{ height: "100%" }}></img> */}
                 <div className='container align-items-center justify-center d-flex flex-column call-to-action'>
-                    <div className='btn' onClick={() => { navigate('/merino-wool') }} style={{ border: 'none' }}><h1 className='my-bold'>Experience the magic of Merino Wool</h1></div>
+                    <div className='btn' onClick={() => { navigate('/merino-wool') }} style={{ border: 'none' }}><h1>Experience the magic of Merino Wool</h1></div>
                     <div className='d-flex align-items-center justify-center' style={{maxWidth: '70vw'}}>
-                        <Button as={Link} to='/mens' className='landing-links me-3 my-btn'>Shop Mens</Button>
-                        <Button as={Link} to='/womens' className='landing-links ms-3 my-btn'>Shop Womens</Button>
+                        <Button as={Link} to='/mens' className='landing-links me-3 my-btn-translucent'><h5>Shop Mens</h5></Button>
+                        <Button as={Link} to='/womens' className='landing-links ms-3 my-btn-translucent'><h5>Shop Womens</h5></Button>
                     </div>
-                    <Button className='landing-links mt-4 my-btn' href="#searchPage" >Search for Products</Button>
+                    <Button className='landing-links mt-4 my-btn-translucent' href="#searchPage"><h5>Search for Products</h5></Button>
                 </div>
             </div>
             <div id='searchPage' className='container'>

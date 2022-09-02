@@ -74,6 +74,11 @@ code {
   border-color: #444f5a !important;
 }
 
+.my-btn-translucent{
+  background-color: rgba(68,79,90,0.8) !important;
+  border: none !important;
+}
+
 .custom-shadow {
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
