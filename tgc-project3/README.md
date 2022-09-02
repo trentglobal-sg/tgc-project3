@@ -1,89 +1,70 @@
-<h1>Travel Merino</h1>
-<img src="#" style="width: 800px"></img>
+# Merinology
+![alt=mock up](src/images/mockup.png)
 
-<p>The live demo of the website can be accessed <a href="#">here</a></p>
+The live demo of the main customer website can be accessed [here](https://tgc-ec-merinology-react.netlify.app/)
 
-<h2>1. Project Summary</h2>
+The live demo of the admin website can be accessed [here](https://tgc-ec-merinology.herokuapp.com/)
+
+Github for Express Application: [Click here](https://github.com/Koihcire/tgc-project3-api)
+
+## 1. Project Summary
 <hr>
-<h3>Project Context</h3>
-<ul>
-<p></p>
-</ul>
-<h3>Organisation Goals</h3>
-<ul>
-<p></p>
-</ul>
-<h3>Target Audience</h3>
-<ul>
-<p></p>
-</ul>
 
-<h2>2. UI UX</h2>
+### Project Context
+
+### Organisation Goals
+
+### Target Audience
+
+## 2. UI UX
 <hr>
-<h3>2.1 Strategy</h3>
-<h4>Organisation Objective</h4>
-<ul>
-<p></p>
-</ul>
-<h4>User Story</h4>
 
-<ul>
-<p></p>
+### 2.1 Strategy
 
-</ul>
+#### Organisation Objective
 
-<h4>User Goals</h4>
-<ul>
-    <li></li>
-</ul>
+#### User Story
 
-<h3>2.2 Scope</h3>
-<h4>Features</h4>
+#### User Goals
 
-<ul>
-<h4>Content</h4>
-<ul>
-    <li></li>
-</ul>
-</ul>
-<h4>Non Functional Requirements</h4>
-<ul>
-<p></p>
-</ul>
+### 2.2 Scope
 
-<h3>2.3 Database and Website Architecture</h3>
-<h4>Database</h4>
-<img src="#" style="width:800px"></img>
-<h4>Website</h4>
-<!-- insert mockups here -->
-<img src="#" style="width: 800px"></img>
+#### Features
 
-<h3>2.4 UI Skeleton</h3>
-<!-- insert mockups here -->
-<img src="#" style="width: 800px"></img>
+#### Content
 
-<h3>2.5 Surface</h3>
-<h4>Colors</h4>
-<ul>
-<img src="#" style="width:320px"></img>
-<p></p>
-</ul>
-<h4>Fonts</h4>
-<ul>
-<p>insert font</p>
-<p></p>
-</ul>
-<h4>Icons</h4>
-<p>All interface icons are taken from Bootstrap Icons. See credits.</p>
+#### Non Functional Requirements
 
-<h2>3. Features</h2>
+### 2.3 Database and Website Architecture
+
+#### Database
+
+[Click to view logical schema](src/images/logical-schema.png)
+
+#### Website
+
+[Click to view website architecture](src/images/project3-sitemap.pdf)
+
+### 2.4 UI Skeleton
+
+[Click to view UI wireframe](src/images/project3-wireframe.pdf)
+
+### 2.5 Surface
+
+#### Colors
+![color scheme](src/images/color-scheme.png)
+
+#### Fonts
+
+#### Icons
+All interface icons are taken from Bootstrap Icons. See credits.
+
+## 3. Features
 <hr>
-<h3>Key Features</h3>
-<ul>
-    <li></li>
 
-</ul>
-<h3>Limitations and Future Implementations</h3>
+### Key Features
+
+### Limitations and Future Implementations
 <table>
     <tr>
         <th>No.</th>
@@ -97,16 +78,19 @@
     </tr>
 </table>
 
-<h2>4. Test Cases</h2>
+## 4. Test Cases
 <hr>
-<p>The documentation for test cases can be accessed <a href="https://1drv.ms/x/s!ArFMW1hSgH5_gacWUup7Crrz-ORTaA?e=2lzszq">here</a></p>
 
-<h2>5. Deployment</h2>
+[Click for test cases](https://1drv.ms/x/s!ArFMW1hSgH5_gacWUup7Crrz-ORTaA?e=2lzszq)
+
+
+## 5. Deployment
 <hr>
-<p>The API is deployed using Heroku</p>
-<p>The React application is manually deployed using Netlify</p>
 
-<h2>6. Technologies Used</h2>
+The API is deployed using Heroku
+The React application is manually deployed using Netlify
+
+## 6. Technologies Used
 <hr>
 <table>
     <tr>
@@ -167,10 +151,9 @@
     </tr>
 </table>
 
-<h2>7. Credits</h2>
-<p>Bootstrap icons: [https://icons.getbootstrap.com/]</p>
-<p>Muzli for creating color palette: https://colors.muz.li/palette/e8f5fd/d0ecfb/a4b5da/4a6eb5/283c63</p>
-<p>Looka for logo creation: https://looka.com/editor/91955174</p>
-<p>Create Mockup: https://www.createmockup.com/generate/</p>
-<p>Creatable Multi Select: https://react-select.com/creatable</p>
-<p>CK Editor: https://ckeditor.com/</p>
+## 7. Credits
+[Bootstrap icons](https://icons.getbootstrap.com/)
+
+[Muzli for creating color palette](https://colors.muz.li/palette/e8f5fd/d0ecfb/a4b5da/4a6eb5/283c63)
+
+[Create Mockup](https://www.createmockup.com/generate/)
