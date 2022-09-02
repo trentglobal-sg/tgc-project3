@@ -21,17 +21,19 @@ export default function MyNavbar(props) {
     };
 
     const getCart = async () => {
-        let response = await context.getCart();
-        setCart(response);
-        // handleShow();
-        let total = 0
-        response.map(item => {
-            let quantity = item.quantity;
-            let cost = item.product_variant.variant.product.cost;
-            let itemTotal = quantity * cost;
-            total = total + itemTotal
-        })
-        setCartTotal(total)
+        if (localStorage.getItem('accessToken')) {
+            let response = await context.getCart();
+            setCart(response);
+            // handleShow();
+            let total = 0
+            response.map(item => {
+                let quantity = item.quantity;
+                let cost = item.product_variant.variant.product.cost;
+                let itemTotal = quantity * cost;
+                total = total + itemTotal
+            })
+            setCartTotal(total)
+        }
     }
 
     useEffect(() => {
@@ -78,25 +80,6 @@ export default function MyNavbar(props) {
         setShow(true)
     };
 
-    // const mountActiveItem = (id)=>{
-    //     setActiveItem (id)
-    //     setActiveItemQuantity(quantity)
-    // }
-
-    // const updateItem = ()=>{
-
-    // }
-
-    // const updateQuantity = (e)=>{
-    //     setActiveItemQuantity(e.target.value)
-    // }
-
-    // const mountActive = (id, quantity) => {
-    //     setActiveItem(id)
-    //     setActiveItemQuantity(quantity)
-    // }
-    // <img style={{ height: '40px' }} src={merinologyLogo} alt="logo"></img>
-
     return (
         <Navbar bg="light" expand="lg" id="navbar" fixed='top' collapseOnSelect>
             <Container className='align-items-center'>
@@ -124,21 +107,17 @@ export default function MyNavbar(props) {
                                 <NavDropdown.Item as={Link} to="/womens/innerwear" eventKey={10}>Innerwear</NavDropdown.Item>
                             </NavDropdown>
                             <Nav.Link as={Link} to="/merino-wool" eventKey={11}>Merino Wool</Nav.Link>
-                            {/* <NavDropdown title="About" id="basic-nav-dropdown">
-                            <NavDropdown.Item as={Link} to="/about" eventKey={12}>Who Are We</NavDropdown.Item>
-                        </NavDropdown> */}
                         </div>
                         <hr></hr>
                         <div id="nav-right">
-                            {/* <Nav.Link as={Link} to="/login">Login</Nav.Link> */}
-                            {context.checkAuth() ?
+                            {localStorage.getItem('accessToken') ?
                                 <Fragment>
                                     <Nav.Link onClick={handleShow} eventKey={13}>
                                         <div id="cart-logo-container">
-                                        {cart.length ? <span id="cart-counter" className='my-text-font-small' style={{position:'fixed'}}>{cart.length}</span> : ''}
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-cart" viewBox="0 0 16 16">
-                                            <path d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .491.592l-1.5 8A.5.5 0 0 1 13 12H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5zM3.102 4l1.313 7h8.17l1.313-7H3.102zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2zm7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2z" />
-                                        </svg>
+                                            {cart.length ? <span id="cart-counter" className='my-text-font-small' style={{ position: 'fixed' }}>{cart.length}</span> : ''}
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-cart" viewBox="0 0 16 16">
+                                                <path d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .491.592l-1.5 8A.5.5 0 0 1 13 12H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5zM3.102 4l1.313 7h8.17l1.313-7H3.102zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2zm7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2z" />
+                                            </svg>
                                         </div>
                                     </Nav.Link>
                                     <NavDropdown title="My Account" id="basic-nav-dropdown">
@@ -161,9 +140,9 @@ export default function MyNavbar(props) {
                                     }) : ''}
                                 </ul>
                                 {cart.length ? <div>
-                                    <div className='my-bold mt-3'>Total: ${cartTotal/100}</div>
+                                    <div className='my-bold mt-3'>Total: ${cartTotal / 100}</div>
                                     <button className='btn my-btn btn-sm mt-2' onClick={checkout}>Checkout</button>
-                                    </div> : <p className='my-bold'>Cart is Empty</p>}
+                                </div> : <p className='my-bold'>Cart is Empty</p>}
                             </Offcanvas.Body>
                         </Offcanvas>
                     </Nav>
