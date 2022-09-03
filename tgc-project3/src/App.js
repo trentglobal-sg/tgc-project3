@@ -26,6 +26,7 @@ import Stripe from './components/Stripe'
 import Orders from './pages/Orders'
 import OrderFail from './pages/OrderFail'
 import Footer from './components/Footer'
+import ScrollToTop from './components/ScrollToTop'
 
 
 
@@ -36,6 +37,7 @@ function App() {
       {/* The Routes, Route and Link components only worked in <Router> */}
       <ProductProvider>
           <Router>
+            <ScrollToTop />
           <ReactToastify />
           <CustomerProvider>
             <MyNavbar />

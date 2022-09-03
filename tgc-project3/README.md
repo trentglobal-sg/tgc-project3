@@ -5,12 +5,13 @@ The live demo of the main customer website can be accessed [here](https://tgc-ec
 
 The live demo of the admin website can be accessed [here](https://tgc-ec-merinology.herokuapp.com/)
 
-Github for Express Application: [Click here](https://github.com/Koihcire/tgc-project3-api)
+The github for the Express application can be accessed [here](https://github.com/Koihcire/tgc-project3-api)
 
 ## 1. Project Summary
 <hr>
 
 ### Project Context
+
 
 ### Organisation Goals
 
@@ -54,7 +55,12 @@ Github for Express Application: [Click here](https://github.com/Koihcire/tgc-pro
 #### Colors
 ![color scheme](src/images/color-scheme.png)
 
+The color chosen is in a greyscale palette in line with a minimalist look and feel. Merino wool apparel are often in natural wool colors in greyscale tones as it is often not ideal to dye the fabric without affecting its natural anti bacterial properties.
+
 #### Fonts
+Vanillate font is chosen for the company logo for its clean, bold cursive for a casual, stylish and clean look.
+
+HurmeGeometric font 3 is chosen for the website body for its versatility and suitability for fashion e-commerce websites.
 
 #### Icons
 All interface icons are taken from Bootstrap Icons. See credits.
@@ -87,73 +93,140 @@ All interface icons are taken from Bootstrap Icons. See credits.
 ## 5. Deployment
 <hr>
 
-The API is deployed using Heroku
-The React application is manually deployed using Netlify
+The express server is deployed using Heroku
+
+The website is manually deployed using Netlify
 
 ## 6. Technologies Used
 <hr>
+
+### Backend
 <table>
     <tr>
         <th>Technology</th>
         <th>Uses</th>
     </tr>
     <tr>
-        <td>MongoDB</td>
-        <td>Database hosting</td>
+        <td>Express</td>
+        <td>Web application framework used</td>
     </tr>
     <tr>
-        <td>MongoDB Node Driver</td>
-        <td>To access MongoDB from Express</td>
+        <td>Bookshelf.js</td>
+        <td>Javascript ORM used for querying SQL databases</td>
+    </tr>
+    <tr>
+        <td>knex</td>
+        <td>Query builder for PostgreSQL, MySQL</td>
+    </tr>
+    <tr>
+        <td>db-migrate</td>
+        <td>Database migration framework</td>
     </tr>
     <tr>
         <td>Axios</td>
-        <td>API calls</td>
+        <td>HTTP client</td>
     </tr>
     <tr>
-        <td>HTML React Parser</td>
-        <td>Display data from rich text editor into formatted html</td>
-    </tr>
-    <tr>
-        <td>CK Editor</td>
-        <td>Instructions and Debrief form field inputs</td>
-    </tr>
-    <tr>
-        <td>ExpressJS</td>
-        <td>Backend application</td>
-    </tr>
-    <tr>
-        <td>ReactJS</td>
-        <td>Frontend application</td>
-    </tr>
-    <tr>
-        <td>React-select</td>
-        <td>Create user editable multi select tags for tags form field input</td>
-    </tr>
-    <tr>
-        <td>BootStrap / CSS</td>
-        <td>Styling of html elements in React application</td>
-    </tr>
-    <tr>
-        <td>Heroku</td>
-        <td>Deployment of Express API</td>
-    </tr>
-    <tr>
-        <td>Netlify</td>
-        <td>Deployment of React application</td>
-    </tr>
-    <tr>
-        <td>dotenv</td>
-        <td>To enable use of .env file</td>
+        <td>Caolan forms</td>
+        <td>Create and validate forms</td>
     </tr>
     <tr>
         <td>CORS</td>
-        <td>To enable cross origin resource sharing for API</td>
+        <td>Middleware to enable Cross-Origin Resource Sharing(CORS)</td>
+    </tr>
+    <tr>
+        <td>csurf</td>
+        <td>CSRF protection middleware</td>
+    </tr>
+    <tr>
+        <td>dotenv</td>
+        <td>To allow loading of environment variables from .env file</td>
+    </tr>
+    <tr>
+        <td>express-sessions</td>
+        <td>Session management middleware</td>
+    </tr>
+    <tr>
+        <td>connect-flash</td>
+        <td>Middleware to enable flash messages</td>
+    </tr>
+    <tr>
+        <td>express-flash</td>
+        <td>Extension of connect-flash to enable definition and rendering of flash messages without redirecting request</td>
+    </tr>
+    <tr>
+        <td>JSON Web Token</td>
+        <td>Authentication framework with React app</td>
+    </tr>
+    <tr>
+        <td>Handlebars</td>
+        <td>HTML templates for admin panel</td>
+    </tr>
+    <tr>
+        <td>handlebars-helpers</td>
+        <td>Handlebar-helpers</td>
+    </tr>
+    <tr>
+        <td>wax-on</td>
+        <td>Add support to Handlebars for template inheritance with block and extend helpers</td>
+    </tr>
+    <tr>
+        <td>Cloudinary</td>
+        <td>Image hosting service used for upload and storage of images</td>
+    </tr>
+</table>
+
+### Frontend
+<table>
+    <tr>
+        <th>Technology</th>
+        <th>Uses</th>
+    </tr>
+    <tr>
+        <td>React</td>
+        <td>Frontend framework</td>
+    </tr>
+    <tr>
+        <td>React router dom</td>
+        <td>Handle routing in React web application</td>
+    </tr>
+    <tr>
+        <td>Axios</td>
+        <td>HTTP client</td>
+    </tr>
+    <tr>
+        <td>React Bootstrap</td>
+        <td>Bootstrap for react client</td>
+    </tr><tr>
+        <td>Bootstrap</td>
+        <td>User for styling of web application</td>
+    </tr><tr>
+        <td>Stripe</td>
+        <td>Pyament gateway used in web application</td>
     </tr>
 </table>
 
 ## 7. Credits
-[Bootstrap icons](https://icons.getbootstrap.com/)
+Interface icons from [Bootstrap icons](https://icons.getbootstrap.com/)
 
-[Muzli for creating color palette](https://colors.muz.li/palette/e8f5fd/d0ecfb/a4b5da/4a6eb5/283c63)
+Color paletter from [Muzli](https://colors.muz.li/palette/e8f5fd/d0ecfb/a4b5da/4a6eb5/283c63)
 
-[Create Mockup](https://www.createmockup.com/generate/)
+Responsive device mockups from [Create Mockup](https://www.createmockup.com/generate/)
+
+HurmeGeometric font taken from [bestfonts](https://en.bestfonts.pro/font/hurme-geometric-sans-no.3)
+
+Vanillate font taken from [fontspace](https://www.fontspace.com/vanillate-font-f30107)
+
+Stripe.js component is adapted from [Jerrysuper123](https://github.com/Jerrysuper123/artisanBread)
+
+mySQL template for express application is from [kunxin-chor](https://github.com/kunxin-chor/mysql-base)
+
+Product images taken from [Ridge Merino](https://www.ridgemerino.com/), [Wool & Prince](https://woolandprince.com/), [IceBreaker Merino](https://www.icebreaker.com/en-us/home)
+
+Loading skeleton taken from [React-loading-skeleton](https://www.npmjs.com/package/react-loading-skeleton)
+
+
+
+
+
+
