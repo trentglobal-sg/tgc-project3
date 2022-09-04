@@ -307,6 +307,8 @@ Product images taken from [Ridge Merino](https://www.ridgemerino.com/), [Wool & 
 
 Loading skeleton taken from [React-loading-skeleton](https://www.npmjs.com/package/react-loading-skeleton)
 
+Informational video on merino wool taken from [packhacker youTube channel](https://www.youtube.com/watch?v=ZoUs7ar3LD0)
+
 
 
 
