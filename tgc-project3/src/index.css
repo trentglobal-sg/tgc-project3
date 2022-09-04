@@ -57,6 +57,8 @@ code {
   width: 100%;
   z-index: 1234;
   background-color: #5e6871 !important;
+  /* background-color: rgba(94,104,113,0.8) !important; */
+
 }
 
 .my-text-font {
@@ -111,6 +113,8 @@ code {
 } */
 .navbar-collapse{
   background-color: #5e6871 !important;
+  /* background-color: rgba(94,104,113,0.8) !important; */
+  margin-top: 11px !important;
 }
 
 .dropdown-menu{
@@ -119,8 +123,8 @@ code {
 
 #landing {
   height: 100vh;
-  background-image: url('./images/home-wallpaper.jpeg');
-  background-position: right;
+  background-image: url('./images/home-wallpaper2.jpeg');
+  background-position: center;
   background-size: cover;
   position: relative
 }

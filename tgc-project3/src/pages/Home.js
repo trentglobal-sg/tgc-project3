@@ -121,7 +121,7 @@ export default function Home() {
             <div id='landing' className='d-flex align-items-center justify-center'>
                 {/* <img src={homeWallpaper} alt="wallpaper" style={{ height: "100%" }}></img> */}
                 <div className='container align-items-center justify-center d-flex flex-column call-to-action'>
-                    <div className='btn' onClick={() => { navigate('/merino-wool') }} style={{ border: 'none' }}><h1>Experience the magic of Merino Wool</h1></div>
+                    <div className='btn' onClick={() => { navigate('/merino-wool') }} style={{ border: 'none' }}><h1>Experience the miracle of Merino Wool</h1></div>
                     <div className='d-flex align-items-center justify-center' style={{maxWidth: '70vw'}}>
                         <Button as={Link} to='/mens' className='landing-links me-3 my-btn-translucent'><h5 className='my-main-btn-text'>Shop Mens</h5></Button>
                         <Button as={Link} to='/womens' className='landing-links ms-3 my-btn-translucent'><h5 className='my-main-btn-text'>Shop Womens</h5></Button>
