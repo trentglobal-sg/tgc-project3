@@ -1,25 +1,42 @@
-import { useContext, useState } from 'react'
-import CustomerContext from '../CustomerContext';
+import { useContext, useEffect, useState } from 'react'
+// import CustomerContext from '../CustomerContext';
 
 export default function CartItem(props) {
-    const context = useContext(CustomerContext);
+    // const context = useContext(CustomerContext);
     const [updateItem, setUpdateItem] = useState('')
     const [updateItemQuantity, setUpdateItemQuantity] = useState('')
 
-    const updateQuantity = (e) => {
-        setUpdateItemQuantity(parseInt(e.target.value))
-    }
-
-    const mountActive = (id, quantity) => {
-        setUpdateItem(id)
+    const mountActive = (quantity) => {
         setUpdateItemQuantity(quantity)
     }
 
+    const setLoading = (id) => {
+        setUpdateItem(id)
+    }
+
+    useEffect(()=>{
+        mountActive(props.item.quantity)
+    },[])
+
     const confirmUpdateItem = async (id, quantity) => {
-        let response = props.confirmUpdateItem(id, quantity)
+        let response = await props.confirmUpdateItem(id, quantity)
         setUpdateItem('')
-        setUpdateItemQuantity('');
+        setUpdateItemQuantity(response);
         return response;
+    }
+
+    const increment = () => {
+        setLoading(props.item.product_variant.id)
+        if (updateItemQuantity >= 1 && updateItemQuantity < 10 && updateItemQuantity < (props.item.product_variant.stock-1)) {
+            setUpdateItemQuantity(updateItemQuantity + 1)
+        }
+    }
+
+    const decrement = () => {
+        setLoading(props.item.product_variant.id)
+        if (updateItemQuantity > 1 && updateItemQuantity <= 10 ) {
+            setUpdateItemQuantity(updateItemQuantity - 1)
+        }
     }
 
     const confirmDeleteItem = async (id) => {
@@ -37,15 +54,28 @@ export default function CartItem(props) {
                     <h6 className='my-bold' style={{ fontSize: "small", height: "fit-content" }}>{props.item.product_variant.variant.product.product}</h6>
                     <h6 style={{ fontSize: "small", height: "fit-content" }}>{props.item.product_variant.variant.color_name} | {props.item.product_variant.size.size}</h6>
                     <h6 style={{ fontSize: "small", height: "fit-content" }}>$ {props.item.product_variant.variant.product.cost / 100}</h6>
-                    {/* <div style={{ display: 'flex' }}> */}
-                    {updateItemQuantity ?
+                    {updateItem ?
                         <div className='d-flex'>
-                            <input type='number' min={1} max={Math.min(props.item.product_variant.stock, 10)} style={{ width: '50px' }} className='form-control form-control-sm' value={updateItemQuantity} onChange={(e) => { updateQuantity(e) }} /> <button className='btn btn-sm btn-primary ms-2' onClick={async () => { await confirmUpdateItem(updateItem, updateItemQuantity) }} >Update</button>
+                            <button className='btn btn-sm my-btn' onClick={decrement} ><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-dash-lg" viewBox="0 0 16 16">
+                                <path fill-rule="evenodd" d="M2 8a.5.5 0 0 1 .5-.5h11a.5.5 0 0 1 0 1h-11A.5.5 0 0 1 2 8Z" />
+                            </svg></button>
+                            <input type="number" style={{ width: '40px', textAlign: 'center' }} className='form-input form-input-sm ms-2 me-2' value={updateItemQuantity} disabled />
+                            <button className='btn btn-sm my-btn' onClick={increment}><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus-lg" viewBox="0 0 16 16">
+                                <path fill-rule="evenodd" d="M8 2a.5.5 0 0 1 .5.5v5h5a.5.5 0 0 1 0 1h-5v5a.5.5 0 0 1-1 0v-5h-5a.5.5 0 0 1 0-1h5v-5A.5.5 0 0 1 8 2Z" />
+                            </svg></button>
+                            <button className='btn btn-sm btn-primary ms-2' onClick={async () => { await confirmUpdateItem(updateItem, updateItemQuantity) }} >Update</button>
                         </div>
                         :
-                        <input type='number' min={1} max={Math.min(props.item.product_variant.stock, 10)} style={{ width: '50px' }} className='form-control form-control-sm' value={props.item.quantity} onChange={() => { mountActive(props.item.product_variant.id, props.item.quantity) }} />
+                        <div className='d-flex'>
+                            <button className='btn btn-sm my-btn' onClick={decrement} ><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-dash-lg" viewBox="0 0 16 16">
+                                <path fill-rule="evenodd" d="M2 8a.5.5 0 0 1 .5-.5h11a.5.5 0 0 1 0 1h-11A.5.5 0 0 1 2 8Z" />
+                            </svg></button>
+                            <input type="number" style={{ width: '40px', textAlign: 'center' }} className='form-input form-input-sm ms-2 me-2' value={props.item.quantity} disabled />
+                            <button className='btn btn-sm my-btn' onClick={increment}><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus-lg" viewBox="0 0 16 16">
+                                <path fill-rule="evenodd" d="M8 2a.5.5 0 0 1 .5.5v5h5a.5.5 0 0 1 0 1h-5v5a.5.5 0 0 1-1 0v-5h-5a.5.5 0 0 1 0-1h5v-5A.5.5 0 0 1 8 2Z" />
+                            </svg></button>
+                        </div>
                     }
-                    {/* </div> */}
                 </div>
                 <div className='col col-2'>
                     <button className='btn btn-sm' onClick={() => { confirmDeleteItem(props.item.product_variant.id) }}><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x-lg" viewBox="0 0 16 16">

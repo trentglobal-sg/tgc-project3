@@ -123,10 +123,10 @@ export default function Home() {
                 <div className='container align-items-center justify-center d-flex flex-column call-to-action'>
                     <div className='btn' onClick={() => { navigate('/merino-wool') }} style={{ border: 'none' }}><h1>Experience the miracle of Merino Wool</h1></div>
                     <div className='d-flex align-items-center justify-center' style={{maxWidth: '70vw'}}>
-                        <Button as={Link} to='/mens' className='landing-links me-3 my-btn-translucent'><h5 className='my-main-btn-text'>Shop Mens</h5></Button>
+                        <Button as={Link} to='/mens' className='landing-links me-3 my-btn-translucent'><h5 className='my-main-btn-text my-main-margin-top'>Shop Mens</h5></Button>
                         <Button as={Link} to='/womens' className='landing-links ms-3 my-btn-translucent'><h5 className='my-main-btn-text'>Shop Womens</h5></Button>
                     </div>
-                    <Button className='landing-links mt-4 my-btn-translucent' href="#searchPage"><h5 className='my-main-btn-text'>Search for Products</h5></Button>
+                    <Button className='landing-links mt-4 my-btn-translucent' href="#searchPage"><h5 className='my-main-btn-text my-main-margin-top'>Search for Products</h5></Button>
                 </div>
             </div>
             <div id='searchPage' className='container'>

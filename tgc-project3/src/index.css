@@ -82,6 +82,10 @@ code {
 }
 
 .my-main-btn-text{
+  font-size: medium !important;
+}
+
+.my-main-margin-top{
   margin-top: 6px !important;
 }
 
@@ -197,11 +201,21 @@ code {
     width: 80%;
   }
 
+  .my-main-btn-text{
+    margin-top: 6px !important;
+    font-size: large !important;
+  }
+
 }
 
 @media screen and (width > 990px) {
   #nav-container {
     width: 100%
+  }
+
+  .my-main-btn-text{
+    margin-top: 6px !important;
+    font-size: large !important;
   }
 
   #search {

@@ -48,7 +48,7 @@ export default function MyNavbar(props) {
         if (response) {
             toast.success('Item updated')
             await getCart()
-            return true
+            return quantity
         } else {
             toast.error('Something went wrong')
             return false

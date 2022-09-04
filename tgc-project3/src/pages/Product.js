@@ -213,7 +213,7 @@ export default function Product(props) {
                                         </div>
                                     </div>
                                     <div>
-                                        {selectedProductVariantData.stock < 10 ? <span className='errorMessage'>{selectedProductVariantData.stock} pieces left</span> : ''}
+                                        {selectedProductVariantData.stock < 10 ? <span className='errorMessage'>{selectedProductVariantData.stock-1} pieces left</span> : ''}
                                     </div>
                                 </div>
 
