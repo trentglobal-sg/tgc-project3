@@ -2,29 +2,11 @@ import { Fragment, useState, useEffect, useContext } from 'react';
 import CustomerContext from '../CustomerContext';
 import { useNavigate } from 'react-router-dom';
 import moment from 'moment'
-import Modal from 'react-bootstrap/Modal';
 
 export default function Orders() {
     const navigate = useNavigate()
     const customerContext = useContext(CustomerContext)
     const [orders, setOrders] = useState('')
-    // const [activeOrder, setActiveOrder] = useState('')
-
-    // const [show, setShow] = useState(false);
-    // const handleClose = () => {
-    //     setActiveOrder('')
-    //     setShow(false);
-    // }
-    // const handleShow = (id) => {
-    //     let selectedOrder = [];
-    //     for (let order of orders) {
-    //         if (order.id == id) {
-    //             selectedOrder.push(order)
-    //         }
-    //     }
-    //     setActiveOrder(selectedOrder)
-    //     setShow(true);
-    // }
 
     const getOrdersData = async () => {
         let response = await customerContext.getOrders()

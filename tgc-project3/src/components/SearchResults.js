@@ -20,9 +20,6 @@ export default function SearchResults(props) {
                                     <h6 className="card-title my-bold">{m.product}</h6>
                                     <h6 className="card-text">$ {(m.cost / 100).toFixed(2)}</h6>
                                 </div>
-                                {/* <div className='col-3'>
-                                    <Button as={Link} to={`/product/${m.id}`} className='btn btn-sm btn-primary'>View</Button>
-                                </div> */}
                             </div>
                         </div>
                     )

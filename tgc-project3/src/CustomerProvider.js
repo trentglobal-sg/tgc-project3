@@ -61,12 +61,6 @@ export default function CustomerProvider(props) {
                     // refreshToken: jwt.refreshToken
                     refreshToken: localStorage.getItem('refreshToken')
                 },
-                // {
-                //     headers: {
-                //         authorization: `Bearer ${localStorage.getItem('accessToken')}`
-                //         // authorization: `Bearer ${jwt.accessToken}`
-                //     }
-                // }
             )
 
             if (logoutResponse.data.message) {
@@ -126,21 +120,22 @@ export default function CustomerProvider(props) {
         refresh()
     },[])
 
-    useEffect(() => {
-        const handleTabClose = (event) => {
-            event.preventDefault();
-            console.log('before unload event triggered');
+    // load warning on reload and browser tab close?
+    // useEffect(() => {
+    //     const handleTabClose = (event) => {
+    //         event.preventDefault();
+    //         console.log('before unload event triggered');
 
-            return (event.returnValue = "Are you sure you want to exit?")
-            // return(alert('you want to exit?'))
-        }
+    //         return (event.returnValue = "Are you sure you want to exit?")
+    //         // return(alert('you want to exit?'))
+    //     }
 
-        window.addEventListener('beforeunload', handleTabClose);
+    //     window.addEventListener('beforeunload', handleTabClose);
 
-        return () => {
-            window.removeEventListener('beforeunload', handleTabClose)
-        };
-    }, [])
+    //     return () => {
+    //         window.removeEventListener('beforeunload', handleTabClose)
+    //     };
+    // }, [])
 
     const addToCart = async (productVariantId, quantity) => {
         if (localStorage.getItem('accessToken')) {

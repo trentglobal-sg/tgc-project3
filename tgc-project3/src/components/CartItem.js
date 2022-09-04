@@ -1,6 +1,5 @@
-import { useStatem, useContext, useState } from 'react'
+import { useContext, useState } from 'react'
 import CustomerContext from '../CustomerContext';
-import { toast } from 'react-toastify'
 
 export default function CartItem(props) {
     const context = useContext(CustomerContext);

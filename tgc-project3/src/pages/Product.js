@@ -22,7 +22,6 @@ export default function Product(props) {
     const [selectedProductVariant, setSelectedProductVariant] = useState('');
     const [selectedProductVariantData, setSelectedProductVariantData] = useState('');
     const [selectedQuantity, setSelectedQuantity] = useState(1)
-    // const [isLoaded, setIsLoaded] = useState(false)
 
     const context = useContext(ProductContext);
     const product = context.getProductById(parseInt(productId));
