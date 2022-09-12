@@ -90,7 +90,7 @@ export default function Product(props) {
     }
 
     const increment = () => {
-        if (selectedQuantity >= 1 && selectedQuantity < 10 && selectedQuantity < selectedProductVariantData.stock) {
+        if (selectedQuantity >= 1 && selectedQuantity < 10 && selectedQuantity < (selectedProductVariantData.stock-1)) {
             setSelectedQuantity(selectedQuantity + 1)
         }
     }
