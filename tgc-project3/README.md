@@ -1,9 +1,9 @@
 # Merinology
 ![alt=mock up](src/images/mockup.png)
 
-The live demo of the main customer website can be accessed [here](https://tgc-ec-merinology-react.netlify.app/)
+The live demo of the main customer website can be accessed [here](https://tgc-ec-merinology-react.netlify.app/) (Test account email: customer@email.com / password: customer)
 
-The live demo of the admin website can be accessed [here](https://tgc-ec-merinology.herokuapp.com/)
+The live demo of the admin website can be accessed [here](https://tgc-ec-merinology.herokuapp.com/)(Test account username: admin / password: admin)
 
 The github for the Express application can be accessed [here](https://github.com/Koihcire/tgc-project3-api)
 
