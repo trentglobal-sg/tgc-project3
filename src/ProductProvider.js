@@ -3,7 +3,7 @@ import ProductContext from './ProductContext';
 import axios from 'axios';
 
 export default function ProductProvider(props) {
-    const BASE_API_URL = 'https://tgc-ec-merinology.herokuapp.com/'
+    const BASE_API_URL = process.env.REACT_APP_BASE_API_URL;
     // const BASE_API_URL = 'https://8000-koihcire-tgcproject3api-jo56h3kktpv.ws-us63.gitpod.io/'
 
     const [products, setProducts] = useState([
